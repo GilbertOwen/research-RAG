@@ -1,0 +1,20 @@
+[project]
+name = "miracl-rag"
+version = "0.1.0"
+description = "RAG over Indonesian Wikipedia, evaluated with MIRACL relevance labels"
+readme = "README.md"
+authors = [
+    { name = "Gilbert Owen", email = "psychoganko@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "ollama>=0.6.3",
+    "pyyaml>=6.0.3",
+]
+
+[project.scripts]
+miracl-rag = "miracl_rag:main"
+
+[build-system]
+requires = ["uv_build>=0.11.1,<0.12.0"]
+build-backend = "uv_build"

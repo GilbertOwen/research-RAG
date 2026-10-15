@@ -1,0 +1,12 @@
+# Settings for the RAG system. Change values here, not in the code.
+# The Ollama address comes from the environment (see .env.example).
+
+models:
+  llm: qwen3.5:4b                  # writes the answer
+  embedding: qwen3-embedding:0.6b  # turns text into vectors for search
+  think: false                     # thinking mode off: too slow on a 6 GB GPU
+
+paths:
+  raw_dir: data/raw          # MIRACL files as downloaded
+  subset_dir: data/subset    # the sampled questions and articles
+  index_dir: data/index      # chunks and their vectors
