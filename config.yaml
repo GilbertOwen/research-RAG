@@ -7,6 +7,6 @@ models:
   think: false                     # thinking mode off: too slow on a 6 GB GPU
 
 paths:
-  raw_dir: data/raw          # MIRACL files as downloaded
-  subset_dir: data/subset    # the sampled questions and articles
-  index_dir: data/index      # chunks and their vectors
+  manifest: papers/manifest.csv  # the papers in the collection, with licences
+  papers_dir: data/papers        # PDFs as downloaded from arXiv (not committed)
+  index_dir: data/index          # chunks and their vectors

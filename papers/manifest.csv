@@ -1,0 +1,21 @@
+arxiv_id,version,group,title,license
+1810.04020,v2,background,A Comprehensive Survey of Deep Learning for Image Captioning,CC BY 4.0
+2506.05399,v1,background,Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation,CC BY 4.0
+2004.14231,v2,methods,Image Captioning through Image Transformer,CC BY 4.0
+2012.07061,v1,methods,Improving Image Captioning by Leveraging Intra- and Inter-layer Global Representation in Transformer Network,CC BY 4.0
+2204.07476,v1,methods,Guiding Attention using Partial-Order Relationships for Image Captioning,CC BY 4.0
+2107.14178,v2,methods,ReFormer: The Relational Transformer for Image Captioning,CC0 1.0
+2502.18734,v1,methods,Beyond RNNs: Benchmarking Attention-Based Image Captioning Models,CC BY 4.0
+2306.11593,v3,methods,Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion,CC BY 4.0
+2212.00843,v1,context,Focus! Relevant and Sufficient Context Selection for News Image Captioning,CC BY 4.0
+2111.08940,v2,evaluation,Transparent Human Evaluation for Image Captioning,CC BY 4.0
+2509.03897,v2,evaluation,SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation,CC BY 4.0
+2503.12329,v1,evaluation,CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era,CC BY 4.0
+2607.23235,v1,evaluation,A Reconstruction-Based Framework for Caption Evaluation Beyond Reference Captions,CC BY 4.0
+2305.14711,v3,evaluation,Gender Biases in Automatic Evaluation Metrics for Image Captioning,CC BY 4.0
+2106.08503,v2,evaluation,Understanding and Evaluating Racial Biases in Image Captioning,CC BY 4.0
+2110.01705,v2,hallucination,Let there be a clock on the beach: Reducing Object Hallucination in Image Captioning,CC BY 4.0
+2407.06192,v2,hallucination,Multi-Object Hallucination in Vision-Language Models,CC BY 4.0
+2412.15484,v4,hallucination,Toward Robust Hyper-Detailed Image Captioning: A Multiagent Approach and Dual Evaluation Metrics for Factuality and Coverage,CC BY 4.0
+2502.20034,v4,hallucination,Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore,CC BY 4.0
+2310.01779,v3,hallucination,HallE-Control: Controlling Object Hallucination in Large Multimodal Models,CC BY 4.0

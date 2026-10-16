@@ -7,7 +7,7 @@ import time
 
 from ollama import Client
 
-from miracl_rag.config import load_config
+from research_rag.config import load_config
 
 config = load_config()
 client = Client(host=config["ollama_host"])
