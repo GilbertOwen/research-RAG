@@ -1,8 +1,4 @@
-"""Download the papers listed in papers/manifest.csv from arXiv.
-
-For each paper, the script reads the licence shown on the arXiv page of the
-exact version in the manifest, and only saves the PDF if it matches. Papers
-already downloaded are skipped, so the script can be run again safely.
+"""Download the manifest's papers from arXiv, only if the version's licence matches. Safe to rerun.
 
 Run: uv run python scripts/download_papers.py
 """
@@ -21,7 +17,7 @@ LICENCE_URLS = {
     "CC0 1.0": "creativecommons.org/publicdomain/zero/1.0",
 }
 HEADERS = {"User-Agent": "research-rag (student assessment project; polite single downloads)"}
-DELAY_SECONDS = 3  # arXiv asks automated clients to space out requests
+DELAY_SECONDS = 3  
 
 
 def fetch(url: str) -> bytes:
