@@ -6,12 +6,23 @@ models:
   think: false          
 
 chunking:
-  size_words: 250      
-  overlap_words: 50     
+  # size_words: 250
+  # overlap_words: 50
+  size_words: 400       #version 2 (sweep: 14/22 hits)
+  # overlap_words: 80   # exploratory alternative, compared in step 5.5
+  overlap_words: 0      #version 3 (overlap sweep, pre-set rule)
 
 embedding:
-  add_title: true       
+  # add_title: true       
+  add_title: false   #version 2    
   batch_size: 32
+
+retrieval:
+  top_k: 5
+  query_instruction: >-
+    Given a question about image captioning and vision-language model evaluation,
+    retrieve research-paper passages that directly answer the question or provide
+    evidence for comparing methods, metrics, results, or limitations.
 
 paths:
   manifest: papers/manifest.csv
