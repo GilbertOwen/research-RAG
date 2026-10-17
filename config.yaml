@@ -24,6 +24,11 @@ retrieval:
     retrieve research-paper passages that directly answer the question or provide
     evidence for comparing methods, metrics, results, or limitations.
 
+generation:
+  temperature: 0
+  num_ctx: 8192        
+  no_evidence_reply: NOT ENOUGH EVIDENCE
+
 paths:
   manifest: papers/manifest.csv
   papers_dir: data/papers   
