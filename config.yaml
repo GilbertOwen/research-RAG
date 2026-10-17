@@ -1,12 +1,19 @@
-# Settings for the RAG system. Change values here, not in the code.
-# The Ollama address comes from the environment (see .env.example).
+# Settings for the RAG system. The Ollama address comes from OLLAMA_HOST (see .env.example).
 
 models:
-  llm: qwen3.5:4b                  # writes the answer
-  embedding: qwen3-embedding:0.6b  # turns text into vectors for search
-  think: false                     # thinking mode off: too slow on a 6 GB GPU
+  llm: qwen3.5:4b
+  embedding: qwen3-embedding:0.6b
+  think: false          
+
+chunking:
+  size_words: 250      
+  overlap_words: 50     
+
+embedding:
+  add_title: true       
+  batch_size: 32
 
 paths:
-  manifest: papers/manifest.csv  # the papers in the collection, with licences
-  papers_dir: data/papers        # PDFs as downloaded from arXiv (not committed)
-  index_dir: data/index          # chunks and their vectors
+  manifest: papers/manifest.csv
+  papers_dir: data/papers   
+  index_dir: data/index     
