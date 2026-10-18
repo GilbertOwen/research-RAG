@@ -1,0 +1,71 @@
+{
+ "question": "What GPU and how many training hours did the ReFormer authors use?",
+ "time": "2026-10-18T21:19:57",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "NOT ENOUGH EVIDENCE",
+ "citation_check": {
+  "abstained": true,
+  "cited": [],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2107.14178v2:p8:c0",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 8,
+   "score": 0.675,
+   "text": "ReFormer −Weighted 39.3 29.2 58.9 130.3 22.5 Table 3: Ablation study and comparison of ReFormer variants. Results are reported on the ‘Karpathy’ test split. ∗denotes that we fix the encoder during the caption training. We highlight the best model in bold. Method SGGen SGCls PredCls R@20 R@50 R@100 R@20 R@50 R@100 R@20 R@50 R@100 IMP 14.6 20.7 24.5 31.7 34.6 35.4 52.7 59.3 61.3 MOTIFS 21.4 27.2 30.3 32.9 35.8 36.5 58.5 65.2 67.1 VCTree 22.0 27.9 31.3 35.2 38.1 38.8 60.1 66.4 68.1 ReFormer 25.4 33.0 37.2 36.6 40.1 41.1 60.5 66.7 68.1 Table 4: Scene graph generation evaluation results on Visual Genome dataset. We highlight the best model in bold. [9] jacob devlin, saurabh gupta, ross girshick, margaret mitchell, and lawrence c zitnick. 2015. Exploring Nearest Neighbor Approaches for Image Captioning. CoRR (2015). [10] Z. Feng, Q. Zhou, J. Zhang, P. Jiang, and X. Yang. 2015. A Target Guided Subband Filter for Acoustic Event Detection in Noisy Environments Using Wavelet Packets. IEEE/ACM Transactions on Audio, Speech, and Language Processing 23 (2015), 361–372. [11] Yash Goyal, Tejas Khot, Aishwarya Agrawal, Douglas Summers-Stay, Dhruv Batra, and Devi Parikh. 2019. Making the V in VQA Matter: Elevating the Role of Image Understanding in Visual Question Answering. Int. J. Comput. Vision (2019). [12] Sen He, Wentong Liao, Hamed Rezazadegan Tavakoli, Michael Ying Yang, Bodo Captioning: Transforming Objects into Words. In Advances in Neural Information Processing Systems 32. [14] Sepp Hochreiter and Jürgen Schmidhuber. 1997. Long short-term memory. Neural computation (1997). [15] Micah Hodosh, Peter Young, and Julia Hockenmaier. 2013. Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics. Journal of Artificial Intelligence Research (2013). [16] Lun Huang, Wenmin Wang, Jie Chen, and Xiao-Yong Wei. 2019. Attention on Attention for Image Captioning. In International Conference on Computer Vision. [17] Justin Johnson, Andrej Karpathy, and Li Fei-Fei. 2016. DenseCap: Fully Convolu- Generating Image Descriptions. IEEE Trans. Pattern Anal. Mach. Intell. (2017). [19] Diederik P. Kingma and Jimmy Ba. 2015. Adam: A Method for Stochastic Optimization. [20] Ranjay Krishna, Yuke Zhu, Oliver Groth, Justin Johnson, Kenji Hata, Joshua Kravitz, Stephanie Chen, Yannis Kalantidis, Li-Jia Li, David A. Shamma, Michael S. Bernstein, and Li Fei-Fei. 2017. Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations. Int. J. Comput. Vision (2017). [21] Guang Li, Linchao Zhu, Ping Liu, and Yi Yang. 2019. Entangled Transformer for In Text Summarization Branches Out. [23] Tsung-Yi"
+  },
+  {
+   "label": "S2",
+   "id": "2107.14178v2:p6:c2",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 6,
+   "score": 0.631,
+   "text": "models using the Adam [19] optimizer. We use Glove [30] embedding to initialize word embedding layer. The total number of objects in one image varies from 10 to 50, depending on the IOU threshold that is set to 0.3. After some parameter tuning, we fix λ= 0.1 at which ReFormer provides the best CIDEr score. 4.3 Evaluation 4.3.1 General Caption Generation. We first evaluate our model with the general caption generation metrics. We first compare the performances of our ReFormer with those of several recent proposals for image captioning on the COCO ‘Karpathy’ test split. As shown in Tab. 1, in general, the Transformer-based models outperforms other two types of baselines: the models using pre-trained CNN to encode image information and the LSTM decoder with attention to decode a caption and those using GCN to encode scene graph information and the LSTM decoder to generate a sentence. This proves that Transformer can be used to better learn high-level image features and is capable of decoding sentences with a higher quality. The GCN-based models outperform the CNN-based ones but perform worse than the ones using the Transformer, which indicates that the scene graph information is useful for better learning the image features but still not well explored. Our proposed ReFormer outperforms all other models. For example, it provides an improvement of 1.5, 0.7, 0.5, 1.2, 0.7 and 0.4 points over baseline model M2-T [7] on 6 metrics respectively. This demonstrates the effectiveness of concurrently exploiting the Transformer structure and scene graphs in extracting the relational image features. We evaluate the model on the COCO online test server, composed of 40775 images for which annotations are not made publicly available. The MSCOCO online testing results are listed in Tab. 2, our"
+  },
+  {
+   "label": "S3",
+   "id": "2107.14178v2:p7:c0",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 7,
+   "score": 0.596,
+   "text": "ReFormer: The Relational Transformer for Image Captioning MM ’22, October 10–14, 2022, Lisboa, Portugal GT: a male tennis player in white shirt is playing tennis. M2-T: a man playing with a tennis racket. ReFormer: a player wearing white shirt is playing tennis. player hat shirt hand wearing holding wearing logo has has leg racket in holding court GT: a cheesy pizza sitting on top of a table. M2-T: a pizza with cheese on it. ReFormer: a pizza with cheese and herb on a table. pizza arm herb cheese with table with glass on on Figure 4: Examples of captions generated by ReFormer and the M2-T model, as well as the corresponding ground-truths. ReFormer generates a scene graph to show the pair-wise relationships. ReFormer outperforms previous transformer based model on several evaluation metrics. 4.3.2 Ablation. We first do ablation studies on the number of Transformer layers. We start from the vanilla Transformer without using any other techniques proposed in the paper. We vary the number of encoder and decoder layers from 2 to 6. As shown in Tab. 3, the Transformer model with 3 layers achieves the best results. To evaluate the importance of keeping Lcin step (iii) of Section 3.5, we conduct two ablation experiments. We first keep the parameters of the encoder fixed, which means Lris not used to update the parameters of the encoder. We denote this variant as ReFormer ∗. We find that the CIDEr score drops from 131.2 to 128.9. We then remove Lrand only use Lcto update the parameters of the encoder and the decoder. We denote this case as ReFormer −Lr. We find that the CIDEr score drops as well. We can thus conclude that using Lr helps to improve the quality of caption generation. 4.3.3 Scene Graph Generation Evaluation. Generating scene graphs is essential not only because it provides a way of explaining the relationships between the objects in the image, but also the resource of the scene graphs when there is no other state-of-the-art scene graph generator available. To evaluate the proposed ReFormer in generating scene graphs, we compare it with other state-of-the-art scene graph generation methods. IMP [43] solves the scene graph inference problem using standard RNNs and learns to iteratively improves its predictions via message passing. MOTIFS [53] is a stacked bi-directional LSTM architecture designed to capture higher order motifs in scene graphs. VCTree [36] is a dynamic tree structure"
+  },
+  {
+   "label": "S4",
+   "id": "2107.14178v2:p5:c2",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 5,
+   "score": 0.594,
+   "text": "results as those using the proposed training algorithm. The main purpose of incorporating Lris to ensure that the relational features learned do not vary much in step (iii) while being used to generate an accurate scene graph. 4 EXPERIMENTS 4.1 Datasets We evaluate ReFormer on two large-scale publicly available datasets: MS COCO [23] which is an image captioning dataset and Visual Genome [20] which is a scene graph generation dataset. COCO. The dataset is the most popular benchmark for image captioning, which contains 82, 783 training images and 40, 504 validation images. There are 5 human annotated descriptions per image. As the annotations of the official test set are not publicly available, we follow the widely used splits provided by [18], where 5, 000 images are used for validation, 5, 000 for testing and the rest for training. We convert all the descriptions in the training set to lower case and"
+  },
+  {
+   "label": "S5",
+   "id": "2107.14178v2:p4:c0",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 4,
+   "score": 0.558,
+   "text": "MM ’22, October 10–14, 2022, Lisboa, Portugal Xuewen Yang, Yingru Liu, and Xin Wang < man with hair > < man holding racket > man hand racket ball hair box1 box3 box5 box4 box2 Faster R-CNN Encoder Layer 1 y\":$ ⋯× m ⋯× m ⋯× m(m−1) ⨂ ⨂ ⋯× m(m−1) Encoder Layer N. Post-Processing Layer Pre-Processing Layer P(y$|X, y\":$) P(r|b, o, X) a man with long hair holding a ball and tennis racket. object detection image captioning ⋯ Decoder Layer 1 Decoder Layer N6 ⋯ scene graph generation (a) (b) (c) P(b|X) P(o|X) man hair shirt hand racket ball with holding in holding wearing a generated graph (d) Figure 3: The architecture of ReFormer. ReFormer consists of a (a) Faster R-CNN object detection model to provide mbounding boxes, object labels and object region features, a (b) Transformer encoder to generate m× (m−1) pair-wise relations for the objects in the image and a (c) Transformer decoder for generating captions. The generated scene graph is shown in (d). We model P(bk|X) and P(ok|bk,X) with object detector Faster R-CNN [31] to automatically generate a set of bounding boxes bkand the corresponding object labels okfrom an image X(Figure 3(a)). In practice, training a Faster R-CNN is highly non-trivial. To simplify the training of our proposed ReFormer, we first train a Faster R-CNN till its convergence. Then with its parameters learnt, we train the model P(ri→j|(bi,oi), (bj,oj),X) (Figure 3(b)) with (bi,oi), (bj,oj) and Xas the input. In theory, if the groundtruth bkand okare provided, we can eliminate Faster R-CNN. To feed in bk, ok and X, we use a Pre-Processing Layer (Section 3.3.1) which converts the three inputs into vectors and then concatenate them together to get the final input features. Modeling P(ri→j|(bi,oi), (bj,oj),X) is actually a predicate classification task. We use the ReFormer encoder (Section 3.3.2) to first encode the input into high-level features and then apply a Post-Processing Layer (Section 3.3.3) to get the final output for classification. The features right before the Post-Procesing layer contain useful relational information and are used as the input to the decoder for caption generation (Section 3.4). We talk about more details about the model architecture in Section 3.3. 3.3 Encoder Architecture The encoder takes as input a set ofmimage region tuples, (bi,oi, vi)m i=1, where viis defined as the mean-pooled convolutional feature from region iwith dimension 2048 and the number of region varies for different images."
+  }
+ ],
+ "prompt_tokens": 3012,
+ "answer_tokens": 7,
+ "seconds": 2.8,
+ "id": "U01",
+ "reference_answer": "Not in the collection: the ReFormer text has no mention of GPUs or training hours (searched).",
+ "expected_evidence": []
+}

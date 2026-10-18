@@ -1,0 +1,97 @@
+{
+ "question": "What different explanations do the papers give for why vision-language models hallucinate objects?",
+ "time": "2026-10-18T21:19:31",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "Paper [S1] attributes hallucinations to spurious correlations, prevalent object classes in training data, and a preference for objects listed early in prompts. Paper [S2] notes that hallucination is influenced by data-specific factors like salience, frequency, and model intrinsic behaviors. Paper [S3] argues that the vision encoder's representational capacity is not necessarily the primary cause of hallucination. Paper [S4] identifies a misalignment between the vision encoder and instruction data as a key factor, suggesting that balancing labels weakens this parametric knowledge to reduce hallucinations.",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2407.06192v2:p10:c1",
+   "title": "Multi-Object Hallucination in Vision-Language Models",
+   "page": 10,
+   "score": 0.82,
+   "text": "in determining whether a model hallucinates, it appears to have minimal impact on the prediction of hallucinated objects. Our analysis also shows that models are more likely to hallucinate object classes that are prevalent in the training data, but the reverse is not necessarily true. Additionally, there is a notable preference for models to hallucinate objects that are listed early in the input prompt as candidate classes. Overall, our findings indicate that spurious correlations may lead to hallucinations involving multiple objects. 6 Discussions and Conclusion Hallucinations in large vision-language models (LVLMs) can occur at different scales and granularities. In this study, we study the problem of multi-object hallucination, examining how LVLMs may misperceive when tasked to focus on multiple objects concurrently, and which factors cause the hallucinations. we introduce Recognition-based Object Probing Evaluation (ROPE), an automated evaluation protocol designed to account for the distribution of object classes within a single image during testing and to use visual referring prompts to reduce ambiguity. Our research provides key insights for the development and application of LVLMs. Since models tend to experience more hallucinations with multiple objects than with single ones, it may be advantageous to probe objects individually in visual prompts to enhance performance. The likelihood of a model’s hallucinatory output is linked to various data factors and model behaviors. Particularly in situations involving heterogeneous data and low certainty from the model, there is an increased risk of hallucinations, and users should be vigilant. Moreover, our analysis indicates that merely adopting (grounded) instruction tuning and scaling the base language model may not be enough to fully address the issue of object hallucination. There is a need for more balanced object distributions, annotations of objects away from image centers, and an increase in diversity. Introducing instructions that require multiple visual pointers and complex multi-object reasoning is also crucial."
+  },
+  {
+   "label": "S2",
+   "id": "2407.06192v2:p1:c0",
+   "title": "Multi-Object Hallucination in Vision-Language Models",
+   "page": 1,
+   "score": 0.818,
+   "text": "Multi-Object Hallucination in Vision Language Models Xuweiyi Chen1,2∗ Ziqiao Ma1∗ Xuejun Zhang1∗ Sihan Xu1 Shengyi Qian1 Jianing Yang1 David F. Fouhey3 Joyce Chai1 1University of Michigan 2University of Virginia 3New York University https://multi-object-hallucination.github.io/ Abstract Large vision language models (LVLMs) often suffer from object hallucination, producing objects not present in the given images. While current benchmarks for object hallucination primarily concentrate on the presence of a single object class rather than individual entities, this work systematically investigates multi-object hallucination, examining how models misperceive (e.g., invent nonexistent objects or become distracted) when tasked with focusing on multiple objects simultaneously. We introduce Recognition-based Object Probing Evaluation (ROPE), an automated evaluation protocol that considers the distribution of object classes within a single image during testing and uses visual referring prompts to eliminate ambiguity. With comprehensive empirical studies and analysis of potential factors leading to multi-object hallucination, we found that (1) LVLMs suffer more hallucinations when focusing on multiple objects compared to a single object. (2) The tested object class distribution affects hallucination behaviors, indicating that LVLMs may follow shortcuts and spurious correlations. (3) Hallucinatory behaviors are influenced by data-specific factors, salience and frequency, and model intrinsic behaviors. We hope to enable LVLMs to recognize and reason about multiple objects that often occur in realistic visual scenes, provide insights, and quantify our progress towards mitigating the issues. 1 Introduction Recent advances in large language models (LLMs) have motivated increasing efforts in adapting them for understanding visual semantics, giving rise to a surge of large vision language models (LVLMs) [1, 37, 43]. These models, whether explicitly trained with grounding data [71] or without [31], demonstrate an impressive grounded understanding of visual entities. This motivates a new prompting paradigm based on user-provided visual cues, referred to as visual prompting [45, 60, 27, 58, 58]. Despite their promising performances on various downstream applications [36], LVLMs often suffer from object hallucination [44, 10, 26], where they produce objects not present in a given image. Although object hallucination was initially observed in image captioning describing multiple objects [44], current benchmarks for object hallucination primarily concentrate on the presence of a single object class rather than individual entities. These benchmarks either verify if an object class mentioned in the caption can ground to an object in the image [44, 19], or probe the model about the existence of an object class, sometimes with additional attributes or relations to other objects [26,"
+  },
+  {
+   "label": "S3",
+   "id": "2502.20034v4:p1:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 1,
+   "score": 0.81,
+   "text": "Published in Transactions on Machine Learning Research (01/2026) Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore Hongseok Oh cxv0519@uos.ac.kr Department of Artificial intelligence University of Seoul Wonseok Hwang wonseok.hwang@uos.ac.kr Department of Artificial intelligence University of Seoul Reviewed on OpenReview: https: // openreview. net/ forum? id= JTua6tDPgZ Abstract Recently, Large Vision-Language Models (LVLMs) show remarkable performance across various domains. However, these models suffer from object hallucination. In this work, we study object hallucination primarily in a discriminative, retrieval-style evaluation setting (OHD-Caps), rather than in free-form caption generation. This study revisits the previous claim that the cause of such hallucinations lies in the limited representational capacity of the vision encoder. Our analysis implies that the capacity of the vision encoder is not necessarily a major limiting factor in detecting object hallucination. Based on this insight, we propose Fine-grained CLIPScore (F-CLIPScore), a simple yet effective evaluation metric that enhances object-level granularity by incorporating text embeddings at the noun level. Evaluations on the OHD-Caps benchmark show that F-CLIPScore significantly outperforms conventional CLIPScore in accuracy by a large margin of 39.6% without additional training. We further demonstrate that F-CLIPScore-based data filtering reduces object hallucination in LVLM (4.9% in POPE accuracy after alignment pretraining). Our code is publicly available at https://github.com/abzb1/f-clip 1 Introduction Recent studies identify Large Vision-Language Models (LVLMs) as a leading approach for vision-language integration (Liu et al., 2023; Wang et al., 2024a; Zhu et al., 2023; Chen et al., 2024). However, like hallucinations in large language models (LLMs) (Ji et al., 2023; Zhang et al., 2023), LVLMs exhibit object hallucination, referring to nonexistent or misidentified objects that may undermine their reliability (Li et al., 2023a; Liu et al., 2024b). While object hallucination is often discussed in the context of caption generation, this paper focuses on discriminative vision–language models and retrieval-style evaluation protocols, where the goal is to select or score candidate captions given an image. Liu et al. (2024c) built OHD-Caps, a dataset designed to measure object hallucination in a discriminative caption-selection setting. The dataset comprises 1.5k image-captions pairs where a model needs to select the best caption that does not show hallucinations. They found that CLIPScore (Hessel et al., 2021) achieved only 10–20% accuracy, and the further fine-tuning with the proposed objective function with the dataset improves the accuracy up to 80–90%. However, when they connected the OHD-Caps-trained CLIP to an LVLM and conducted full fine-tuning, the resulting accuracy sometimes drops, showing lower performance compared to original CLIP (for instance, 1st row of Table 4 in (Liu et al., 2024c) shows the accuracy in POPE benchmarks (Li et al., 2023b) drops from 85.4% to 81.2%)."
+  },
+  {
+   "label": "S4",
+   "id": "2310.01779v3:p10:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 10,
+   "score": 0.8,
+   "text": "introduces CCEval, including CHAIR metrics, object coverage, average sentence length and number of objects to overcome limitations of previous evaluations. Hallucination Hallucinations (Ji et al., 2023a; Shi et al., 2023; Lin et al., 2021) have been widely studied in traditional NLG (Ji et al., 2023b) tasks, including machine translation (Zhou et al., 2020; Lee et al., 2019), data-to-text (Rebuffel et al., 2021; Kasner & Duˇsek, 2022; Lee et al., 2022), summarization (Cao et al., 2022), dialogue (Dziri et al., 2022) and QA (Shuster et al., 2021). For LMMs, previous studies have been mainly focusing on object hallucination (Marino et al., 2019; MacLeod et al., 2017; Li et al., 2023a;e). POPE (Li et al., 2023e) reveals object existence hallucination may related with label distributions, such as object co-occurance. Earlier than POPE, Biten et al. (2022) balance object co-occurance to decrease hallucination. LRV (Liu et al., 2023a) finds the cause of hallucination in VQA benchmarks, especially unbalanced answer distribution and lack of negation information. Our work raise another important cause: misalignment between the vision and language information captured by models. More interestingly, we can explain balancing labels in Biten et al. (2022) as trying to weaken the parametric knowledge caused by the misalignment. 6 Conclusion In summary, this study delves deep into the object hallucination phenomena within the detailed captions of LMMs, advancing understanding of the accuracy and unwarranted inference in describing visual details. We introduce a novel and comprehensive evaluation method for object existence hallucination in detailed captions. We conduct an in-depth and component-wise analysis of LMMs, meticulously examining each element that might result in hallucination. We further identify an alignment issue between the vision encoder and the instruction data. To alleviate such hallucination, we introduce controlling parameters over LMMs to condition the inference of objects."
+  },
+  {
+   "label": "S5",
+   "id": "2310.01779v3:p9:c1",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 9,
+   "score": 0.773,
+   "text": "and InstructBLIP (Dai et al., 2023) present Q-former-based LMMs. Multimodal-GPT (Gong et al., 2023) and Otter (Li et al., 2023b) aims to improve OpenFlamingo’s (Alayrac et al.; Awadalla et al., 2023) directive adherence. mPLUG-Owl (Ye et al., 2023) suggests a two-step method: first train vision models, then refining the language model using techniques like LoRA. Our work utilize a linear layer to control object existence hallucination within LMMs. Evaluation on LMMs. The evaluation of large vision-and-language models (LMMs) (Yu et al., 2023; Liu et al., 2023b;c) is challenging due to the intricate nature of generation tasks they undertake. Some of the VQA-based benchmarks (Antol et al., 2015; Hudson & Manning, 2019; Gurari et al., 2018) require models to identify objects, colors, or quantities, while others (Liu et al., 2023e; Li et al., 2023c; Lu et al., 2022) offer multiple-choice questions. POPE (Li et al., 2023e) and MME (Fu et al., 2023) evaluate object hallucination using paired yes/no questions on existence, color, counting, OCR, and etc. While VQA-based benchmarks are cheap and straightforward, we find them cannot accurately reflect object hallucination for detailed captions. Besides VQA benchmarks, ROUGE (Lin, 2004; Elliott & Keller, 2014) use n-gram to evaluate similarity between ground truth and model inferences. CIDr (Vedantam et al., 2015) is a triplet-based method of collecting human annotations to measure consensus. CHAIR (Rohrbach et al., 2018) evaluates caption hallucination with object concepts. These methods are constraint by ground truth length or word variance and cannot clearly reflect hallucination with object coverage information. Wang et al. (2023) uses a language model to predict whether the caption exist hallucination, which is cheaper than GPT-4. Our work"
+  }
+ ],
+ "prompt_tokens": 2987,
+ "answer_tokens": 117,
+ "seconds": 4.4,
+ "id": "X02",
+ "reference_answer": "Hyper-detailed captioning: models rely more on their own generated text as captions get longer. F-CLIPScore: the vision encoder's capacity is not necessarily the main cause. HallE-Control: descriptions at a finer granularity than the vision module can ground. Clock on the beach: frequent object co-occurrence in the data.",
+ "expected_evidence": [
+  {
+   "paper": "2412.15484v4",
+   "page": 1,
+   "phrase": "reliance of MLLMs"
+  },
+  {
+   "paper": "2502.20034v4",
+   "page": 1,
+   "phrase": "not necessarily"
+  },
+  {
+   "paper": "2310.01779v3",
+   "page": 1,
+   "phrase": "granularity"
+  },
+  {
+   "paper": "2110.01705v2",
+   "page": 1,
+   "phrase": "co-occurrence"
+  }
+ ]
+}

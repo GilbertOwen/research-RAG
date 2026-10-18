@@ -1,0 +1,81 @@
+{
+ "question": "What does the control value do in HallE-Control?",
+ "time": "2026-10-18T21:18:56",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The control value $\\epsilon$ adjusts the model's reliance on parametric knowledge to shift between minimal hallucination ($\\epsilon = -1$) and maximal imagination ($\\epsilon = 1$) [S2]. It allows users to condition captioning output by blending contextual knowledge with inferred objects based on a specified level of imagination [S5]. Specifically, increasing $\\epsilon$ leads to higher object existence hallucination while maintaining similar object coverage [S4].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   4,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2310.01779v3:p19:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 19,
+   "score": 0.75,
+   "text": "A.9 Modified CCEval of Section 4.1 1. Evaluation only on indicated objects CHAIRi = |{hallucinated objects w/ indication}| |{all objects w/ indication mentioned}| CHAIRs = |{sentences with hallucinated object w/ indication}| |{all sentences w/ indication| 2. Evaluation without indicated objects CHAIRi = |{hallucinated objects w/o indication}| |{all objects w/o indication mentioned}| CHAIRs = |{sentences with hallucinated object w/o indication}| |{all sentences w/o indication| 3. Evaluation with indicated objects CHAIRi = |{hallucinated objects w/o indication}| |{all objects mentioned}| CHAIRs = |{sentences with hallucinated object w/o indication}| |{all sentences}| A.10 Qualitative Results of HallE-Control This section shows qualitative results for HallE-Control in Table 17, Table 18, Table 19, Table 20, and Table 21. ε = −1 means no imagination and ε = 1 means max imagination. Both models can output indication. A.11 Theoretical Explanations HallE-Control Formulation HallE-Control follows LLaVA’s training strategy, which freezes vision encoder and language model, only finetune the projector for the first stage. The visual encoder g(·) transfer image Xv to visual features: Zv = g(Xv) The projector W connects image feature to the word embedding space: Hv = W · Zv . In the second stage, both projector and language model is trained. The model is trained on two type of data: 1. Contextual only data. 2. Contextual and parametric combined data. Language model trained on contextual only data has a distribution initiating from π. The other language model trained on combined data has a distribution initiating from π′ With the Theorem 1 in LM-Switch (Han et al., 2023), under the same assumptions, there exists an matrix W, transforming a word embedding E to WE, which is equivalent to let a LM simulate the text distribution initiating from another distribution. Inspired by the Theorem, we propose a linear transform in word embedding space for LMM. Let M be the finetuned LLM, with control layer/projector denoted as W, we replace each word embedding ev with ev + εWev, making the new language model M′ = M(εW) as HallE-Control’s language decoder. ε is adjustable from -1 to 1. We assign ε = −1 and fit contextual only data; assign ε = 1 with the contextual and parametric combined data. After finetuning the HallE-Control, the user only needs to specify a control value ε ∈[−1, 1]"
+  },
+  {
+   "label": "S2",
+   "id": "2310.01779v3:p8:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 8,
+   "score": 0.684,
+   "text": "Table 7: Comparison between baselines and the effect of indication on CCEval. ’Only ind’ means evaluation only on indicated objects; ’w/o ind’ means evaluation without indicated objects; ’w/ ind’ means evaluation with indicated objects. Setting LLM Resolution CHAIRs↓CHAIRi↓Coverage↑ Avg. Length↑Avg. Object↑ 158K baseline LLaVA7B 224x 82.00 25.30 33.58 109.89 9.31 only ind. LLaVA7B 224x 53.00 63.90 12.01 – 1.66 w/o ind. LLaVA7B 224x 57.00 17.10 37.60 108.94 7.63 w/ ind. LLaVA7B 224x 57.00 14.00 37.62 108.94 9.22 158K baseline LLaVA Llama 213B 336x 64.00 16.00 33.37 108.52 8.92 only ind. LLaVA Llama 213B 336x 52.00 62.31 19.90 – 1.3 w/o ind. LLaVA Llama 213B 336x 52.00 11.62 34.70 106.94 7.23 w/ ind. LLaVA Llama 213B 336x 52.00 9.86 39.31 106.94 8.52 Table 8: Performance of HallE-Control. Control value LLM Resolution CHAIRs↓CHAIRi↓Coverage↑ Avg. Length↑Avg. Object↑ 1 LLaVA7B 224x 89.00 26.60 32.80 108.54 9.72 0.5 LLaVA7B 224x 85.00 27.92 34.02 109.33 8.81 -0.5 LLaVA7B 224x 81.00 24.88 35.87 118.08 8.04 -1 LLaVA7B 224x 76.00 20.90 33.88 133.79 8.02 1 LLaVA Llama 213B 336x 65.00 14.58 36.14 102.18 8.37 0.5 LLaVA Llama 213B 336x 65.00 14.44 32.32 103.51 8.45 -0.5 LLaVA Llama 213B 336x 66.00 13.79 33.07 105.57 8.41 -1 LLaVA Llama 213B 336x 43.00 6.37 34.37 136.28 8.79 both contextual and parametric knowledge, we use ε = 1. Notably, only the linear layer W is fine-tuning throughout the training phase. Inference. At the inference stage, ε can adopt any value within the interval [−1, 1]. Specifically, an ε value of −1 corresponds to minimal reliance on parametric knowledge, whereas a value of 1 indicates a strong inclination towards such knowledge. Detailed theoretical explanation on why HallE-Control works are elaborated upon in the Appendix. 4 Experiment 4.1 Finetune on Parametric Joint Data Before we present experiments on HallE-Control, we show the upper-bound experiments on how well the model can indicate parametric knowledge. We directly finetune the LLaVA model on parametric joint data. Intuitively, the model is trained on data indicating parametric knowledge. Its output should identify parametric knowledge accurately. Specifically, the model should put a bracket around every ”guessed” objects for indication of hallucination. Therefore, we evaluate the object hallucination in three different settings: 1. Evaluation only on indicated objects: We do CCEval only on objects inside the bracket. The result should reflect a high level of hallucination. 2. Evaluation without indicated objects: We disregard objects in bracket and calculate CCEval. The result"
+  },
+  {
+   "label": "S3",
+   "id": "2310.01779v3:p18:c1",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 18,
+   "score": 0.649,
+   "text": "identify them in the captions. Hallucination control only involves only finetuning a linear layer added before lm head layer. We freeze all other layers and only finetune control layer with 3 epochs. The dataset is generated data with associated ε value. We have 10K contextual only detailed caption data and 23K parametric joint detailed caption data. A.8 More Experiments on LLaVA 1.5 The experiments on the main text are based on LLaVA 1.3, we provide experiments on LLaVA 1.5 in Table 16. The results are consistent with the conclusion in the main text and hallucination is less in this new version. 1https://github.com/haotian-liu/LLaVA/tree/main/playground/data/prompts/detail_ description"
+  },
+  {
+   "label": "S4",
+   "id": "2310.01779v3:p9:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 9,
+   "score": 0.638,
+   "text": "marked by brackets. This is interesting because the model perfectly captures the intention of marking parametric objects in training data and replicate the behavior during inference. Evaluation with indicated objects.: We observe a significant decline in the hallucination without any reduce in object coverage. LLaVA7B CHAIRi improved from 25.30 to 14.00 which has 44.66% improvements. For LLaVA13B CHAIRi improved from 16 to 9.86 which also has 38.38% improvements. 4.2 Hallucination Controlling During model inference, we select 4 different ε , ranging from −1 to +1. As shown in Table 8, we evaluate HallE-Control7B and HallE-Control13B model, which use LLaVA as backbone. For the 7B model, we train it by removing the special token in parametric joint data, showing that indication is not a necessary condition for control module to work. ε = −1 means the control module trained purely on contextual only data, which try to minimize the hallucination, where ε = +1 maximize parametric knowledge output. The results show that as ε increase, CHAIRi increase from 20.90 to 26.6, the coverage keeps at a similar level. For the 13B model, we keep the indication inside the parametric joint data. The HallE-Control13B achieves the best in object existence hallucination metric. With control value set to -1 and indication, we have CHAIRs = 43 versus baseline’s 64 and CHAIRi = 6.37 vs baseline’s 16, and the coverage of the model is not decreasing. 5 Related Work Large Multimodal Models (LMMs). The rapid advancements in Large Language Models (LLMs) (Touvron et al., 2023a; Chung et al., 2022; Touvron et al., 2023b; Anil et al., 2023; Driess et al., 2023; Scao et al., 2022; OpenAI, 2023) combined with a surge in open-source initiatives, have paved the way for the emergence of extensive vision-language models (Liu et al., 2023d; Goyal et al., 2017; Zhu et al., 2023; Sun et al., 2023; Ye et al., 2023; Bai et al., 2023; Chen et al., 2023; Peng et al., 2023). LLaVA introduces the concept of integrating a simple projector during LLM fine-tuning. Chatspot (Zhao et al., 2023b) follow LLaVA’s model structure, but embed region of interest into instruction data. GPT4RoI (Zhang et al., 2023a) and Shikra (Chen et al., 2023) add grounding tasks to LLaVA structure models. Instead of using detector to provide region information to the model, we use detector to filter objects for alignment between vision and language information. Additionally, BLIP2 (Li et al., 2023d)"
+  },
+  {
+   "label": "S5",
+   "id": "2310.01779v3:p1:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 1,
+   "score": 0.629,
+   "text": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models Bohan Zhai1∗ Shijia Yang2∗ Chenfeng Xu3 Sheng Shen3 Kurt Keutzer3 Chunyuan Li1 Manling Li4 ByteDance Inc.1, Stanford University2, UC Berkeley3, UIUC4 Abstract Current Large Multimodal Models (LMMs) achieve remarkable progress, yet there remains significant uncertainty regarding their ability to accurately apprehend visual details, that is, in performing detailed captioning. To address this, we introduce CCEval, a GPT-4 assisted evaluation method for detailed captioning. Interestingly, while LMMs demonstrate minimal object existence hallucination in existing VQA benchmarks, our proposed evaluation reveals continued susceptibility to such hallucinations. In this paper, we make the first attempt to investigate such hallucination from different aspects, including image resolution, the language decoder size, and instruction data amount, quality, granularity. Our findings underscore the unwarranted inference when the language description includes details at a finer object granularity than what the vision module can ground or verify, thus inducing hallucination. To control such hallucinations, we further attribute the reliability of captioning to contextual knowledge (involving only contextually grounded objects) and parametric knowledge (containing inferred objects by the model). Thus, we introduce HallE-Control, a controllable LMM in terms of Hallucination in object Existence. HallE-Control can condition the captioning to shift between (i) exclusively depicting contextual knowledge for grounded objects and (ii) blending it with parametric knowledge to imagine inferred objects. Our method reduces hallucination by 44% compared to LLaVA7B and maintains the object coverage. Our code is publicly available at https://github.com/bronyayang/HallE_Control 1 Introduction In recent years, Large Multimodal Models (LMMs) (Liu et al., 2023d; Dai et al., 2023; Li et al., 2023b; Zhu et al., 2023) have achieved significant progress, advancing tasks such as detailed captioning, visual conversations, and vision question-answering (VQA) (Goyal et al., 2017; Liu et al., 2023e; Hudson & Manning, 2019; Fu et al., 2023). However, similar to Large Language Models (LLMs) (Touvron et al., 2023a; Team, 2023; OpenAI, 2022) in the NLP domain, LMMs confront the issue of hallucination. This is particularly severe in detailed image captioning, which hinders the performance of downstream applications in robotics (Huang et al., 2023), visual search (Hu et al., 2023), etc. To better understand and address this challenge, we first outline three types of object hallucinations frequently observed in the detailed captions: (1) Object Existence Hallucination - The detailed image description references objects that are not present; (2) Object Attribute Hallucination - The detailed image description inaccurately characterizes objects, misrepresenting attributes such as color, shape, and size; (3) Object Relationship Hallucination - The detailed image description inaccurately depicts the relationships or interactions among objects, including erroneous relative positions, interaction states, and actions involving two or more objects. ∗Equal Contribution"
+  }
+ ],
+ "prompt_tokens": 3530,
+ "answer_tokens": 93,
+ "seconds": 4.1,
+ "id": "S08",
+ "reference_answer": "A single continuous parameter at inference: -1 makes the model use only visually grounded objects, +1 allows more imagination in the caption.",
+ "expected_evidence": [
+  {
+   "paper": "2310.01779v3",
+   "page": 2,
+   "phrase": "control value"
+  }
+ ]
+}

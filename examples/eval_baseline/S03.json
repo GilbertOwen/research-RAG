@@ -1,0 +1,80 @@
+{
+ "question": "How many pairwise caption battles does CapArena contain, and how do the top models compare with humans?",
+ "time": "2026-10-18T21:18:37",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "CapArena contains over 6,000 pairwise caption battles [S3]. The top models, such as GPT-4o, achieve performance comparable to or even surpassing human-level capabilities [S4]. Most open-source models, however, lag behind these leading commercial models [S3].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2503.12329v1:p9:c1",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 9,
+   "score": 0.815,
+   "text": "Our experiments reveal that VLM-as-a-Judge sets a new standard, highlighting that systematic biases in existing metrics are the key factor affecting alignment with human preferences. Finally, we release CapArena-Auto, an automated benchmark that closely aligns with human preferences, offering a cost-effective and efficient tool for detailed captioning evaluation. Our findings lay the foundation for the future development of image captioning. Limitations One limitation of CapArena is the scope of models and the domains covered. Current pairwise battle evaluation includes 14 representative Vision-Language Models (VLMs), but this selection is constrained by the available annotation resources. As a result, several recent models released after our dataset was compiled have not been considered in the evaluation. Additionally, the images used mostly focus on everyday life scenarios, which means that other domains, such as artwork or medical images, are not yet represented. Extending the evaluation to these domains could provide a more complete picture of VLM performance."
+  },
+  {
+   "label": "S2",
+   "id": "2503.12329v1:p5:c1",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 5,
+   "score": 0.783,
+   "text": "0.31 0.29 0.33 0.34 0.47 0.50 0.48 0.37 0.75 0.74 0.75 0.59 0.87 0.23 0.34 0.24 0.28 0.21 0.34 0.45 0.52 0.63 0.79 0.72 0.67 0.70 0.88 0.12 0.16 0.23 0.19 0.31 0.19 0.31 0.25 0.25 0.21 0.61 0.59 0.58 0.89 0.23 0.27 0.14 0.21 0.33 0.21 0.23 0.25 0.26 0.28 0.39 0.49 0.61 0.82 0.16 0.17 0.15 0.25 0.22 0.24 0.27 0.33 0.25 0.33 0.41 0.51 0.45 0.81 0.20 0.21 0.18 0.20 0.19 0.20 0.20 0.28 0.41 0.30 0.42 0.39 0.55 0.74 0.09 0.01 0.14 0.09 0.12 0.06 0.04 0.15 0.13 0.12 0.11 0.18 0.19 0.26 \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ Win Rate Matrix 0.0 0.2 0.4 0.6 0.8 1.0 Figure 3: Battle counts and win rate matrix between models in CapArena. 30 40 50 60 70 50 55 60 65 70 0 75 80 85 90 40 50 60 70 MMMU Score MathVista Score POPE Score VCR Score CapArena Rank Score Figure 4: Correlation between vision-language benchmark scores and CapArena ranking. Models that perform well on general benchmarks do not necessarily excel in captioning. The size of each point represents the model size. During the annotation process, we randomly selected 400 samples to be annotated by different annotators for inter-annotator validation. The results showed an agreement of 0.782, demonstrating the reliability of our manual labeling. Our empirical study found that the remaining 20% of disagreement stemmed not from annotator errors, but from the inherent subjectivity in interpreting which aspects of the image to emphasize. We also implemented measures to continuously monitor annotation quality during the labeling process (see Appendix E). Data collection began in October 2024, and by February 2025, a total of 6,522 annotation instances had been collected. The average time per annotation was 142 seconds. 3.3 VLMs Performance Analysis The final ranking is shown in Figure 1. Figure 3 presents the battle count and win rate matrix. Top models achieve human-level performance. Surprisingly, our evaluation reveals for the first time that leading models like GPT-4o have reached or even surpassed human-level performance in de- tailed captioning tasks. This milestone demonstrates that machine-generated descriptions can now rival high-quality human descriptions. We conducted an empirical study in Appendix D, and the results show that even human expert annotators occasionally overlook image details, where GPT-4o’s descriptions are more comprehensive. CapArena uncovers disparities in fine-grained visual perception across models. As"
+  },
+  {
+   "label": "S3",
+   "id": "2503.12329v1:p1:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 1,
+   "score": 0.78,
+   "text": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era Kanzhi Cheng♢† Wenpo Song♢† Jiaxin Fan♢† Zheng Ma♢ Qiushi Sun \b Fangzhi Xu♡ Chenyang Yan♢ Nuo Chen♢ Jianbing Zhang♢ Jiajun Chen♢ ♢National Key Laboratory for Novel Software Technology, Nanjing University \bThe University of Hong Kong ♡Shanghai Artificial Intelligence Laboratory chengkz@smail.nju.edu.cn zjb@nju.edu.cn Abstract Image captioning has been a longstanding challenge in vision-language research. With the rise of LLMs, modern Vision-Language Models (VLMs) generate detailed and comprehensive image descriptions. However, benchmarking the quality of such captions remains unresolved. This paper addresses two key questions: (1) How well do current VLMs actually perform on image captioning, particularly compared to humans? We built CapArena, a platform with over 6000 pairwise caption battles and high-quality human preference votes. Our arena-style evaluation marks a milestone, showing that leading models like GPT-4o achieve or even surpass human performance, while most open-source models lag behind. (2) Can automated metrics reliably assess detailed caption quality? Using human annotations from CapArena, we evaluate traditional and recent captioning metrics, as well as VLM-as-a-Judge. Our analysis reveals that while some metrics (e.g., METEOR) show decent caption-level agreement with humans, their systematic biases lead to inconsistencies in model ranking. In contrast, VLM-as-a-Judge demonstrates robust discernment at both the caption and model levels. Building on these insights, we release CapArena-Auto, an accurate and efficient automated benchmark for detailed captioning, achieving 94.3% correlation with human rankings at just $4 per test. Data and resources will be open-sourced at CapArena. 1 Introduction Image captioning, the task of generating textual descriptions for images, has long been a fundamental challenge in both the computer vision and natural language processing communities (Vinyals et al., 2015; Anderson et al., 2018; Cornia et al., 2020). It has broad and valuable applications, such as assisting visually impaired individuals and supporting multimedia retrieval. Driven by progress in LLMs, †Equal contribution. 1171 1142 1141 1139 1130 1105 1037 1016 1015 1001 886 864 863 851 GPT-4o-0806 human Gemini-2.0-flash-exp InternVL2-26B Gemini-1.5-pro-002 Claude-3.5-Sonnet-0620 GPT-4o-mini-0718 LLama-3.2-90B Qwen2-VL-72B-Instruct CogVLM2-llama3-chat-19B MiniCPM-V2.6-8B Qwen2-VL-7B-Instruct Qwen2-VL-2B-Instruct LLaVA-1.6-34B LLaVA-1.5-7B ELO Rating Human Baseline di [ h ]/ i / h j Figure 1: Model rankings from CapArena in detailed captioning. Top models are comparable to humans, while most open-source models lag behind. modern Vision-Language Models (VLMs) are capable of generating long, detailed descriptions of image content (OpenAI, 2023; Chen et al., 2024c), moving beyond the short captions of traditional methods. The proliferation"
+  },
+  {
+   "label": "S4",
+   "id": "2503.12329v1:p2:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 2,
+   "score": 0.776,
+   "text": "formance, and how do they compare against each other? We conduct the first large-scale human evaluation to benchmark current VLMs. Further, using resulting annotations from (1) as ground truth, we analyze existing captioning metrics and ask: (2) How can we develop automated evaluation methods that reliably measure detailed caption quality and align with human preferences? To explore the first question, we developed CapArena, which includes over 6000 high-quality human annotations to evaluate the detailed captioning capabilities of 14 advanced VLMs and humans. In our preliminary study, we found that traditional scoring methods are unsuitable for annotating detailed captions’ quality due to their fine-grained intricacy and diversity. Inspired by LLM evaluation (Chiang et al., 2024), we adopted a pairwise caption battles paradigm. The resulting model rankings are shown in Figure 1. For the first time, we observe that state-of-the-art models, such as GPT-4o, are comparable to or even surpass human-level performance, marking a pivotal milestone in image captioning. While open-source VLMs achieve competitive results on general benchmarks, CapArena reveals a persistent performance gap between them and commercial models. An exception is InternVL2-26B (Chen et al., 2024c), a smaller open-source model that stands out with its strong performance, underscoring the potential of compact and efficient VLMs for detailed captioning. In response to the second question, we conducted a comprehensive analysis of traditional and recent captioning metrics, as well as the ability of VLM-as-a-Judge (Chen et al., 2024a) to assess caption quality. We compared these metrics against human preferences from CapArena. Our results reveal that most metrics designed for short captions, such as CLIPScore (Hessel et al., 2021), fail entirely in the detailed captioning task. Although some rule-based metrics, such as METEOR (Banerjee and Lavie, 2005), exhibit decent agreement with human judgments at the caption level, they suffer from systematic biases across different VLMs. This results in low agreement at the model level, where the rankings produced by these metrics deviate significantly from human rankings. In contrast, we introduce VLM-as-a-Judge with reference captions, which demonstrates robust discernment for detailed captions. It achieves the highest alignment with human judgments at both the caption and model levels. In light of these findings, we release CapArena-Auto, an automated benchmark for detailed cap- tioning. It comprises 600 samples and innovatively adopts the pairwise battle paradigm to improve evaluation reliability. VLM-as-a-Judge is employed to estimate human preferences by comparing captions against three baseline models. With 94.3% correlation to"
+  },
+  {
+   "label": "S5",
+   "id": "2503.12329v1:p4:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 4,
+   "score": 0.768,
+   "text": "scription of a spiritual figure. Hallucination: Hallucinations are considered an intractable flaw in VLMs (Li et al., 2023), where models generate objects that do not exist in the image. We instruct annotators to impose strict penalties for hallucinations, as they significantly harm the caption quality in real-world applications. Additionally, previous studies show that human annotators are influenced by output length and response style (Chiang et al., 2024). To mitigate this, we asked annotators to focus solely on the quality of the descriptions, minimizing distractions from such aspects. Furthermore, for pairs of similar quality, we considered the longer description less favorable if it was noticeably too long. 3.2 CapArena: Pairwise Battle Platform We developed CapArena, an annotation platform aimed at benchmarking VLMs’ performance in detailed captioning through anonymous pairwise battles. The platform covers a diverse range of image scenarios and evaluates a set of established VLMs through human annotator votes, providing reliable rankings between models. Data Source. The test images are sourced from the recently proposed DOCCI dataset (Onoe et al., 2024), which includes high-resolution images of various real-life scenes. We provide detailed information about this dataset in Appendix A. Notably, each image in this dataset is paired by carefully crafted long, human-annotated descriptions, which are used as the human baseline on our platform. For the tested models, we selected a diverse set of representative VLMs, including both commercial and open-source models, spanning a range of model sizes (the full list is provided in Appendix C). To minimize bias introduced by specific prompts, we crafted 10 prompts for detailed image captioning, such as Describe this image in detail. These prompts were manually reviewed to ensure they generated descriptions of similar quality and length (all prompts are provided in Appendix B). We show the caption length distribution of different VLMs in Figure 2, where GPT-4o is most similar to humans. CapArena Infrastructure. We take N to denote the number of models. Let n1, n2 ∈[N] be the indices of the models. We define At = (n1, n2) as the model pair compared at time t. The human response is indicated by Ht ∈{0, 1}, where Ht = 0 indicates human preference for model n1, and Ht = 1 for model n2. To focus on comparing models with similar per- Figure 2: Caption length distribution of different VLMs. formance levels and thus accelerate the convergence of rankings, we adopt the probability update strategy"
+  }
+ ],
+ "prompt_tokens": 3313,
+ "answer_tokens": 62,
+ "seconds": 3.5,
+ "id": "S03",
+ "reference_answer": "Over 6000 battles with human preference votes; leading models such as GPT-4o are comparable to or even surpass human-level captions.",
+ "expected_evidence": [
+  {
+   "paper": "2503.12329v1",
+   "page": 2,
+   "phrase": "6000"
+  }
+ ]
+}

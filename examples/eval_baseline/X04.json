@@ -1,0 +1,91 @@
+{
+ "question": "What weaknesses of CLIPScore do the papers point out?",
+ "time": "2026-10-18T21:19:39",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The papers identify that CLIPScore tends to encode gender biases and can incorrectly filter semantically correct captions with repetitive lexical usage [S2][S3]. Additionally, it lacks compositionality and is limited to processing only up to 77 subword tokens, making it unsuitable for long image caption evaluation [S5].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   3,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2502.20034v4:p4:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 4,
+   "score": 0.754,
+   "text": "Published in Transactions on Machine Learning Research (01/2026) Figure 3: The graphical representation of F-CLIPScore. two distributions. As shown in Figure 2a, we observe that there is no substantial difference between the two distributions. We conducted the same analysis using ground-truth text embeddings of the pre-trained and fine-tuned models, and similarly found no significant difference in the cosine similarity distributions between the samples that were correctly and incorrectly predicted by CLIP-L (Figure 2b). Two-sample t-tests yield p-values of 0.11 for a and 0.67 for b. In contrast, Figure 2c reveals significant changes in text embeddings for captions with hallucination (green), and without hallucination (purple) highlighting the distinct adaptation of text representation. Two-sample t-tests yield near zero p-value for c. These observations suggest that OHD-Caps training induces more noticeable changes in the text representation space, particularly in discriminating hallucinated from non-hallucinated captions, whereas the vision representation space exhibits relatively minor changes. 3.2 Fine-grained CLIPScore Motivated by these observations, we propose a simple metric called Fine-grained CLIPScore (F-CLIPScore), which enhances the discriminative power of the VLM in order to utilize textual information with more granularity without additional training. F-CLIPScore first utilizes the spaCy parser Honnibal et al. (2020) to extract nouns from a given sentence. Then, it evaluates the quality of an image caption by averaging the CLIPScore of the entire sentence and each individual noun (Figure 3). Mathematically, given an image I and a caption C containing a total of N nouns, each denoted as ni, F-CLIPScore is defined as Eq. 1. F-CLIPScore(I, C) = CLIPScore(I, C) + PN i=1 CLIPScore(I, ni) N + 1 (1) 4 Experiments For evaluating OHD-Caps test set, F-CLIPScore only requires an additional parsing step (we used en_core_web_sm of spaCy (Honnibal et al., 2020)), which takes on average 170 ms per sentence and can be parallelized across samples. We note that this parser runs in linear time with respect to the length of the sentence (Honnibal & Johnson, 2015). For training CLIP with Eq. 2 on the OHD-Caps train set, we used a batch size of 64 and a learning rate of 1e-5, which required 3 hours on an H100 GPU. For LLaVA"
+  },
+  {
+   "label": "S2",
+   "id": "2305.14711v3:p8:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 8,
+   "score": 0.752,
+   "text": "viate gender biases. Motivated by this, we investigate if adding CLIPScore and CIDEr together without normalization for model evaluation (denoted as CLIPScore+CIDEr) can harness the benefits of both model-based and n-gram matching-based evaluation metrics, which has demonstrated effective in other tasks (Wan and Bansal, 2022; Huang et al., 2023). Formally, we obtain the new evaluation score with H(ci, ri, Ii) = CLIPScore(ci, Ii) + CIDEr(ci, ri), (4) where ci denotes the candidate caption, ri denotes the reference sentences set, and Ii denotes the corresponding image. We mainly focus on CIDEr because it is a commonly used n-gram matching-based metric in image captioning tasks although our method is compatible with other n-gram matching-based metrics as well. We assign equal weights to both of the metrics for simplicity, while a more sophiscated weighting strategy can potentially improve the model performance but add complexity, which we leave as a future direction. 4.1 Bias Evaluation In this part, we experiment with the hybrid metric following the setting in Section 2.2. Table 2 shows that CLIPScore+CIDEr does not encode gender biases on the PAO-EVALBIAS dataset, suggesting this method can successfully reduce the metric bias. We include several examples in Appendix B with CLIPScore and CIDEr score breakdowns to demonstrate the idea of combining these two metrics. Moreover, we evaluate the human correlations of each evaluation metric on Flickr8K-Expert (Hodosh et al., 2015) and as present in Table 7, CLIPScore+CIDEr achieves an improved correlation with human judgments compared to CLIPScore and CIDEr, indicating that it can maintain its capability of model evaluation. Our success with CLIPScore+CIDEr shows our method is compatible with any other statistical metrics. That say, we also test CLIPScore+BLEU4 and CLIPScore+SPICE, resulting in 51.260 and 55.051 τc, respectively, which further strengthens our argument. To conclude, our proposed metric emphasizes the synergistic fusion of two metrics with complementary strengths. While CLIPScore excels at capturing vision-language alignment, it tends to biased models due to inherent gender biases in its encoding. Conversely, CIDEr adheres to unbiased reference captions, albeit limited to surface-level comparisons. Combining these two metrics, our τc BLEU-4 30.776 METEOR 41.822 ROUGE 32.314 CIDEr 43.891 SPICE 44.888 CLIPScore 51.482 CLIPScore+BLEU-4 51.260 CLIPScore+CIDEr 53.768 CLIPScore+SPICE 55.051 Table 7: Correlations (measured with τc) with human judgment on Flickr8K-Expert. Combining CLIPScore with CIDEr or SPICE can improve the correlation over both n-gram matching-based evaluation metrics and CLIPScore. method presents a comprehensive evaluation framework containing visual relevance and"
+  },
+  {
+   "label": "S3",
+   "id": "2502.20034v4:p11:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 11,
+   "score": 0.751,
+   "text": "We first observed the degree of overlap between the F-CLIPScore and CLIPScore metrics when filtering the data. At filtering rates of 20, 30, 40, 50, and 60, the proportions of overlapping image–caption pairs filtered by both metrics were 57%, 62%, 67%, 71%, and 76%, respectively. We then randomly sampled 10 image–caption pairs that did not overlap between the two metrics’ filtered sets at the 30% filtering rate, which was the setting that yielded the best performance when using the F-CLIPScore metric. The results are presented in Figure 4. As shown in Figure 4, the images filtered by CLIPScore (upper row) appear to include some that should not have been filtered out, despite having normal and semantically correct captions. Although cases such as (g) and (h) involve repetitive lexical usage—where a word is repeated even if it correctly refers to an object present in the image—it is still reasonable for such captions to receive lower scores. However, it is unfortunate that these samples were filtered only by CLIPScore and not by F-CLIPScore. On the other hand, the images filtered by F-CLIPScore (lower row in Figure 4) include cases such as (l), where even though there is repetitive lexical usage, the corresponding object in the image is actually a model rather than a designer, making the filtering reasonable. There were also examples like (n), where the captioned object is missing from the image, and (r), where the image shows a personal debt chart for “Brainy” rather than a “brain”. These qualitative samples provide insights into how filtering with F-CLIPScore influenced the performance of the LVLMs. Furthermore, we measured the CLIPScore and F-CLIPScore for each image–caption pair across the entire LLaVA-Pretrain dataset and sorted them in ascending order, such that a higher score corresponds to a higher rank. We then sorted the samples by the difference between the two ranks (F-CLIPScore rank − CLIPScore rank) and selected the top 10 samples with the largest positive values (i.e., those that CLIPScore rated higher than F-CLIPScore, shown in the upper row of Figure 5) and the bottom 10 samples with the largest negative values (i.e., those that F-CLIPScore rated higher than CLIPScore, shown in the lower row of Figure 5). As shown in Figure 5, the samples on side (I), which CLIPScore rated higher than F-CLIPScore, contain many text-rendered images. Conversely, the samples on side (II), which F-CLIPScore rated higher than CLIPScore, tend to exhibit"
+  },
+  {
+   "label": "S4",
+   "id": "2502.20034v4:p5:c1",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 5,
+   "score": 0.748,
+   "text": "Table 2, we observed the expected decline in accuracy as nouns were replaced. This indicates that the strong performance of F-CLIPScore, even without additional training, is not due to random noise, but rather stems from its ability to more effectively leverage fine-grained textual embeddings. We experimented with alternative configurations of F-CLIPScore using verbs and noun phrases instead of nouns. As shown in Table 3, using verbs yielded little to no improvement, while noun phrases performed better than verbs but still fell short of the performance achieved with nouns."
+  },
+  {
+   "label": "S5",
+   "id": "2509.03897v2:p2:c1",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 2,
+   "score": 0.744,
+   "text": "et al., 2021) and PACScore (Sarto et al., 2023) build on pre-trained vision–language models such as CLIP (Radford et al., 2021), assessing captions through representational similarity between images and their captions. More recently, large language models (LLMs) have been used as evaluators by prompting them to score alignment between captions and images: FaithScore (Jing et al., 2023) extracts atomic facts from captions using an MLLM and verifying each fact against the image to measure faithfulness. CLAIR (Chan et al., 2023) leverages LLMs in a zero-shot setting to score captions and explain their judgments, GPT4-Eval (Liu et al., 2023) is evaluated by prompting GPT-4 to judge multimodal responses, with performance measured by relative quality scores. RLAIF-V (Yu et al., 2024) evaluates captions by prompting open-source MLLMs to verify decomposed claims and score hallucination reduction. FLEUR (Lee et al., 2024) prompts an open-source MLLM to directly compare an image with a candidate caption in a reference-free setting, producing both a numerical score and a natural-language rationale to align evaluation with human judgments. CAPTURE (Dong et al., 2024) evaluates captions by extracting and matching fine-grained visual details. DCScore (Ye et al., 2025) evaluates captions by decomposing them into primitive information units and measuring their accuracy and coverage using GPT-4. These LLM-based methods show strong performance but remain prohibitively expensive and mostly closed-source. CLIP-based adaptations Metrics based on representational similarity carry promise as they operate on the level of semantics rather than surface, and they are less costly than LLMs. However, CLIP, the common choice for base model in such metrics, is not suitable for long caption evaluation for two key reasons: it lacks compositionality and it can only take up to 77 subword tokens. To address these limitations, a line of research has modified CLIP in various ways. NegCLIP (Yuksekgonul et al., 2022) is the first work to address composi-"
+  }
+ ],
+ "prompt_tokens": 2703,
+ "answer_tokens": 66,
+ "seconds": 3.3,
+ "id": "X04",
+ "reference_answer": "Gender bias (it can favour stereotyped captions), weak object-level granularity (F-CLIPScore adds noun-level scores), and weak handling of long detailed captions (SPECS adds specificity).",
+ "expected_evidence": [
+  {
+   "paper": "2305.14711v3",
+   "page": 1,
+   "phrase": "gender biases"
+  },
+  {
+   "paper": "2502.20034v4",
+   "page": 1,
+   "phrase": "noun level"
+  },
+  {
+   "paper": "2509.03897v2",
+   "page": 1,
+   "phrase": "specificity"
+  }
+ ]
+}

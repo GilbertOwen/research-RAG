@@ -1,0 +1,81 @@
+{
+ "question": "Which attention mechanism and which evaluation metrics does the 'Beyond RNNs' benchmark use?",
+ "time": "2026-10-18T21:19:22",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The study uses the Bahdanau Attention mechanism [S5]. It evaluates models using automatic metrics such as BLEU-4, METEOR, CIDEr, and GLEU, alongside human judgment [S2][S3].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   3,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2502.18734v1:p8:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 8,
+   "score": 0.722,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT 10 Conclusions Having implemented and studied the performance of both Vanilla RNN and Attention-based Image Captioning techniques on the MS COCO dataset, Natural Images, and Abstract Images, we can conclude that, in terms of performance on both human judgment and automatic metrics, the Attention Mechanism is superior to the Vanilla RNN Image Captioning on the COCO dataset and Natural Images with fewer subjects. However, both models perform similarly on abstract paintings and Natural Images with a large number of subjects. Design considerations, such as the choice of CNN-Encoder, also affect the performance of the model. Moreover, we have observed that the currently used automatic metrics for image captioning judge caption quality by determining similarity between candidate and reference captions. As a result, these metrics fail to achieve adequate levels of correlation with human judgments at the sentence level, reflecting the fact that they do not fully capture the set of criteria humans use when evaluating caption quality. We have accomplished our goal of comparing and understanding the architecture and performance aspects of deep learning-based image captioning models. In the process, we have learned about the interplay between Computer Vision and NLP, encoder-decoder architectures, loss functions in complex architectures, and the crucial ability to comprehend academic research papers in deep learning."
+  },
+  {
+   "label": "S2",
+   "id": "2502.18734v1:p7:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 7,
+   "score": 0.72,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT 1. Adequacy – whether the full meaning of the source is conveyed. 2. Fidelity – how accurately the translation matches the original. 3. Fluency – how grammatically well-formed the sentence is. These three factors determine what makes a good sentence according to human judgment, which explains why BLEU-4 scores correlate well with human evaluation. 8.4 Comparison: Vanilla RNN vs. Attention Model It can be observed that: • The attention model performs better than the vanilla RNN model on all automatic NLP metrics except METEOR. • Human judgment also rates the attention model higher than the vanilla model. Furthermore: • Due to its nature, the attention model is more descriptive than the vanilla model. • The attention model enables better interpretability by showing: – Various regions of the image. – How different image regions contribute to specific words in the caption. • This interpretability makes it a strong candidate for tasks requiring explainability in AI. Figure 6: Comparison of Vanilla RNN vs. Attention-Based Model View: Detailed Results 9 Repository GitHub Repository: Open Repository The complete source code, dataset preprocessing scripts, model architectures, and training details for this study are available in our GitHub repository. This repository provides a structured implementation of both Vanilla RNN-based and Attention-based image captioning models, along with scripts for evaluation metrics such as BLEU, METEOR, and CIDEr. Additionally, sample outputs, visualization scripts for attention heatmaps, and detailed documentation are included to facilitate reproducibility. Researchers and developers interested in extending this work or applying it to other datasets can explore the repository for pre-trained models and training logs. Contributions, suggestions, and discussions are welcome through GitHub issues and pull requests."
+  },
+  {
+   "label": "S3",
+   "id": "2502.18734v1:p6:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 6,
+   "score": 0.689,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT A possible explanation for this discrepancy is that: • The model captured many nuances in the image and the corresponding words. • However, it neglected the semantic order of the words. Since METEOR primarily emphasizes word similarity, this resulted in: • A high METEOR score • A lower human judgment score due to lack of semantic coherence Figure 5: Results for Model 2 - Bahdanau Attention + ResNet50 View: Detailed Results 8.3 Analysis of BLEU-4 and Word Error Rate (WER) Typically, it is believed that a lower word error rate (WER) indicates superior accuracy in speech recognition. However, we observe the following: • The Fair prediction has a lower WER than the Good prediction. • This demonstrates that true understanding of language depends on more than just: – Low WER – High accuracy On the contrary, BLEU-4 scores align better with human judgment because they consider:"
+  },
+  {
+   "label": "S4",
+   "id": "2502.18734v1:p5:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 5,
+   "score": 0.687,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT • Vocabulary size: 7000 • Number of epochs: 30 • Number of images: 6000 achieved the best BLEU-1,2,3,4 and GLEU scores. However, the scores decreased for the configuration with: • Vocabulary size: 7000 • Number of epochs: 50 • Number of images: 10,000 This suggests possible overfitting of the model. Figure 3: Results for Model 1 - Bahdanau Attention + Inception V3 Figure 4: Results for Model 1 - Bahdanau Attention + Inception V3 (Continued) 8.2 Model: Bahdanau Attention + ResNet50 We have inferred that, in some cases, METEOR scores do not align well with human judgments. For example, while human evaluators rated a particular image as “Good,” its METEOR score was lower (30.9) than another image that was rated as “Fair” (37.5). This discrepancy suggests that METEOR, which primarily emphasizes word similarity, may not always capture the full semantic accuracy and coherence of an image caption."
+  },
+  {
+   "label": "S5",
+   "id": "2502.18734v1:p4:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 4,
+   "score": 0.646,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT 6.1 Bahdanau Attention In this project, we have used Bahdanau Attention, also known as Additive Attention, as it performs a linear combination of the encoder states and the decoder states. In the Bahdanau Attention mechanism, all encoder hidden states, along with the decoder hidden state, are used to generate the context vector. We calculate the alignment scores between the previous decoder hidden state and each of the encoder’s hidden states. These alignment scores for each encoder hidden state are combined into a single vector and then passed through a softmax function. The alignment vector has the same length as the source sequence, with each value representing the score (or probability) of the corresponding word in the source sequence. Alignment vectors assign weights to the encoder’s output, allowing the decoder to determine which parts of the input to focus on at each time step. The encoder hidden states and their respective alignment scores (attention weights in the above equation) are multiplied to form the context vector, which is then used to compute the final output of the decoder. 6.2 Training Details ResNet-50: It is a convolutional neural network that is 50 layers deep, consisting of 48 convolutional layers, along with one MaxPool and one Average Pool layer. It performs approximately 3.8 × 109 floating-point operations. ResNet-50: It is a convolutional neural network that is 50 layers deep, consisting of 48 convolutional layers, along with one MaxPool and one Average Pool layer. It performs approximately 3.8 × 109 floating-point operations. Inception V3: Inception v3 is a convolutional neural network that is 48 layers deep and designed to reduce computational cost by optimizing previous Inception architectures. Teacher Forcing: We have used teacher forcing instead of feeding the output of a time step into the next time step, as it allows recurrent neural network models to train more quickly and efficiently by using the ground truth from a prior time step as input. Vocab Size: We have varied the vocabulary size (Top 5000, Top 7000), as ideally, we want a vocabulary that is both expressive and as small as possible. A smaller vocabulary results in a more compact model that trains faster. Learning Rate: We adjusted several hyperparameters during our experiments. Initially, in the training phase, we set the learning rate to 4 × 10−4. However, under this condition, the training loss exhibited significant oscillations."
+  }
+ ],
+ "prompt_tokens": 1864,
+ "answer_tokens": 50,
+ "seconds": 2.9,
+ "id": "S15",
+ "reference_answer": "Bahdanau (additive) attention; BLEU, METEOR, GLEU and WER on MS-COCO.",
+ "expected_evidence": [
+  {
+   "paper": "2502.18734v1",
+   "page": 4,
+   "phrase": "Bahdanau"
+  }
+ ]
+}

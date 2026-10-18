@@ -1,0 +1,80 @@
+{
+ "question": "Which LLMs did the ranking-and-fusion captioning paper try for the fusion stage?",
+ "time": "2026-10-18T21:18:41",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The paper tested two open-weight LLMs, LLaMA-3.3-70B-Instruct and Mixtral-8x7B-Instruct-v0.1, as alternatives to the proprietary Davinci model [S1]. It also evaluated a manually engineered \"Sem-Syn Merge\" prompt which achieved the best results across all metrics [S5].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2306.11593v3:p18:c0",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 18,
+   "score": 0.764,
+   "text": "Figure 9 illustrates the distribution of BLIPScores for ranked image-caption pairs. The box plot for rank 1 (higher-ranked captions) exhibits the highest median BLIPScore and a narrower score range, indicating better quality and consistency. In contrast, as the rank increases (i.e., captions are ranked lower), the median BLIPScore decreases, and the score range widens, reflecting lower quality and greater variability. Outliers suggest that some captions within certain ranks deviate significantly—either positively or negatively—from the majority. Overall, the figure reveals that BLIPScores decline with rank, highlighting the superior quality of higher-ranked captions. The similarity in medians for the first two ranks further supports focusing on these for tasks like fusion, as including lower-ranked captions may reduce overall accuracy. Since the median BLIPScore value for the top three captions in the ranking is quite similar, we conduct an ablation study in which we combine the top three captions in the ranking instead of the top two. The model is kept in its original form except for the prompt, which is adapted to include three captions instead of two. The results reported in row 3 of Table 7 show how the use of three captions instead of two (whose results are in the last row) leads to a slight degradation in performance across most metrics. In particular, although the BLEU-4 and SPICE scores decrease only marginally, more noticeable drops are observed for METEOR, CIDEr, CAPTURE, and Polos. These results suggest that incorporating an additional caption in the prompt may introduce redundancy or conflicting semantic content that hinders the model’s ability to generate coherent and high-quality outputs. Overall, the configuration with two captions appears to provide a better balance between diversity and relevance, resulting in superior caption quality. In Figure 10, we present the percentage of SoTA model pairs selected during the ranking phase. In practice, these results demonstrate which models most frequently belong to the captions that are fused by our model. As shown, the pair of models BLIP-2 and OFA is selected for 22% of the test image captions, while GIT and OFA are selected for 19%. The pair consisting of ExpNet-v2 and ViT-GPT2 accounts for only 2.4% of the generated captions. 4.4.2 Caption fusion through LLM alternatives To evaluate the generality and practicality of our fusion-based strategy, we replaced the proprietary Davinci model with two widely used open-weight LLMs: LLaMA-3.3-70B-Instruct and Mixtral-8x7B-Instruct-v0.1. These models were selected for their public availability and"
+  },
+  {
+   "label": "S2",
+   "id": "2306.11593v3:p13:c0",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 13,
+   "score": 0.739,
+   "text": "Table 2: Captioning performance in terms of image-agnostic metrics on the Karpathy split of MS-COCO. For each metric, best and second best models are highlighted in bold and underlined, respectively. “–” indicates that the model has not reported a score on the metric. Model B@4 M C S CAPTURE F1attr F1obj F1rel BLIP-2 43.8 31.7 145.9 25.2 0.36 10.96 61.02 38.85 EVCap 41.5 31.2 140.1 24.7 – – – – ExpNet-v2 40.7 30.0 139.5 24.4 0.36 9.47 61.26 40.75 GIT 38.7 29.5 131.2 23.3 0.39 10.75 64.15 46.98 I-Tuning 34.8 28.3 116.7 21.8 – – – – MSRM 41.7 30.7 134.8 – OFA 44.6 32.5 153.7 26.6 0.38 11.34 62.99 42.88 ViPCap 37.7 28.6 122.9 21.9 – – – – ViT-GPT2 35.4 27.9 119.1 21.2 0.35 6.50 61.43 40.55 Our (Best) 41.6 31.6 145.5 25.9 0.39 12.93 62.70 42.68 Our (Fusion) 30.0 31.5 106.0 26.5 0.42 16.75 64.59 47.77 The performance of these models is compared to that of our proposed fusion-based model, denoted as “Our (Fusion)”. In contrast, “Our (Best)” refers to the selectionbased strategy in which, for each image, we retain the single caption among the five candidates that receives the highest BLIPScore during the ranking phase. Table 3: Captioning performance in terms of image-agnostic metrics on the Karpathy split of Flickr30k. For each metric, best and second best models are highlighted in bold and underlined, respectively. “–” indicates that the model has not reported a score on the metric. Model B@4 M C S CAPTURE F1attr F1obj F1rel BLIP-2 31.9 25.2 85.9 18.5 0.33 10.29 55.93 34.12 EVCap – – 84.4 18.0 – – – – ExpNet-v2 24.5 21.1 60.9 15.2 0.34 9.48 57.63 37.21 GIT 28.0 23.4 76.3 16.9 0.36 11.65 59.37 40.30 MSRM 28.9 25.4 58.3 – – – – – I-Tuning – – 72.3 19.0 – – – – OFA 27.6 22.9 74.4 16.6 0.32 8.17 54.53 33.17 ViPCap – – 66.8 17.2 – – – – ViT-GPT2 16.4 17.9 39.2 11.1 0.30 7.91 52.14 28.80 Our (Best) 31.3 25.5 88.3 19.2 0.36 13.10 58.29 38.01 Our (Fusion) 24.0 26.5 73.1 21.0 0.40 18.29 60.70 43.11 Several observations can be drawn from the results presented in Tables 2, 3, 4, and 5. While the proposed model does not consistently outperform SoTA captioners in traditional quality metrics such as BLEU-4 (B@4) and CIDEr (C), it shows"
+  },
+  {
+   "label": "S3",
+   "id": "2306.11593v3:p18:c1",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 18,
+   "score": 0.728,
+   "text": "favorable performance-cost trade-offs. In all cases, we used the same “Sem-Syn Merge” prompt (see Section 4.4.3), and fused two captions per image for consistency across conditions. The results, shown in rows 4 and 5 of Table 7, reveal significant performance differences between these alternatives. In particular, the variant using LLaMA shows a sharp decline across all quality metrics (B@4: 10.6, C: 16.3, S: 14.9), indicating that this model struggled to synthesize coherent and relevant captions using our fusion prompt. This degradation suggests that, despite its architectural size, LLaMA may lack robustness or instruction-following capabilities sufficient for the nuanced semantic alignment required in this task. Conversely, the Mixtral variant delivers much stronger results, achieving 12.7 in B@4, 27.1 in METEOR, and 23.4 in SPICE. While these"
+  },
+  {
+   "label": "S4",
+   "id": "2306.11593v3:p14:c0",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 14,
+   "score": 0.718,
+   "text": "competitive or superior performance in metrics that better capture semantic alignment and linguistic richness. Specifically, “Our (Fusion)” achieves the highest SPICE score among all models on both datasets (26.5 on MS-COCO and 21.0 on Flickr30k), indicating strong alignment with the image content in terms of scene elements and relationships. Although OFA and BLIP-2 lead in B@4 and CIDEr on both benchmarks, our model obtains top results in SPICE and METEOR, suggesting that the captions it generates are more semantically faithful and fluent, even if they differ in surface n-gram similarity from the references. “Our (Best)” also performs strongly on traditional metrics—achieving the best CIDEr score (88.3) and second-best scores in B@4 and SPICE on Flickr30k—highlighting the effectiveness of candidate selection when constrained to single-caption outputs. Importantly, the fusion-based strategy leads to a substantial improvement in caption diversity. As shown in Table 4, “Our (Fusion)” achieves the highest Div-1 and Div-2 scores on both datasets (0.66/0.44 on MS-COCO and 0.61/0.40 on Flickr30k), significantly outperforming all baselines. It also achieves the second-lowest mBLEU, indicating low redundancy across generated captions while preserving quality. In contrast, models such as ViT-GPT2 exhibit similar mBLEU scores but suffer from substantially lower content quality, underscoring that high diversity alone does not guarantee caption adequacy. Moreover, the linguistic analysis in Table 5 reveals that our model generates longer and more syntactically complex sentences, with the highest frequencies of adjectives, nouns, verbs, and conjunctions. This indicates an increase in both lexical richness and descriptive capacity, beyond what is captured by standard metrics. Interestingly, the fusion model even surpasses human-written references in several of these linguistic dimensions, suggesting that it does not simply interpolate across candidates but produces more nuanced and detailed descriptions. Finally, results in Table 6 confirm that these advantages generalize across datasets and metrics, with “Our (Fusion)” achieving the best performance on both ALOHa and Polos scores for MS-COCO and Flickr30k. These consistent gains across quality, diversity, and semantic grounding metrics demonstrate the effectiveness of the proposed fusion-based captioning strategy in addressing limitations of existing models, particularly those reliant on single-decoder architectures. Table 4: Captioning performance in terms of diversity statistics on the Karpathy split of MS-COCO and Flickr30k. For each metric, best and second best models are highlighted in bold and underlined, respectively. Model MS-COCO Flickr30k mBLEU (↓) Div-1 (↑) Div-2 (↑) mBLEU (↓) Div-1 (↑) Div-2 (↑) BLIP-2 0.88 0.50 0.32 0.68 0.44 0.28 ExpNet-v2 0.84 0.49 0.32 0.52 0.41 0.26 GIT 0.80 0.49 0.32 0.60 0.42 0.27 OFA 0.91 0.51 0.33 0.64 0.43 0.27 ViT-GPT2 0.69 0.47 0.30 0.35 0.41 0.27 Our (Best) 1.00 0.52 0.34 1.00 0.54 0.35 Our (Fusion) 0.72 0.66 0.44 0.50 0.61 0.40"
+  },
+  {
+   "label": "S5",
+   "id": "2306.11593v3:p21:c1",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 21,
+   "score": 0.711,
+   "text": "24.6 and CIDEr of 88.8, we observe a substantial improvement with the LLM-Optimized prompt (BLEU-4 of 29.3 and CIDEr of 102.1), confirming the effectiveness of prompt refinement—even when automatically generated by another LLM. The best results across all evaluation metrics are obtained with the Sem-Syn Merge prompt, which was manually engineered to incorporate both semantic and syntactic alignment cues. This version achieves the highest scores in BLEU-4 (30.0), METEOR (31.5), CIDEr (106.0), SPICE (26.5), CAPTURE (0.42), and Polos (0.74). These findings demonstrate that prompt design has a significant impact on caption fusion quality, and that explicit instructions encouraging both semantic integration and syntactic fluency can effectively guide the model toward more accurate and informative captions. The results"
+  }
+ ],
+ "prompt_tokens": 3159,
+ "answer_tokens": 76,
+ "seconds": 3.6,
+ "id": "S04",
+ "reference_answer": "Davinci, Mixtral-8x7B-Instruct and Llama-3.3-70B-Instruct.",
+ "expected_evidence": [
+  {
+   "paper": "2306.11593v3",
+   "page": 3,
+   "phrase": "Mixtral"
+  }
+ ]
+}

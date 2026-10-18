@@ -1,0 +1,80 @@
+{
+ "question": "According to the THumB study, which automatic metric correlates better with human judgments than text-only metrics?",
+ "time": "2026-10-18T21:18:33",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "According to the THUMB study, CLIPScore (specifically RefCLIP-S) correlates better with human judgments than conventional text-only metrics because it is more sensitive to recall [S2]. The study notes that while text-only metrics often fail to capture the quality gap between humans and machines, image-based metrics like CLIPScore improve these correlations [S3].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   3
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2111.08940v2:p6:c0",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 6,
+   "score": 0.707,
+   "text": "THUMB 1.0 Automatic Metrics Model P↑ R↑ Flu.↓ Con.↓Inc.↓ Total↑ BLEU ROUGE BERT-S SPICE CIDEr CLIP-S RefCLIP-S Human 4.82 4.35 0.019 0.02 0.00 4.56+0.03 −0.03 26.2 50.4 0.938 23.7 111.5 0.791 0.834 VinVL-large 4.54 3.97 0.005 0.00 0.00 4.25+0.04 −0.04 33.3 56.5 0.946 26.4 141.8 0.784 0.834 VinVL-base 4.47 3.95 0.001 0.00 0.00 4.21+0.04 −0.04 32.3 55.9 0.945 25.6 138.4 0.779 0.830 Unified-VLP 4.35 3.77 0.004 0.00 0.00 4.06+0.04 −0.04 31.6 55.8 0.945 24.3 128.5 0.771 0.821 Up-Down 4.29 3.50 0.014 0.00 0.00 3.88+0.05 −0.05 28.4 52.2 0.939 21.0 110.7 0.746 0.803 Table 2: Performance of image captioning models with respect to THUMB 1.0 (left) and automatic metrics (right). All scores are averaged over 500 images randomly sampled from the Karpathy test split. P: precision; R: recall; Flu.: fluency; Con.: conciseness; Inc.: inclusive language. 90% confidence intervals for total scores are calculated by bootstrapping (Koehn, 2004). All reference-based metrics take as input the same four crowdsourced captions that are not used in Human for fair comparisons. THUMB 1.0 scores Human substantially higher than the machines, unlike all automatic metrics. P, R, and total scores. In particular, we see a large gap between Human and the machines in recall (e.g., Human 4.35 vs. VinVL-large 3.97). This contrasts with the automatic metric-based ranking of the MSCOCO leaderboard, where Human is ranked at the 250th place.5 This result questions claims about human parity or superhuman performance on MSCOCO image captioning. The four machine captioning models are ranked in the expected order, though the small difference between VinVL-large and VinVL-base suggests that simply scaling up models would not lead to a substantial improvement. We see that the three models that are initialized with pretrained BERT (VinVL-large/base, Unified-VLP) are particularly fluent, but the problem is small in the other models as well. While we compute representative, total scores, our transparent rubrics allow for adjusting weighting of the categories depending on the application of interest. For instance, in the social media domain, recall can be more important than precision to make captions engaging to users (Shuster et al., 2019). To assess the models independently of these aggregation decisions, we count the number of times when each model outperforms/underperforms all the others both in P and R (strictly best/worst, Table 3). We see patterns consistent with Table 2. For example, Human is most likely to be strictly best and least likely to be strictly worst. This suggests"
+  },
+  {
+   "label": "S2",
+   "id": "2111.08940v2:p1:c0",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 1,
+   "score": 0.684,
+   "text": "Transparent Human Evaluation for Image Captioning Jungo Kasai♡∗ Keisuke Sakaguchi♣ Lavinia Dunagan♡ Jacob Morrison♡♠ Ronan Le Bras♣ Yejin Choi♡♣ Noah A. Smith♡♣ ♡Paul G. Allen School of Computer Science & Engineering, University of Washington ♣Allen Institute for AI ♠Department of Linguistics, University of Washington {jkasai,laviniad,jacobm00,yejin,nasmith}@cs.washington.edu {keisukes,ronanlb}@allenai.org Abstract We establish THUMB, a rubric-based human evaluation protocol for image captioning models. Our scoring rubrics and their definitions are carefully developed based on machine- and human-generated captions on the MSCOCO dataset. Each caption is evaluated along two main dimensions in a tradeoff (precision and recall) as well as other aspects that measure the text quality (fluency, conciseness, and inclusive language). Our evaluations demonstrate several critical problems of the current evaluation practice. Human-generated captions show substantially higher quality than machine-generated ones, especially in coverage of salient information (i.e., recall), while most automatic metrics say the opposite. Our rubric-based results reveal that CLIPScore, a recent metric that uses image features, better correlates with human judgments than conventional text-only metrics because it is more sensitive to recall. We hope that this work will promote a more transparent evaluation protocol for image captioning and its automatic metrics.1 1 Introduction Recent progress in large-scale training has pushed the state of the art in vision-language tasks (Li et al., 2020; Zhang et al., 2021, inter alia). One of these tasks is image captioning, whose objective is to generate a caption that describes the given image. The performance in image captioning has been primarily measured in automatic metrics (e.g., CIDEr, Vedantam et al., 2015; SPICE, Anderson et al., 2016) on popular benchmarks, such as MSCOCO (Lin et al., 2014) and Flickr8k (Hodosh et al., 2013). Use of these metrics is justified based on their correlation with human judgments collected in previous work (Hodosh et al., 2013; Elliott and Keller, 2014; Kilickaya et al., 2017, inter alia). ∗Work was done during an internship at AI2. 1All data are available at https://github.com/ jungokasai/THumB. Machines P R CIDEr A red fire hydrant spewing water on a street. 5 3 139.2 A red fire hydrant spraying water on a street. 5 3 205.2 Human A busted red fire hydrant spewing water all over a street creating a rainbow. 5 5 120.5 Figure 1: These machine captions are precise (in the scale of 1–5) but lose points in recall (i.e., coverage of salient information); they both ignore the rainbow in the picture. Automatic metrics, such"
+  },
+  {
+   "label": "S3",
+   "id": "2111.08940v2:p2:c0",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 2,
+   "score": 0.679,
+   "text": "2016). Correlations of automatic metrics with human judgments can break down especially when model types change (Callison-Burch et al., 2006), or generation models become increasingly powerful (Ma et al., 2019; Edunov et al., 2020). We thus develop an up-to-date, transparent human evaluation protocol to better understand how current models perform and how automatic metrics are correlated when applied to current models. At the core of our rubrics are two main scores in a tradeoff: precision and recall (Fig. 1). The former measures accuracy of the information in a caption, and the latter assesses how much of the salient information in the image is covered. We then penalize a caption if we find a problem in fluency, conciseness, or inclusive language. Two or more authors evaluate every instance and collaborate to resolve disagreements, ensuring high quality of the annotations. We assess outputs from four strong models as well as human-generated reference captions from MSCOCO. We call our scores THUMB 1.0 (Transparent Human Benchmark), and release them publicly. Key Findings We made several key observations from the evaluations. • Machine-generated captions from recent models have been claimed to achieve superhuman performance using popular automatic metrics (human performance is ranked at the 250th place in the MSCOCO leaderboard),2 but they still show substantially lower quality than human-generated ones. • Machines fall short of humans, especially in recall (Fig. 1), but most automatic metrics say the opposite. This finding is consistent with prior work that showed that machines tend to produce less diverse captions than humans (van Miltenburg et al., 2018). • Human performance is underestimated in the current leaderboard paradigm, and there is still much room for improvement on MSCOCO captioning. • CLIPScore and RefCLIPScore (Hessel et al., 2021), recently proposed metrics that use image features, improve correlations particularly in recall. While they fail to score human generation much higher than machine one, they capture an 2https://competitions.codalab.org/ competitions/3221#results. aspect that is less reflected in text-only metrics. • Currently available strong captioning models generate highly fluent captions. Fluency evaluation is thus no longer crucial in ranking these models. 2 Evaluation Protocol We establish a transparent evaluation protocol for English image captioning models. Our rubrics and rules are developed through discussions among all annotators (first four authors of this paper) and designed to increase the reliability of evaluation (Jonsson and Svingby, 2007) 2.1 Evaluation Setups and Quality Control We used images from the test data"
+  },
+  {
+   "label": "S4",
+   "id": "2509.03897v2:p6:c1",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 6,
+   "score": 0.649,
+   "text": "while DCI and DAC perform worse, and LaCLIP shows no improvement over the baseline. Having established that the model we trained shows strong specificity in intrinsic evaluations, we proceed to use this model as a scoring function. Extrinsic Evaluation To evaluate how well automatic caption metrics align with human preferences, we adopt the evaluation protocol from DECAPBENCH (Ye et al., 2025). This human correlation benchmark consists of 100 images, sampled from the ImageInWords (IIW) dataset (Garg et al., 2024). Human-annotated ratings are available for five captions per image, generated by different vision-language models. This setup enables a standardized comparison between automatic metrics and human judgments. We evaluate SPECS in the context of a wide range of metrics from different categories: rule-based, representational similarity-based and LLM-based ones. Table 2 summarizes the results in terms of four standard correlation metrics: Pearson correlation coefficient (PCC), coefficient of determination (R2), Kendall’s τ (Kd τ), and Sample-wise τ (Sp τ). Among RS metrics, SPECS achieves the highest human correlation, improving PCC over the CLIPScore baseline from 0.2183 to 0.5228 and Kendall’s τ from 0.1724 to 0.4078 . SPECS outperforms most LLM-based metrics, including the strongest open-source metric, FLEUR, in terms of PCC and ranking consistency (Sp τ). SPECS requires only 2.81 × 10−2 TFLOPs per forward pass, making it far more efficient than LLM-based metrics like FLEUR (7.74) and CLAIR (3.97). With only 0.15 billion parameters, SPECS remains lightweight and scalable, offering a practical and human-aligned solution for evaluating dense, detail-rich captions."
+  },
+  {
+   "label": "S5",
+   "id": "2111.08940v2:p7:c0",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 7,
+   "score": 0.631,
+   "text": "should be regularly updated as our models become stronger (and perhaps more similar to humans), and raises a significant concern about the current practice that fixes evaluation metrics over time (Kasai et al., 2022). w/o Human w/ Human Metric P R Total P R Total RefCLIP-S 0.34 0.27 0.44 0.31 0.26 0.41+0.05 −0.05 RefOnlyC 0.42 0.14 0.41 0.37 0.11 0.34+0.04 −0.05 CLIP-S 0.18 0.27 0.32 0.17 0.28 0.32+0.05 −0.05 CIDEr 0.27 0.18 0.33 0.21 0.11 0.23+0.04 −0.04 BERT-S 0.27 0.18 0.33 0.20 0.10 0.21+0.04 −0.04 SPICE 0.26 0.15 0.30 0.20 0.09 0.21+0.04 −0.04 ROUGE-L 0.26 0.17 0.31 0.18 0.07 0.18+0.04 −0.04 BLEU 0.21 0.13 0.25 0.15 0.04 0.13+0.04 −0.04 Table 4: Instance-level correlations of automatic evaluation scores. RefCLIP-S and CLIP-S use image features unlike the others, and all but CLIP-S require references. All of these reference-based metrics use the same subset of four captions as in Table 2 that exclude Human. All metrics had correlations lower than 0.1 for fluency. Seen in Table 4 are instance-level Pearson correlation scores between automatic scores and our evaluations.6 We also add an ablation study: RefOnlyC removes image features from RefCLIP-S to quantify the effect of image features. We consider two types of scenarios: one with Human and one without. Correlations drop from the latter to the former for all metrics and aspects except CLIP-S, again showing that the metrics are not reliable in assessing human-generated captions. Interestingly, CLIP-S correlates best in recall (0.28 w/ Human) but suffers in precision (0.17 w/ Human). RefOnlyC, in contrast, achieves the best correlations in P at the expense of R. RefCLIP-S balances the two and achieves the best correlation in total scores. This indicates that the CLIP image features particularly help assess coverage of salient information that can be ignored in some reference captions from crowdworkers.7 Prior work (Hessel et al., 6Instance-level Pearson correlations with human judgments were often computed in prior work to compare automatic metrics for image captioning (e.g., Hessel et al., 2021). An alternative is system-level correlations, but they would be uninformative with five systems only. 7The low recall correlations of reference-only metrics can be partly because the maximum (as opposed to minimum or average) is typically taken over multiple reference captions (e.g., BERTScore, Zhang et al., 2020). Nevertheless, this alone does not explain the recall gap from image-based metrics because RefCLIP-S also takes the maximum score over all references. Future work can explore"
+  }
+ ],
+ "prompt_tokens": 3538,
+ "answer_tokens": 74,
+ "seconds": 3.3,
+ "id": "S02",
+ "reference_answer": "CLIPScore (CLIP-S), which uses image features.",
+ "expected_evidence": [
+  {
+   "paper": "2111.08940v2",
+   "page": 7,
+   "phrase": "better correlates"
+  }
+ ]
+}

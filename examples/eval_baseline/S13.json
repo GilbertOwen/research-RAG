@@ -1,0 +1,79 @@
+{
+ "question": "Which Indonesian image captioning datasets are listed in the multilingual survey of attention-based models?",
+ "time": "2026-10-18T21:19:14",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The multilingual survey lists the **Indonesian FEEH-ID** dataset as one of the benchmarks for evaluating multilingual image captioning performance [S3]. This dataset is mentioned alongside Bengali BORNON to highlight challenges in generating captions for non-English languages [S3]. The survey also notes that achieving high performance on such culturally diverse datasets remains a significant area for future research [S3].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   3
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2506.05399v1:p4:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 4,
+   "score": 0.758,
+   "text": "Table 1: Comparison of this survey with existing reviews on attention-based image captioning Survey Year Focus Attention- Based Models Multilingual Coverage Datasets Reviewed Evaluation Metrics [23] 2019 Comparative study of deep learning models ! % Limited (MS, COCO, Flicker8k) BLEU, METEOR [24] 2021 Transformer-based models ! % Largescale datasets CIDEr, SPICE [25] 2022 Vision-language models ! % MS COCO, Flickr30k Multiple metrics [26] 2022 Review of datasets and metrics ! % Extensive dataset coverage Detailed metric analysis [27] 2021 Attentive deep learning models for IC ! % MSCOCO B4, METEOR, CIDER and SPICE [28] 2024 Graph types used in 2D image understanding approaches ! % A summary of common datasets A summary of performance metrics [29] 2023 Medical image captioning ! % Common data set of medical IC Multiple metrics This Survey 2025 Comprehensive review of attention-based models, multilingual coverage ! !(English, Arabic. Vietnamese, etc.) Extensive dataset coverage Detailed metric analysis and outlining potential future possibilities. In addition, a systematic review of the literature (SLR) summarized advances in image captioning [36]. The primary objective of this research was to summarize the findings from recent papers and to describe the most popular methods and challenging problems in image captioning. The survey [37] explores the challenges and advancements in image captioning. The frameworks traditionally relied on a two-step pipeline, where visual features were extracted before being processed into natural language descriptions. However, with the emergence of sequential deep learning models, such as Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks, and Gated Recurrent Units (GRUs), the efficiency and accuracy of caption generation have improved significantly. The paper provides a review of the modeling architectures used, and highlights key research challenges. 2.4. Taxonomy of visual encoding and language modeling techniques The purpose of the [26] study is to present a thorough review of image captioning techniques. The researcher created a taxonomy of visual encoding and language modeling techniques, emphasizing their essential features and restrictions. A comprehensive survey was presented in [2]. This survey report provided an analysis of current deep learning-based image captioning methods, and a taxonomy of image captioning methods was provided. This study concluded that although deep learning-based image captioning techniques have made significant strides in recent years, a reliable technique still needs to be developed. The survey by [28] examines the role of graph neural networks (GNNs) in 2D image understanding, a challenging problem in computer vision that aims to achieve human-level scene comprehension. Graphs are widely used in 2D image under-"
+  },
+  {
+   "label": "S2",
+   "id": "2506.05399v1:p1:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 1,
+   "score": 0.747,
+   "text": "Attention-Based Transformer Models for Image Captioning Across Languages: An In-depth Survey and Evaluation Israa A. Albadarneha, Bassam H. Hammoa,b, Omar S. Al-Kadi*a aThe University of Jordan, Amman, 11941, Jordan bPrincess Sumaya University for Technology, Amman, 11941, Jordan Abstract Image captioning involves generating textual descriptions from input images, bridging the gap between computer vision and natural language processing. Recent advancements in transformer-based models have significantly improved caption generation by leveraging attention mechanisms for better scene understanding. While various surveys have explored deep learning-based approaches for image captioning, few have comprehensively analyzed attention-based transformer models across multiple languages. This survey reviews attention-based image captioning models, categorizing them into transformer-based, deep learning-based, and hybrid approaches. It explores benchmark datasets, discusses evaluation metrics such as BLEU, METEOR, CIDEr, and ROUGE, and highlights challenges in multilingual captioning. Additionally, this paper identifies key limitations in current models, including semantic inconsistencies, data scarcity in non-English languages, and limitations in reasoning ability. Finally, we outline future research directions, such as multimodal learning, real-time applications in AI-powered assistants, healthcare, and forensic analysis. This survey serves as a comprehensive reference for researchers aiming to advance the field of attention-based image captioning. Keywords: Image Captioning, Transformer, Attention Mechanism, Convolutional Neural Network, Computer Vision, Natural Language Processing 1. Introduction Image captioning involves generating an image description, which includes identifying important objects and their relationships and creating syntactically and semantically correct sentences. This task requires collaboration between the computer vision (CV) and natural language processing (NLP) research communities [1] [2]. The large volume of unannotated images on the Internet has driven the automated image captioning process [3]. Furthermore, advances in deep learning models have significantly improved computer vision and natural language processing capabilities [4] [5]. Fig.1 shows the general architecture of the image captioning model. The process of image captioning starts with an input image. The next step is image processing, which involves resizing, normalizing, and augmenting the image. This is followed by feature extraction using CNN architectures like ResNet or Inception, which encode the features into a fixed-size vector. In the language processing stage, models like RNN, LSTM, GRU, or Transformer convert words into vectors and predict the next word in the sequence. The attention mechanism selectively focuses on different parts of the image to enhance the captioning process. Finally, in the output stage, a descriptive caption is generated. For example, ”A little girl in a pink dress going into a wooden"
+  },
+  {
+   "label": "S3",
+   "id": "2506.05399v1:p20:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 20,
+   "score": 0.746,
+   "text": "Figure 12: Examples of soft and hard attention mechanisms. (a) Soft attention assigns varying importance to different parts of the image, influencing the entire caption. In contrast, (b) hard attention focuses on specific regions, selectively considering parts of the image while ignoring others. Figure 13: Illustrations of bottom-up and top-down attention approaches. (a) Bottom-up attention, where focus is determined at the level of objects and other salient regions of the image, and (b) top-down attention, where features correspond to a uniform grid of equally sized image regions. Figure 14: General architecture of an attention-based model for image captioning, illustrating the integration of image features with sequential attention mechanisms to generate descriptive captions. to English-based datasets like Flickr8k and Flickr30k generally yield better scores across most criteria. In the English Flickr8k dataset, the method described in [68] achieved a high BLEU-1 score of 0.690, giving a strong performance in generating relevant captions. However, with the Arabic Flickr8k dataset, the method in [64] only achieved a BLEU-1 score of 0.598, revealing the challenges of adapting methods to different languages and contexts. Additionally, when the method described in [88] was applied to the Bengali Flickr8k dataset, it produced lower scores, with many values marked as ’NA,’ suggesting that all metrics did not evaluate the approach. Further analysis shows that methods evaluated using the English MS COCO dataset, including the method [78], generally achieve high scores on various metrics, such as a CIDEr score of 1.360 and a BLEU-4 score of 0.414. This indicates that the MS COCO dataset, a widely used and comprehensive dataset, provides a reliable standard for evaluating image captioning methods. Furthermore, with the MS COCO dataset, techniques such as [79] and [77] demonstrate strong performance, scoring highly in the BLEU and CIDEr metrics, showcasing their effectiveness in generating diverse and accurate captions. However, achieving high performance on non-English datasets such as Bengali BORNON and Indonesian FEEH-ID is more challenging, underscoring the need for further research and development in multilingual and culturally diverse image captioning techniques. This variation underscores the importance of creating more inclusive datasets and methods that perform well in linguistic and cultural contexts. The variation in results between metrics for the same approach suggests that no single measure can fully evaluate the"
+  },
+  {
+   "label": "S4",
+   "id": "2506.05399v1:p3:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 3,
+   "score": 0.739,
+   "text": "self-driving cars [19], CCTV footage analysis [20], improving image search accuracy [21], and enhanced facial recognition systems [22]. 1.2. Contribution and scope Several survey articles have been published on the subject of image captioning. Although these surveys provided a good overview of the literature on image captioning, they did not cover publications discussing image captioning techniques for various languages. In addition, new deep-learning studies have been published since the survey papers were written. The key contributions of this survey are: (a) providing a comprehensive review of the current state of image captioning for various languages, specifically attention-based models, (b) discussing the detailed design of transformer models with different attention mechanisms, and (c) addressing ongoing challenges and highlighting potential future directions for the field. To highlight the unique contributions of this survey, Table 1 compares our study with previous ones on attention-based image captioning. Unlike prior reviews, this survey extensively covers multilingual models, a broader dataset range, and an in-depth evaluation of current challenges and future directions. 1.3. Search criteria The survey included papers published between 2018 and 2024. A keyword search was conducted on Google Scholar using the following terms: image captioning, image description, image text generation, transformer-based image captioning, and attention-based image captioning. Google Scholar was chosen to avoid bias towards any specific publisher [30]. The survey covers articles on image captioning in multiple languages, including, but not limited to, English, Arabic, Vietnamese, Myanmar, and Indonesian. 1.4. Survey structure This paper is organized as follows: Section 2 provides an overview of related surveys in image captioning, summarizes them, and discusses their foundations. Section 3 discusses the methods employed in image captioning models. Section 4 describes relevant research in image captioning, classifying them into five categories: handcrafted approaches, deep learning for image captioning, transformer-based approaches, attention-based approaches, and graph-based representation. Section 5 discusses the datasets. Section 6 introduces the evaluation metrics used to assess the quality and performance of generated captions. Limitations and challenges are summarized in Section 7, and finally, conclusions and future directions are presented in Section 8. Fig. 15 illustrates the structure of this survey. 2. Overview of Recent Surveys Several recent papers have used deep learning techniques to create captions for images. This section presents a summary and analysis of relevant surveys in image captioning. 2.1. Attentive deep learning models A literature survey by [31] demonstrated that bottom-up attention models, which combine multi-head attention, yield the"
+  },
+  {
+   "label": "S5",
+   "id": "2502.18734v1:p8:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 8,
+   "score": 0.721,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT 10 Conclusions Having implemented and studied the performance of both Vanilla RNN and Attention-based Image Captioning techniques on the MS COCO dataset, Natural Images, and Abstract Images, we can conclude that, in terms of performance on both human judgment and automatic metrics, the Attention Mechanism is superior to the Vanilla RNN Image Captioning on the COCO dataset and Natural Images with fewer subjects. However, both models perform similarly on abstract paintings and Natural Images with a large number of subjects. Design considerations, such as the choice of CNN-Encoder, also affect the performance of the model. Moreover, we have observed that the currently used automatic metrics for image captioning judge caption quality by determining similarity between candidate and reference captions. As a result, these metrics fail to achieve adequate levels of correlation with human judgments at the sentence level, reflecting the fact that they do not fully capture the set of criteria humans use when evaluating caption quality. We have accomplished our goal of comparing and understanding the architecture and performance aspects of deep learning-based image captioning models. In the process, we have learned about the interplay between Computer Vision and NLP, encoder-decoder architectures, loss functions in complex architectures, and the crucial ability to comprehend academic research papers in deep learning."
+  }
+ ],
+ "prompt_tokens": 2747,
+ "answer_tokens": 82,
+ "seconds": 3.8,
+ "id": "S13",
+ "reference_answer": "Flickr8k Bahasa, FEEH-ID and an Indonesian Flickr8k (in the results table); the survey covers Indonesian among its languages on page 3.",
+ "expected_evidence": [
+  {
+   "paper": "2506.05399v1",
+   "page": 12,
+   "phrase": "Indonesian"
+  }
+ ]
+}
