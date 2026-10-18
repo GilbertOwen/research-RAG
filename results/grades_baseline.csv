@@ -1,0 +1,26 @@
+id,type,status,correctness,citation_support,notes
+S01,single,answered,2,partly,"All key facts (from p.1 abstract). Third sentence ""five dimensions used to calculate total scores"" cites a results table (S2) that does not say how the total is computed"
+S02,single,answered,2,partly,"Key fact present; ""specifically RefCLIP-S"" is correct (THumB p.7: RefCLIP-S achieves the best correlation in total scores) but its cited source (S2, abstract) does not mention RefCLIP-S. Regraded 2026-10-18 from 1 (first grade wrongly called it a false claim)"
+S03,single,answered,2,yes,All key facts; every claim in S3 or S4
+S04,single,answered,2,yes,"All three LLMs, from S1 (p.18 ablation); Sem-Syn Merge claim supported by S5. Correct although search missed the expected page 3"
+S05,single,answered,1,partly,"Both key facts (S3, S4). Third sentence attributes better handling of low-frequency object pairs to sentence simplification; S1 says that about the augmentation, and that simplification had little effect"
+S06,single,answered,2,yes,All five key facts; supported by S3 and S4 (p.2)
+S07,single,answered,2,partly,"All key facts; Fitzpatrick scale correct (S2). First sentence (28,315 people) has no citation"
+S08,single,answered,2,yes,"-1 / +1 behaviour and inference-time control described; supported by S2, S4, S5. Correct although search missed the expected page 2"
+S09,single,answered,2,yes,All key facts plus correct extras (sources COCO/SAM/LAION; 143 tokens) from S3
+S10,single,answered,2,partly,"OpenNRE correct (S1). Middle sentence uncited but true. Citation checker also split the sentence at ""Focus!"" (false positive)"
+S11,single,answered,2,yes,Parent / neighbor / child and overlap-based definition from S1; S2 supports the sub-transformer design loosely
+S12,single,answered,2,yes,All key facts from S3; flexibility claim comes from the other survey (S5) but S5 does say it
+S13,single,answered,1,yes,Only FEEH-ID of the three datasets; claims supported by S3 (p.20). Retrieval failure: the results table on p.12 was not retrieved
+S14,single,answered,2,yes,All key facts plus the formula; S4
+S15,single,answered,1,partly,"Bahdanau, BLEU, METEOR, GLEU correct; WER missing; adds CIDEr (only named in S2 as a repository script). GLEU not in the cited text"
+X01,cross,answered,1,partly,"CapArena point (bias, inaccurate estimation) and n-gram rigidity present; THumB point missing; papers not named. Claim 1 says CIDEr fails to correlate, but S2 says CIDEr correlates better than BLEU"
+X02,cross,answered,1,partly,"ROPE and F-CLIPScore causes correct; HallE-Control given as ""vision encoder vs instruction data"" misalignment, S4 says vision vs language information; hyper-detailed and clock-on-the-beach causes missing"
+X03,cross,answered,2,yes,"CHAIR use in clock paper (S2) and HallE-Control's CCEval vs CHAIR (S1, S4) covered; papers identified only by labels. Citation checker flagged the [S4] sentence because the label starts the sentence (false positive)"
+X04,cross,answered,1,partly,Gender bias and long-caption weakness present; noun-level granularity missing. S2 (gender paper p.8) only weakly supports the claim it is cited for
+X05,cross,answered,1,yes,Racial-bias study described correctly; the metric paper is described as societal bias in CLIPScore without saying gender or PAO-EvalBias
+M01,uses_vs_mentions,answered,1,partly,SPECS correct (S4); Focus! and F-CLIPScore missing (not retrieved); gender paper's hybrid metric named (acceptable). NegCLIP claim cites S1 but appears in S3
+M02,uses_vs_mentions,answered,1,partly,"CapArena's GPT-4o judge correct (S2). Lists ROPE's tables (GPT-4V as a test subject) and SPECS' related work (other methods' GPT-4 use) as uses: the uses-vs-mentions trap. Labels written as **S1** without brackets, so the checker found no citations"
+U01,unanswerable,refused,correct,n/a,Refused; retrieved ReFormer pages contain no GPU or training time
+U02,unanswerable,refused,correct,n/a,Refused
+U03,unanswerable,refused,correct,n/a,"Refused, although the sources mention CLIPScore and CIDEr"
