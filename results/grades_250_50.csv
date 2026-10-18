@@ -1,0 +1,26 @@
+id,type,status,correctness,citation_support,notes
+S01,single,answered,2,partly,"All key facts (S1, S5 p.3); total-score sentence cites the results table (p.6)"
+S02,single,answered,2,partly,"Key fact correct (S3); ""machines often produce less diverse captions"" is not in S2; third sentence supported by S1 (p.6)"
+S03,single,answered,2,yes,Both key facts from S2 (p.1 abstract)
+S04,single,answered,2,partly,"All three LLMs and the LLaMA / Mixtral results (S1); the Davinci sentence cites S5, which does not mention Davinci"
+S05,single,answered,2,yes,"Both key facts and the regularizer reason from S1 (p.3)"
+S06,single,answered,1,yes,"92,049 images and gender bias in metrics correct; 88 professions, 52 activities, 39 objects missing although S1 states them"
+S07,single,answered,2,yes,"All key facts; supported by S2, S1, S3"
+S08,single,answered,2,partly,"-1 / +1 from S3 (p.8, inference interval [-1, 1]); last sentence cites S4 (fine-tuning details), which does not support it"
+S09,single,answered,2,yes,"Same answer as 400 / 0, all key facts"
+S10,single,answered,0,yes,"Says the model name is not given and ends with NOT ENOUGH EVIDENCE; true for its sources: p.5 with OpenNRE was not retrieved. Retrieval failure"
+S11,single,answered,2,yes,All key facts from S1 (p.7)
+S12,single,answered,2,yes,All key facts from S2 (1810.04020 p.2)
+S13,single,answered,0,yes,"Says no Indonesian dataset is named and ends with NOT ENOUGH EVIDENCE; true for its sources: no retrieved chunk names FEEH-ID or the Flickr8k variants. Retrieval failure"
+S14,single,answered,2,yes,"Correct formula from S2 (p.4), averaging from S4"
+S15,single,answered,1,partly,"Bahdanau, BLEU, METEOR correct; GLEU and WER missing; CIDEr added"
+X01,cross,answered,1,no,"General point (n-gram overlap vs semantics) matches one key fact, but no paper's argument is given; claims 1 and 2 are not in their cited chunks (CapArena metric list, THumB introduction); ""not sufficient for detailed captions"" not in S5"
+X02,cross,answered,1,yes,"ROPE (S1, S2), F-CLIPScore (S3) and HallE-Control's alignment cause (S4, p.2) correct; hyper-detailed and clock-on-the-beach causes missing"
+X03,cross,answered,1,yes,"HallE-Control (S1, S3) uses CHAIR and introduces CCEval; clock paper retrieved (S2) but not used. [S3] sentence flagged by the checker because the label starts it"
+X04,cross,answered,1,partly,"Gender bias (S1) and object-hallucination weakness vs F-CLIPScore (S2, S5) correct; says CLIPScore relies on n-gram matching, which is false (S1 is about the CLIPScore + CIDEr hybrid); long-caption weakness missing"
+X05,cross,answered,1,partly,"Both studies described correctly (S1 gender metrics, S2 racial annotations), but ""both papers analyze caption performance, sentiment and word choice"" is true only of the racial study; checker flags label-first sentences"
+M01,uses_vs_mentions,answered,1,partly,"Lists NegCLIP, PACScore, LaCLIP, TripletCLIP, LongCLIP, RefCLIP-S: methods mentioned inside the papers, not papers of the collection (uses-vs-mentions trap); SPECS correct; Focus! and F-CLIPScore missing"
+M02,uses_vs_mentions,answered,1,yes,"Hyper-detailed captioning uses GPT-4o for its meta-evaluation dataset (S4) and ROPE only evaluates GPT-4o (S3, S5): both correct; CapArena's GPT-4o evaluator was in S1 but not used; HallE-Control missing"
+U01,unanswerable,refused,correct,n/a,Refused
+U02,unanswerable,refused,correct,n/a,Refused
+U03,unanswerable,refused,correct,n/a,Refused

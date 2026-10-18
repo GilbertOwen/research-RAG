@@ -1,0 +1,26 @@
+id,type,status,correctness,citation_support,notes
+S01,single,answered,2,partly,"All key facts from p.1; ""used to calculate a total score"" cites the results table (p.6), which does not say how the total is computed"
+S02,single,answered,2,partly,"Correct, incl. RefCLIP-S (THumB p.7: best correlation in total scores), but that claim cites the p.6 results table; CIDEr / SPICE correlation claim supported by S5 (p.7)"
+S03,single,answered,2,partly,"Both key facts (S1). ""Open-source models lag behind the human baseline"" cites S2, which describes a gap to commercial models"
+S04,single,answered,2,yes,"All three LLMs; LLaMA declined and Mixtral was stronger, as S1 (p.18) says"
+S05,single,answered,2,yes,"Both key facts and the regularizer reason, from S1 and S5 (p.3); no false claim (better than 400 / 0)"
+S06,single,answered,2,yes,"All five key facts; 92,049 / 88 / 52 / 39 in S1 (p.3), templates in S3"
+S07,single,answered,2,yes,"All key facts; every sentence cited and supported (S1 abstract, S2 Fitzpatrick scale)"
+S08,single,answered,2,yes,"-1 / +1 and inference-time control from S1 (p.19), S2, S5"
+S09,single,answered,2,yes,All key facts from S2 (p.5)
+S10,single,answered,2,yes,"OpenNRE, every sentence, 0.7 confidence filter: all in S1 / S2 (p.5)"
+S11,single,answered,2,yes,"Parent / neighbor / child, overlap-based, parallel sub-transformers (S1, S2)"
+S12,single,answered,2,yes,All key facts from S5 (1810.04020 p.2)
+S13,single,answered,1,yes,"Same answer as 400 / 0: only FEEH-ID; the p.12 table was not retrieved"
+S14,single,answered,1,partly,"Key facts present, but the third sentence misstates the formula (adds the average of noun scores, then divides by N + 1 again); S4 has the correct formula"
+S15,single,answered,1,partly,"Same answer as 400 / 0: WER missing, CIDEr added, GLEU not in the cited text"
+X01,cross,answered,1,yes,"SPECS point (n-gram overlap misses semantic similarity, penalises paraphrases) supported by S1 / S5 (SPECS p.2, p.1); THumB and CapArena points missing; no false claim"
+X02,cross,answered,1,partly,"ROPE and F-CLIPScore causes correct; HallE-Control given as vision encoder vs instruction data misalignment (source: vision vs language information); hyper-detailed and clock-on-the-beach causes missing"
+X03,cross,answered,1,partly,"Cites HallE-Control twice (S1, S3) as if two papers; clock paper retrieved (S2) but not used; S3 sentence mixes POPE with CCEval's coverage and length; comparison with CCEval not stated"
+X04,cross,answered,1,partly,"Gender bias (S2 weak support) and fine-grained weakness via text-rendered images and filtering (S4 p.11, supported); long-caption weakness missing"
+X05,cross,answered,2,partly,"Both studies covered: manual annotations for racial bias, biased model-based metrics propagating through reinforcement learning (S1, S3); first sentence uncited"
+M01,uses_vs_mentions,answered,1,partly,"SPECS correct (S4); S1 is SPECS' related-work list, presented as papers; Focus! and F-CLIPScore missing (not retrieved)"
+M02,uses_vs_mentions,answered,1,yes,"HallE-Control (CCEval with GPT-4, S1 and S5) and CapArena's GPT-4o evaluator (S2) correct; SPECS described as mentioning GPT-4 methods (accurate); hyper-detailed captioning missing. [S5] sentence flagged by the checker because the label starts it"
+U01,unanswerable,refused,correct,n/a,Refused
+U02,unanswerable,refused,correct,n/a,Refused
+U03,unanswerable,refused,correct,n/a,Refused
