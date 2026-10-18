@@ -1,0 +1,80 @@
+{
+ "question": "Which spatial relationship categories does the Image Transformer use between image regions?",
+ "time": "2026-10-18T21:19:06",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The Image Transformer uses three spatial relationship categories: parent, neighbor, and child [S1]. These relationships are defined based on the overlap area between regions [S1]. The model incorporates these into a spatial graph structure within its transformer layers [S2].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   2
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2004.14231v2:p7:c0",
+   "title": "Image Captioning through Image Transformer",
+   "page": 7,
+   "score": 0.8,
+   "text": "Image Captioning through Image Transformer 7 3.2 Spatial Graph Encoding Transformer Layer (a) (b) Fig. 3: (a) Image with detected regions; (b) An example of query region in the image (man in the red bounding box), and its neighbor regions (regions in blue bounding boxes, bull, umbrella, etc), child regions (regions in the yellow bounding boxes, hair,cloth). In contrast to the original transformer, which only considers spatial relationships between query and key pairs as neighborhood, we propose to use a spatial graph transformer in the encoding part, where we consider three common categories of spatial relationship for each query region in a graph structure: parent, neighbor, and child (an example shown in Fig. 3). Thus we widen each transformer layer by adding three sub-transformer layers in parallel in each layer, each sub-transformer responsible for a category of spatial relationship, all sharing the same query. In the encoding stage, we define the relative spatial relationship between two regions based on their overlap. We first compute the graph adjacent matrices Ωp ∈RN×N (parent node adjacent matrix), Ωn ∈R∈N×N (neighbor node adjacent matrix), and Ωc ∈R∈N×N (child node adjacent matrix) for all regions in the image: Ωp[l, m] =    1, if Area(l ∩m) Area(l) ⩾ε and Area(l ∩m) Area(l) > Area(l ∩m) Area(m) 0, otherwise. Ωc[l, m] = Ωp[m, l] with X i∈{p,n,c} Ωi[l, m] = 1 (5) where ε = 0.9 in our experiment. The spatial graph adjacent matrices are used as the spatial hard attention embedded into each sub-transformer to combine the output of each sub-transformer in the encoder. More specifically, the original"
+  },
+  {
+   "label": "S2",
+   "id": "2004.14231v2:p2:c0",
+   "title": "Image Captioning through Image Transformer",
+   "page": 2,
+   "score": 0.792,
+   "text": "2 Sen He et al. to look in the image [1,2,3,4] (now partly solved by the Faster-RCNN object detection model [5]) in the encoding stage and use a recurrent neural network with attention mechanism in the decoding stage to generate the caption. But more than just to decide what to describe in the image, recent image captioning models propose to use attention to learn how regions of the image relate to each other, effectively encoding their context in the image. Graph convolutional neural networks [6] were first introduced to relate regions in the image; however, those approaches [7,8,9,10] usually require auxiliary models (e.g. visual relationship detection and/or attribute detection models) to build the visual scene graph in the image in the first place. In contrast, in the natural language processing field, the transformer architecture [11] was developed to relate embedded words in sentences, and can be trained end to end without auxiliary models explicitly detecting such relations. Recent image captioning models [12,13,14] adopted the transformer architectures to implicitly relate informative regions in the image through dot-product attention achieving state-of-the-art performance. However, the transformer architecture was designed for machine translation of text. In a text, a word is either to the left or to the right of another word, with different distances. In contrast, images are two-dimensional (indeed, represent three-dimensional scenes), so that a region may not only be on the left or right of another region, it may also contain or be contained in another region. The relative spatial relationship between the semantic units in images has a larger degree of freedom than that in sentences. Furthermore, in the decoding stage of machine translation, a word is usually translated into another word in other languages (one to one decoding), whereas for an image region, we may describe its context, its attribute and/or its relationship with other regions (one to more decoding). One limitation of previous transformer-based image captioning models [12,13,14] is that they adopt the transformer’s internal architecture designed for the machine translation, where each transformer layer contains a single (multi-head) dot-product attention module. In this paper, we introduce the image transformer for image captioning, where each transformer layer implements multiple sub-transformers, to encode spatial relationships between image regions and decode the diverse information in image regions. The difference between our method and previous transformer based models [12,14,13] is that our method focuses on the inner architectures of the transformer"
+  },
+  {
+   "label": "S3",
+   "id": "2004.14231v2:p1:c0",
+   "title": "Image Captioning through Image Transformer",
+   "page": 1,
+   "score": 0.743,
+   "text": "Image Captioning through Image Transformer Sen He⋆1, Wentong Liao⋆2, Hamed R. Tavakoli3, Michael Yang4 Bodo Rosenhahn2, and Nicolas Pugeault5 1 CVSSP, University of Surrey, UK 2 Leibniz University of Hanover, Germany 3 Nokia Technologies, Finland 4 University of Twente, Netherlands 5 School of Computing Science, University of Glasgow senhe752@gmail.com Abstract. Automatic captioning of images is a task that combines the challenges of image analysis and text generation. One important aspect of captioning is the notion of attention: how to decide what to describe and in which order. Inspired by the successes in text analysis and translation, previous works have proposed the transformer architecture for image captioning. However, the structure between the semantic units in images (usually the detected regions from object detection model) and sentences (each single word) is different. Limited work has been done to adapt the transformer’s internal architecture to images. In this work, we introduce the image transformer, which consists of a modified encoding transformer and an implicit decoding transformer, motivated by the relative spatial relationship between image regions. Our design widens the original transformer layer’s inner architecture to adapt to the structure of images. With only regions feature as inputs, our model achieves new state-of-the-art performance on both MSCOCO offline and online testing benchmarks. The code is available at https://github.com/wtliao/ImageTransformer. 1 Introduction Image captioning is the task of describing the content of an image in words. The problem of automatic image captioning by AI systems has received a lot of attention in the recent years, due to the success of deep learning models for both language and image processing. Most image captioning approaches in the literature are based on a translational approach, with a visual encoder and a linguistic decoder. One challenge in automatic translation is that it cannot be done word by word, but that other words influence then meaning, and therefore the translation, of a word; this is even more true when translating across modalities, from images to text, where the system must decide what must be described in the image. A common solution to this challenge relies on attention mechanisms. For example, previous image captioning models try to solve where ⋆Equal contribution"
+  },
+  {
+   "label": "S4",
+   "id": "2004.14231v2:p5:c0",
+   "title": "Image Captioning through Image Transformer",
+   "page": 5,
+   "score": 0.736,
+   "text": "Image Captioning through Image Transformer 5 graph. Also, their decoder focuses on different aspects of a region. Yao et al.[10] further introduces the tree hierarchy and instance level feature into the scene graph. Introducing the graph neural network to relate informative regions yields a sizeable performance improvement for image captioning models, compared to two-stage attention models. However, it requires auxiliary models to detect and build the scene graph at first. Also those models usually have two parallel streams, one responsible for the semantic scene graph and another for spatial scene graph, which is computationally inefficient. 2.4 Transformer Based Image Captioning Transformer based image captioning models use the dot-product attention mechanism to relate informative regions implicitly. Since the introduction of original transformer model [11], more advanced architectures were proposed for machine translation based on the structure or the natural characteristic of sentences [24,25,26]. In image captioning, AoANet [12] uses the original internal transformer layer architecture, with the addition of a gated linear layer [27] on top of the multi-head attention. The object relation network [14] injects the relative spatial attention into the dot-product attention. Another interesting result described by Herdade et al. [14] is that the simple position encoding (as proposed in the original transformer) did not improve image captioning performance. The entangled transformer model [13] features a dual parallel transformer to encode and refine visual and semantic information in the image, which is fused through gated bilateral controller. Compared to scene graph based image captioning models, transformer based models do not require auxiliary models to detect and build the scene graph at first, which is more computational efficient. However current transformer based models still use the inner architecture of the original transformer, designed for text, where each transformer layer has a single multi-head dot-product attention refining module. This structure does not allow to model the full complexity of relations between image regions, therefore we propose to change the inner architecture of the transformer layer to adapt it to image data. We widen the transformer layer, such that each transformer layer has multiple refining modules for different aspects of regions both in the encoding and decoding stages. 3 Image Transformer In this section, we first review the original transformer layer [11], we then elaborate the encoding and decoding part for the proposed image transformer architecture. 3.1 Transformer Layer A transformer consists of a stack of multi-head dot-product attention based transformer refining layer."
+  },
+  {
+   "label": "S5",
+   "id": "2004.14231v2:p15:c0",
+   "title": "Image Captioning through Image Transformer",
+   "page": 15,
+   "score": 0.729,
+   "text": "Image Captioning through Image Transformer 15"
+  }
+ ],
+ "prompt_tokens": 2097,
+ "answer_tokens": 52,
+ "seconds": 3.1,
+ "id": "S11",
+ "reference_answer": "Parent, neighbor and child.",
+ "expected_evidence": [
+  {
+   "paper": "2004.14231v2",
+   "page": 7,
+   "phrase": "parent, neighbor"
+  }
+ ]
+}

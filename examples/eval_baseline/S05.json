@@ -1,0 +1,81 @@
+{
+ "question": "What is sentence simplification in the paper 'Let there be a clock on the beach', and why do the authors do it?",
+ "time": "2026-10-18T21:18:44",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "In the paper \"Let there be a clock on the beach,\" sentence simplification involves removing adjectives from captions that may not apply to every object, such as changing \"A small black cat\" to \"A cat\" [S3]. The authors perform this step to create sentence variations that act as regularizers, helping models exploit language priors existing in the dataset [S4]. This process also allows for better handling of low-frequency object pairs by enabling more flexible data augmentation strategies [S1].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2110.01705v2:p7:c1",
+   "title": "Let there be a clock on the beach: Reducing Object Hallucination in Image Captioning",
+   "page": 7,
+   "score": 0.621,
+   "text": "other ones, an increase around 2% for both models on CHAIRs and 0.2%, 0.3% on CHAIRi for UD and AoA. In addition, we see much better numbers on UD-L and AoA-L, so simple concatenation of labels lowers the object bias. Additionally, with the utilization of perfect labels (orange bars in Figure 3), we appreciate that we obtain even better numbers on low frequency object pairs than the overall numbers calculated in Table 2. This suggests that our proposed augmentation can handle well on low frequency object pairs whether trained with cross entropy or self-critical. As well, we notice that the gap between the original models and Co-Occurrence Updating is bigger on the low frequency pairs. Therefore, our hypothesis on making co-occurrence matrix as uniform as possible making object bias lower holds valid. 4.7. Ablation Study SS CHAIRs [33] CHAIRi [33] UD-L + Uni \u0017 6.3 4.1 UD-L + Inv \u0017 6.3 4 UD-L + Occ \u0017 6.5 4.2 UD-L + Uni \u0013 6.3 4 UD-L + Inv \u0013 6.2 4 UD-L + Occ \u0013 5.9 3.8 Table 4: Ablation results on sentence simplification. Our final experimentation is on the analysis of sentence simplification. To see if the suggested formulation for sentence simplification has any effect on object bias, we decided to run UpDown model with and without sentence simplification. Our results can be found in Table 4. As can be appreciated from the Table 4, sentence simplification does not seem to have a lot of effect on Uniform and Inverse Multinomial sampling. Even though we always get better results on using sentence simplification, we only obtain 0.1% which can be accounted for randomness. However, sentence simplification has a significant effect on Co-Occurrence Updating. Our conjecture regarding this phenomena is that since Co-Occurrence Updating se-"
+  },
+  {
+   "label": "S2",
+   "id": "2412.15484v4:p17:c0",
+   "title": "Toward Robust Hyper-Detailed Image Captioning: A Multiagent Approach and Dual Evaluation Metrics for Factuality and Coverage",
+   "page": 17,
+   "score": 0.57,
+   "text": "A Multiagent Approach and Dual Evaluation Metrics for Factuality and Coverage prompt_1 = \"Describe the given image in a very detailed manner.\" prompt_2 = \"Provide a detailed description of the specified image.\" prompt_3 = \"Elaborate on the details of the image provided.\" prompt_4 = \"Offer an in-depth description of the given image.\" prompt_5 = \"Thoroughly describe the features of the specified image.\" Figure 6: The five prompt inputs used to generate captions in our experiments. system: I want to verify if the given CAPTION is accurate. To assist with this verification, decompose the given CAPTION into atomic propositions. All parts of the caption must be broken down into propositions. The outputs should follow the following format:'1. proposition one\\n2. proposition two\\n3. proposition three'. For example, break down 'He is tall, thin, and pale' into '1. He is tall.\\n2. He is thin.\\n3. He is pale.' user: CAPTION: {caption} Figure 7: The prompt input for LLaMA-3-8B serving as the decomposer. system: I want to create a caption that includes only facts. Please help me correct the given caption. The given caption contain things that are not true. Based on the given FACTS and NON-FACTS remove the non-factual elements from the caption. Place the revised caption between '###'. user: Caption: {caption}\\nFACTS:\\n{Non-hallucinations among the atomic propositions}\\nNONFACTS:\\n{n{Hallucinations among the atomic propositions} Figure 8: The prompt input for LLaMA-3-8B serving as the corrector. system: This is a hard problem. Carefully summarize in ONE detailed caption based on the following 5 captions by different people describing the same image. Be sure to describe everything, and avoid hallucination. Provide the detailed caption in the format '### {Detailed caption} ###'. user: Caption 1: {caption 1st}\\n Caption 2: {caption 2nd}\\n Caption 3: {caption 3rd}\\n Caption 4: {caption 4th}\\n Caption 5: {caption 5th}\\n Figure 9: The prompt input for LLaMA-3-8B serving as the summerizer. We use the prompt employed in the work of (Ge et al., 2024)."
+  },
+  {
+   "label": "S3",
+   "id": "2110.01705v2:p3:c0",
+   "title": "Let there be a clock on the beach: Reducing Object Hallucination in Image Captioning",
+   "page": 3,
+   "score": 0.561,
+   "text": "Language Model Model Supervision A man is holding a bat Object detection Language Model Language Model Model Supervision A man is holding a bat Language Model bat person person person Label embedding Language Model Model Supervision Language Model A bat toothbrush person person Label embedding Language Model Augmentation captioning A man is holding a bat is holding a bat toothbrush Features Object detection Features Labels Object detection Features Labels Sentence simplification Label sampling Figure 2: Most current models for image captioning utilize object-level visual features extracted from an object detection network (left diagram). In this paper we propose a simple tweak that consists of providing also the object labels as input (center diagram). The concatenation of label embeddings to visual features allows us to employ data augmentation techniques on the object labels and model supervision (captions) to fix the object bias in our models (right diagram). This formulation can be seen more clearly on the left part of Figure 2. Our tweak to the aforementioned formulation is to simply concatenate the object labels found in an image with bounding box features (middle part of the Figure 2). More formally, we extend the set of bounding box features from V to ̃V = {v1, v2, ..., vn, l1, l2, ..., li} where li is the ith embedded object label. After the concatenation, we replace V with ̄V and follow exactly the same training procedure outlined in Equation (1). Concatenation of label embeddings to visual features allows us to employ our data augmentation techniques. Since we use the labels as input to our models, we can directly alter them as we see fit. In the following sections, we describe the strategy behind the augmentation of labels. 3.2. Sentence Simplification A first step to all our data augmentation methods is sentence simplification. By sentence simplification we refer to removing adjectives that are used in the captions for objects in the scene. As an example, we would like to modify the sentence “A small black cat is sitting on top of an old table” into “A cat is sitting on top of a table.”. The reasons are twofold, one of which is that there are adjectives that can not hold true for every object, e.g. “small” and “black” can be used for a cat but this will not be correct when cat is artifically changed with another object such as elephant or banana. Secondly,"
+  },
+  {
+   "label": "S4",
+   "id": "2110.01705v2:p3:c1",
+   "title": "Let there be a clock on the beach: Reducing Object Hallucination in Image Captioning",
+   "page": 3,
+   "score": 0.557,
+   "text": "simplifying the sentence in this way provides another variation of sentences, acting as type of a regularizer for captioning models to exploit language prior existing in the dataset. To achieve this goal, we first analyze every caption with a Part-Of-Speech (POS) and find all the noun phrases corresponding to sentences. However, these noun phrases do not necessarily have to refer to objects found in an image. That is why, we make use of synonyms list for object classes that exist in the dataset (e.g. 80 objects in MSCOCO) and filter the noun phrases that include the object name or its synonyms. As a final step, we replace the whole noun phrase with the root of the phrase. 3.3. Augmentation of Sentences After simplifying the sentences, we employ different sampling strategies to pick which object to replace. More formally, given a sentence containing objects oi and oj, we sample object ok to replace oj according to the distribution P(ok|oi). Now, we explain in detail which distributions we use to augment the sentences. 3.3.1 Uniform Sampling The choice of uniform sampling is inspired by our hypothesis on creating a uniform object label co-occurrence matrix. In its most simplest form, we make use of uniform distribution for sampling, where P(ok|oi) = P(ok) = 1/N. (2) In other words, every object has an equal probability to be sampled where dataset statistics are disregarded. The next two distribution takes into account the discarded dataset statistics. 3.3.2 Inverse Multinomial Sampling The most accessible statistics one can obtain regarding any given dataset is the co-occurrence matrix M ∈RN×N where Mij refers to the co-occurrence statistics of objects oi and oj and N is the number of objects. We define a new distribution which considers dataset statistics called inverse multinomial by making use of M where P(ok|oi) = 1 ̃ Mik where ̃ Mik = Mik P k Mik (3) With inverse multinomial, we sample object ok if the occurence is low with object oi. On the other hand, if object"
+  },
+  {
+   "label": "S5",
+   "id": "2306.11593v3:p5:c1",
+   "title": "Improving Image Captioning Descriptiveness by Ranking and LLM-based Fusion",
+   "page": 5,
+   "score": 0.544,
+   "text": "on data generated by ChatGPT and incorporating detailed instructions, which help the model make more informed decisions during fusion. The Visual Fact Checker (Ge et al. 2024) focuses on reducing hallucinations in extended captions by integrating outputs from two multimodal captioners. It uses object detection for fact-checking and an LLM to verify and consolidate the results into a coherent final caption. QAC (Luu et al. 2024) enhances caption detail by"
+  }
+ ],
+ "prompt_tokens": 2240,
+ "answer_tokens": 101,
+ "seconds": 3.6,
+ "id": "S05",
+ "reference_answer": "Removing adjectives attached to objects in captions (e.g. 'A small black cat ... an old table' becomes 'A cat ... a table'), because the adjectives may not hold when the object is swapped and it adds sentence variation.",
+ "expected_evidence": [
+  {
+   "paper": "2110.01705v2",
+   "page": 3,
+   "phrase": "small black cat"
+  }
+ ]
+}

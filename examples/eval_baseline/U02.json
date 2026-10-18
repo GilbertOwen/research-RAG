@@ -1,0 +1,71 @@
+{
+ "question": "Which captioning model performs best on Javanese captions?",
+ "time": "2026-10-18T21:20:01",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "NOT ENOUGH EVIDENCE",
+ "citation_check": {
+  "abstained": true,
+  "cited": [],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2607.23235v1:p5:c0",
+   "title": "A Reconstruction-Based Framework for Caption Evaluation Beyond Reference Captions",
+   "page": 5,
+   "score": 0.72,
+   "text": "Captioning Model MMB.MMS. Hall. MME Vista. Verse. Vision. OB. OQ. CO. Avg. 2024 2024 2024 2023 2023 2024 2024 2024 2019 2014 Upperbound 83.97 46.73 48.48 83.91 51.20 28.53 20.50 68.50 54.38 36.48 52.27 ShowAndTell [7] 41.79 21.00 2.31 53.12 29.60 12.08 7.79 0.90 20.02 19.17 20.78 BLIP [12] 66.92 32.60 17.46 64.36 34.30 11.88 7.68 7.00 20.69 19.07 28.20 BLIP2 [3] 68.77 33.33 18.61 65.21 34.80 11.78 7.89 9.10 17.42 19.26 28.62 LLaVa-V1.6-7B [42] 74.73 38.13 34.49 73.97 38.60 22.23 17.65 23.83 44.85 19.80 38.83 LLaVa-V1.6-34B [42] 76.21 38.33 37.33 74.60 39.00 22.74 19.63 21.03 48.12 20.48 39.75 Llama-3.2-11B [43] 78.47 41.20 39.85 76.92 41.60 23.05 18.97 26.92 45.91 21.62 41.45 Qwen2.5-VL-3B [14] 75.21 39.20 38.59 75.44 41.70 22.94 18.53 26.61 43.98 22.09 40.43 Qwen2.5-VL-7B [14] 78.66 41.27 43.22 76.20 42.60 23.65 18.75 30.53 49.09 22.58 42.65 Qwen2.5-VL-72B [14] 79.63 42.00 42.06 76.87 42.40 24.06 19.52 29.79 50.53 22.84 42.97 InternVL3.5-8b [44] 78.96 42.53 41.96 76.16 44.10 25.79 18.97 29.84 46.29 22.30 42.69 InternVL3.5-38b [44] 80.13 40.73 44.37 76.71 44.80 26.29 19.30 33.43 46.78 22.36 43.49 Qwen3-VL-2B [15] 80.46 42.60 41.96 78.10 43.30 23.96 17.98 35.57 47.35 23.18 43.45 Qwen3-VL-32B [15] 80.71 43.47 41.85 78.10 43.20 27.21 19.08 30.61 49.57 23.65 43.74 Table 1: Performance of vision-language tasks across different captioning models on various datasets. Bold numbers indicate the best performance, and underlined numbers indicate the runner-up. “Upperbound” refers to the performance achieved by completing the task using the original image. “Avg.” represents the average performance across all datasets. We have provided detailed information about each dataset in the Section 4.1. where J (I, Di) is the performance (e.g., accuracy) of the judge model on dataset Di when conditioned on image I, σ > 0 is a tolerance, and a smaller σ induces a stricter notion of semantic equivalence. In practice, original-image performance is an upper reference at the population level on CTTD, motivating the use of judge scores on ˆI as a ranking surrogate. Equation (4) states the intended equivalence criterion, whereas Eq. (5) is a practical score and is not algebraically equivalent to that criterion. A simplified reconstruction may be easier for the judge, and generator stochasticity may alter layout; the score can therefore conflate caption fidelity with generator and judge behavior. Under fixed components, a caption receives a higher score when its reconstruction attains higher downstream-task performance: SD(I, C) = 1 n n X i=1 J"
+  },
+  {
+   "label": "S2",
+   "id": "2503.12329v1:p2:c1",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 2,
+   "score": 0.694,
+   "text": "human rankings and just $4 per test, CapArena-Auto offers a fast and robust pipeline for evaluating detailed captioning. 2 Related Work 2.1 Vision-Language Models In recent years, Vision-Language Models (VLMs) have experienced rapid advances, achieving state-of-the-art performance across various multimodal tasks. Most VLMs integrate visual encoders (Radford et al., 2021; Zhai et al., 2023) with large language models (Bai et al., 2023; Touvron et al., 2023), allowing the latter to possess visual perception capabilities (Liu et al., 2024; Ye et al., 2023; Bai et al., 2023; Chen et al., 2024c, inter alia). To achieve this, VLMs are typically trained in two stages: pre-training on large-scale caption data to align visual and textual information, followed by supervised fine-tuning (SFT) with instructionfollowing capacity. Captioning plays a crucial role in building VLMs (Chen et al., 2024b), as accurately describing image content forms the foundation for complex recognition and reasoning tasks (Cheng et al., 2024b). Current VLM evaluations mainly focus on visual question answering related to knowledge (Yue et al., 2024) and reasoning (Wu et al., 2024; Sun et al., 2024), while captioning is often overlooked due to evaluation difficulties. Our work is dedicated to benchmarking and analyzing the captioning ability of VLMs. 2.2 Image Captioning and Evaluation Metrics Image captioning significantly progressed over the past decade (Vinyals et al., 2015; Xu, 2015; Anderson et al., 2018; Cheng et al., 2022; Wang et al., 2022; Ma et al., 2023; Cheng et al., 2023; Pi et al., 2024). These methods use human-annotated datasets like MSCOCO (Lin et al., 2014) and Nocaps (Agrawal et al., 2019), evaluating generated captions by comparing them to reference sentences using rule-based metrics such as BLEU (Papineni et al., 2002) and CIDEr (Vedantam et al., 2015). Recent research shows that CLIP-based metrics (Hessel et al., 2021) exhibit higher human consistency for short captions. However, current VLMs generate significantly longer, detailed captions, where"
+  },
+  {
+   "label": "S3",
+   "id": "2607.23235v1:p8:c0",
+   "title": "A Reconstruction-Based Framework for Caption Evaluation Beyond Reference Captions",
+   "page": 8,
+   "score": 0.693,
+   "text": "Captioning Model CaptionQA CLIPImage CLIPScore FLEUR CTTD 2025 2024 2021 2024 (Ours) BLIP [12] 59.56 77.79 18.89 48.39 48.59 LLaVa-V1.6-7B [42] 58.22 91.53 26.28 48.23 59.77 InternVL3.5-8b [44] 67.09 92.73 26.49 49.38 61.53 Qwen2.5-VL-3B [14] 64.74 92.11 26.29 48.45 60.96 Qwen2.5-VL-7B [14] 66.01 92.81 26.56 49.32 61.43 Qwen3-VL-2B [15] 66.89 92.91 26.84 49.42 61.79 Qwen3-VL-32B [15] 70.12 93.46 26.81 49.72 62.55 Table 2: Scores from different caption evaluations across captioning models. Bold numbers indicate the best performance, and underlined numbers indicate the runner-up. The methods disagree on several model pairs. perception, scene, spatial, temporal, comparison, commonsense, math, chart, OCR, detection, pose, fine-grained, anomaly, multimodal, and explanation. Qwen3-VL 32B [15] generated 5 QAs for every image across each question category. During question curation, we reused Ops-MM-embedding [49] and set the relevance–diversity parameter to α = 0.5. The resulting CTTD contains 7k samples, with an average of 15 questions per sample. Further implementation details are provided in the supplementary material. 4.3 Result Analysis Q1. What patterns does the framework recover? A1. We report three internal consistency patterns observed in the experiments; none substitutes for direct correlation with human judgments of caption quality. First, traditional captioning models exhibit weaker performance, whereas the evaluated VLMs and LVLMs show progressively higher scores across the task suite. As shown in Table 1, ShowAndTell averages 20.78 and BLIP averages 28.62. LVLMs benefit from richer training data and larger model capacity, which can support captions that preserve more of the information queried by the downstream tasks: even LLaVa-V1.6 7B reaches 38.83, an 86% increase over ShowAndTell, while Qwen3-VL 32B is highest among the evaluated models at 43.73. This ordering is an internal sanity check, not construct validation. Second, within each evaluated model family, score tends to increase with scale, suggesting that larger models capture more of the visual information needed to produce detailed captions. For Qwen2.5-VL, scores rise from 40.43 to 42.65 and 42.97 for 3B, 7B, and 72B, respectively. The InternVL3.5, Qwen3-VL, and LLaVa-V1.6 families exhibit the same within-family trend. This observation alone does not establish that publication date or scaling [51] determines caption quality. Lastly, because the difficulty of different vision-language tasks varies, the gap between model performance and theoretical upper bounds also varies. Third, task difficulty and information requirements lead to different gaps from the original-image upper reference. The best-performing models for VQA, STEM, OCR, and Grounding are Qwen3-VL 32B, InternVL3.5 38B, Qwen3-VL 2B, and"
+  },
+  {
+   "label": "S4",
+   "id": "2502.18734v1:p8:c0",
+   "title": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models",
+   "page": 8,
+   "score": 0.693,
+   "text": "Beyond RNNs: Benchmarking Attention-Based Image Captioning Models A PREPRINT 10 Conclusions Having implemented and studied the performance of both Vanilla RNN and Attention-based Image Captioning techniques on the MS COCO dataset, Natural Images, and Abstract Images, we can conclude that, in terms of performance on both human judgment and automatic metrics, the Attention Mechanism is superior to the Vanilla RNN Image Captioning on the COCO dataset and Natural Images with fewer subjects. However, both models perform similarly on abstract paintings and Natural Images with a large number of subjects. Design considerations, such as the choice of CNN-Encoder, also affect the performance of the model. Moreover, we have observed that the currently used automatic metrics for image captioning judge caption quality by determining similarity between candidate and reference captions. As a result, these metrics fail to achieve adequate levels of correlation with human judgments at the sentence level, reflecting the fact that they do not fully capture the set of criteria humans use when evaluating caption quality. We have accomplished our goal of comparing and understanding the architecture and performance aspects of deep learning-based image captioning models. In the process, we have learned about the interplay between Computer Vision and NLP, encoder-decoder architectures, loss functions in complex architectures, and the crucial ability to comprehend academic research papers in deep learning."
+  },
+  {
+   "label": "S5",
+   "id": "2503.12329v1:p2:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 2,
+   "score": 0.692,
+   "text": "formance, and how do they compare against each other? We conduct the first large-scale human evaluation to benchmark current VLMs. Further, using resulting annotations from (1) as ground truth, we analyze existing captioning metrics and ask: (2) How can we develop automated evaluation methods that reliably measure detailed caption quality and align with human preferences? To explore the first question, we developed CapArena, which includes over 6000 high-quality human annotations to evaluate the detailed captioning capabilities of 14 advanced VLMs and humans. In our preliminary study, we found that traditional scoring methods are unsuitable for annotating detailed captions’ quality due to their fine-grained intricacy and diversity. Inspired by LLM evaluation (Chiang et al., 2024), we adopted a pairwise caption battles paradigm. The resulting model rankings are shown in Figure 1. For the first time, we observe that state-of-the-art models, such as GPT-4o, are comparable to or even surpass human-level performance, marking a pivotal milestone in image captioning. While open-source VLMs achieve competitive results on general benchmarks, CapArena reveals a persistent performance gap between them and commercial models. An exception is InternVL2-26B (Chen et al., 2024c), a smaller open-source model that stands out with its strong performance, underscoring the potential of compact and efficient VLMs for detailed captioning. In response to the second question, we conducted a comprehensive analysis of traditional and recent captioning metrics, as well as the ability of VLM-as-a-Judge (Chen et al., 2024a) to assess caption quality. We compared these metrics against human preferences from CapArena. Our results reveal that most metrics designed for short captions, such as CLIPScore (Hessel et al., 2021), fail entirely in the detailed captioning task. Although some rule-based metrics, such as METEOR (Banerjee and Lavie, 2005), exhibit decent agreement with human judgments at the caption level, they suffer from systematic biases across different VLMs. This results in low agreement at the model level, where the rankings produced by these metrics deviate significantly from human rankings. In contrast, we introduce VLM-as-a-Judge with reference captions, which demonstrates robust discernment for detailed captions. It achieves the highest alignment with human judgments at both the caption and model levels. In light of these findings, we release CapArena-Auto, an automated benchmark for detailed cap- tioning. It comprises 600 samples and innovatively adopts the pairwise battle paradigm to improve evaluation reliability. VLM-as-a-Judge is employed to estimate human preferences by comparing captions against three baseline models. With 94.3% correlation to"
+  }
+ ],
+ "prompt_tokens": 3973,
+ "answer_tokens": 7,
+ "seconds": 3.3,
+ "id": "U02",
+ "reference_answer": "Not in the collection: no paper mentions Javanese (searched).",
+ "expected_evidence": []
+}

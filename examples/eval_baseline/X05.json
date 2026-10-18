@@ -1,0 +1,87 @@
+{
+ "question": "How do the papers in the collection study social bias in image captioning?",
+ "time": "2026-10-18T21:19:43",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The papers study social bias by analyzing racial and gender biases through manual annotations of skin color and perceived gender [S1]. They also investigate how model-based evaluation metrics like CLIPScore encode societal biases that can amplify these issues during generation [S2, S3]. Additionally, researchers examine disparate performance across demographics to understand bias propagation pathways within captioning systems [S1, S4].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2106.08503v2:p1:c0",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 1,
+   "score": 0.759,
+   "text": "Understanding and Evaluating Racial Biases in Image Captioning Dora Zhao Angelina Wang Olga Russakovsky Princeton University {dorothyz,angelina.wang,olgarus}@cs.princeton.edu Abstract Image captioning is an important task for benchmarking visual reasoning and for enabling accessibility for people with vision impairments. However, as in many machine learning settings, social biases can influence image captioning in undesirable ways. In this work, we study bias propagation pathways within image captioning, focusing specifically on the COCO dataset. Prior work has analyzed gender bias in captions using automatically-derived gender labels; here we examine racial and intersectional biases using manual annotations. Our first contribution is in annotating the perceived gender and skin color of 28,315 of the depicted people after obtaining IRB approval. Using these annotations, we compare racial biases present in both manual and automatically-generated image captions. We demonstrate differences in caption performance, sentiment, and word choice between images of lighter versus darker-skinned people. Further, we find the magnitude of these differences to be greater in modern captioning systems compared to older ones, thus leading to concerns that without proper consideration and mitigation these differences will only become increasingly prevalent. Code and data is available at https://princetonvisualai. github.io/imagecaptioning-bias/. 1. Introduction Computer vision applications have become ingrained in numerous aspects of everyday life, and problematically, so have the societal biases they contain. For example, gender and racial biases are prevalent in image tagging [62, 7] and image search [39, 52]; visual recognition models have disparate error rates across demographics and geographic regions [16, 24]. The perpetuation and amplification of social biases precipitate the need for a deeper exploration of these systems and of the bias propagation pathways. We focus on the task of image captioning: the process of generating a textual description of an image [69, 50, 76, 48, 3, 33]. This task serves as an important testbed for visual reasoning and can improve accessibility of digital images for people who are blind or low vision. In this work, we assess the pathways for bias propagation: from the images, to the manual captions, and finally to the automatically generated captions. We focus our attention on studying the Common Objects in Context (COCO) [47, 19] dataset; it is a widely used image captioning benchmark [32], thus making any biases especially problematic [22]. We collect both skin color and perceived gender annotations on 28,315 of the people in the COCO 2014 validation dataset after obtaining IRB approval. This data allows us"
+  },
+  {
+   "label": "S2",
+   "id": "2305.14711v3:p1:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 1,
+   "score": 0.757,
+   "text": "Gender Biases in Automatic Evaluation Metrics for Image Captioning Haoyi Qiu†, Zi-Yi Dou†, Tianlu Wang♯, Asli Celikyilmaz♯, Nanyun Peng† †University of California, Los Angeles ♯Meta AI Research {haoyiqiu,zdou,violetpeng}@cs.ucla.edu {tianluwang,aslic}@meta.com Abstract Model-based evaluation metrics (e.g., CLIPScore and GPTScore) have demonstrated decent correlations with human judgments in various language generation tasks. However, their impact on fairness remains largely unexplored. It is widely recognized that pretrained models can inadvertently encode societal biases, thus employing these models for evaluation purposes may inadvertently perpetuate and amplify biases. For example, an evaluation metric may favor the caption “a woman is calculating an account book” over “a man is calculating an account book,” even if the image only shows male accountants. In this paper, we conduct a systematic study of gender biases in model-based automatic evaluation metrics for image captioning tasks. We start by curating a dataset comprising profession, activity, and object concepts associated with stereotypical gender associations. Then, we demonstrate the negative consequences of using these biased metrics, including the inability to differentiate between biased and unbiased generations, as well as the propagation of biases to generation models through reinforcement learning. Finally, we present a simple and effective way to mitigate the metric bias without hurting the correlations with human judgments. Our dataset and framework lay the foundation for understanding the potential harm of model-based evaluation metrics, and facilitate future works to develop more inclusive evaluation metrics.1 1 Introduction Pretrained model-based evaluation metrics such as BERTScore (Zhang et al., 2019), CLIPScore (Hessel et al., 2021), and GPTScore (Fu et al., 2023) have shown promising performance, achieving stronger correlations with human judgments over n-gram matching-based evaluation metrics such as BLEU (Papineni et al., 2002), ROUGE (Lin, 2004), 1Data is available at https://github.com/PlusLabNLP/ clipscore-bias. Good caption: a woman who is reading Bad caption: a man who is reading Reference: a photo of a woman who is reading CLIPScore 0.72 0.75 Image Captioning Models a man is reading evaluate 0.74 Figure 1: An image-caption pair example from the PAO-EVALBIAS dataset. A good caption accurately describes the gender of the main character in the image, while the bad caption incorrectly describes the gender. CLIPScore can assign a higher score to the caption that is incorrect (0.75 vs. 0.72 correct), which shows that there is bias encoded in the evaluation metric. Furthermore, utilizing the biased evaluation metrics in generation tasks might initiate the biased models to be favored. and CIDEr (Vedantam"
+  },
+  {
+   "label": "S3",
+   "id": "2305.14711v3:p9:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 9,
+   "score": 0.744,
+   "text": "higher evaluation scores and maintaining a stronger correlation with human judgments. These findings corroborate our assertion and demonstrate the effectiveness of the hybrid metric. 5 Related Work Evaluation Metrics. N-gram matching metrics (Papineni et al., 2002; Lin, 2004; Vedantam et al., 2015) have been dominating in evaluating text generation models. However, these metrics typically consider similarities on the lexical level instead of the semantic level. To solve the issue, various approaches have been proposed (Banerjee and Lavie, 2005; Anderson et al., 2016) and models pretrained on large corpora have been leveraged (Zhao et al., 2019; Zhang et al., 2019; Thompson and Post, 2020; Rei et al., 2020; Sellam et al., 2020; Yuan et al., 2021). In image captioning, Hessel et al. (2021) propose CLIPScore, a reference-free metric based on CLIP (Radford et al., 2021) and achieve impressive correlation with human judgments. Societal Biases in Pretrained Models. It has been pointed out (Bolukbasi et al., 2016; Zhao et al., 2017; Bender et al., 2021) that there are societal biases encoded in the model training data, and models pretrained on these data can amplify the biases and potentially harm marginalized populations. While there are several works on investigating the bias issue of pretrained models (Kurita et al., 2019; Sheng et al., 2019; Agarwal et al., 2021; Cho et al., 2022; Zhang et al., 2022; Wang et al., 2022), biases in model-based evaluation metrics have received less attention. Among them, Sun et al. (2022) construct a dataset based on WinoBias (Zhao et al., 2018) and perform a systematic investigation on different types of metrics. However, the paper does not study evaluation metrics in the multimodal domain and fails to analyze the implications of the metric biases to real-world models. 6 Conclusion We analyze the gender biases issue of model-based evaluation metrics on image captioning tasks and investigate its potential impact on image captioning generation models. To do this, we create our own dataset and conduct a thorough analysis of the gender bias present in various evaluation metrics across multiple concepts. We also discuss the consequences of these biases in real-world applications and propose a hybrid metric as a solution to mitigate the issue. Experiments show that using biased model-based evaluation metrics cannot distinguish between biased and debiased model generations and amplifies the model-encoded gender biases through reinforcement learning. The proposed hybrid similarity evaluation metric can significantly reduce gender biases, while maintaining a stronger"
+  },
+  {
+   "label": "S4",
+   "id": "2106.08503v2:p4:c1",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 4,
+   "score": 0.738,
+   "text": "in image captioning systems. First, we examine racial terms (Sec. 4.1) and disparate performance (Sec. 4.2). We then analyze bias in terms of representation, i.e., differences between the lighter and darker images and corresponding captions. To do this we first consider the images in Sec. 4.3, before controlling for these visual differences and studying the captions in Sec. 4.4. Models. We examine the captions generated by six image captioning models: (1) FC [59] is a simple sequence encoder that takes in image features encoded by a CNN; (2) Att2in [59] is similar but images are encoded using spatial features; (3) DiscCap [50] further adds a loss term"
+  },
+  {
+   "label": "S5",
+   "id": "2305.14711v3:p4:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 4,
+   "score": 0.729,
+   "text": "Candidate Captions Reference Caption profession a {gender} who is a/an {profession} a photo of a {gender} who is a/an {profession} activity a {gender} who is {activity} a photo of a {gender} who is {activity} object a {gender} with a/an {object} a photo of a {gender} with a/an {object} Table 1: Caption patterns in PAO-EVALBIAS. The lexicons of profession, activity, and object are presented in Appendix Table 11, 12, and 13. Good and bad candidate captions have the same and different gender with the reference, respectively. gender ∈{man, woman}, profession, activity, object ∈{lexicons from Tables 11, 12, and 13}. For the pair (woman, reading), the reference is “a photo of a woman who is reading” and the good caption is “a woman who is reading” which is used to retrieve suitable images. The bad caption will be “a man who is reading.” where G denotes a gender group, C denotes a concept, N denotes the total number of examples for the specific concept of the gender, S denotes the scoring function, cgood/bad denotes the good/bad (candidate) caption, r denotes the reference sentences set, and I denotes the corresponding image. For text-only evaluation metrics (e.g., BLEU-4, METEOR, ROUGE, CIDEr, and SPICE), the scoring function takes candidate and reference sentences. For image-text evaluation metrics (e.g., CLIPScore), the scoring function takes the candidate sentences and corresponding images. A bias is present if there are significant (p < 0.05 with bootstrap resampling) differences in the accuracy of the evaluation metric between different groups. We define this as the bias of the model for a specific concept. Thus, a concept is considered: • woman-biased: if the accuracy for woman examples is significantly higher than that for man examples, i.e., Accwoman, concpet ≫Accman, concpet; (2) • man-biased: if the accuracy for man examples is significantly higher than that for woman examples, i.e., Accman, concpet ≫Accwoman, concpet, (3) where ≫represents the result on the left is significantly (p < 0.05 with bootstrap resampling) higher than the right. Biases Revealed by PAO-EVALBIAS. As shown in Table 2,3 51.76%, 61.54%, and 51.28% of the lexicons are significantly biased (p < 0.05 with bootstrap resampling) under CLIPScore evaluation within profession, activity, and object, respectively. The lexical overlaps between candidate and reference captions ensure the n-gram evaluation metrics do not reveal any gender bias, that 3A detailed discussion about the dataset robustness can be found in Appendix A. N-Gram Metrics CLIPScore CLIPScore+CIDEr"
+  }
+ ],
+ "prompt_tokens": 2815,
+ "answer_tokens": 78,
+ "seconds": 3.5,
+ "id": "X05",
+ "reference_answer": "One studies racial and intersectional bias in COCO captions using manual skin color and gender annotations; the other studies gender bias in model-based evaluation metrics with PAO-EvalBias and proposes combining model-based and n-gram metrics.",
+ "expected_evidence": [
+  {
+   "paper": "2106.08503v2",
+   "page": 1,
+   "phrase": "skin color"
+  },
+  {
+   "paper": "2305.14711v3",
+   "page": 2,
+   "phrase": "PAO-EVALBIAS"
+  }
+ ]
+}

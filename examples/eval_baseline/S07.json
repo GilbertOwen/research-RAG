@@ -1,0 +1,82 @@
+{
+ "question": "How many people did the racial bias study annotate in COCO, and with which attributes?",
+ "time": "2026-10-18T21:18:51",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The study annotated 28,315 people from the COCO dataset. The annotations included perceived gender and skin color using the Fitzpatrick Skin Type scale [S2]. These attributes were used to analyze racial biases in both manual and automatically generated captions [S3].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   3
+  ],
+  "invalid": [],
+  "uncited_sentences": [
+   "The study annotated 28,315 people from the COCO dataset."
+  ],
+  "ok": false
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2106.08503v2:p8:c2",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 8,
+   "score": 0.732,
+   "text": "the semantic differences captured in the sentence embeddings but also the specific words being employed. 5. Discussion and Conclusion In this work, we seek to understand not only what racial biases are present in the COCO image captioning dataset, but also how these biases propagates into models trained on them. We annotate skin color and gender expression of people in the images, and consider various forms of bias such as those in the form of differentiability between dif-"
+  },
+  {
+   "label": "S2",
+   "id": "2106.08503v2:p2:c1",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 2,
+   "score": 0.724,
+   "text": "recognition [44], facial recognition [28], pedestrian detection [73]); here we expand this work to studying racial biases in image cap- Figure 1: The interface shown to AMT workers, who are asked to provide the inferred gender and skin color of the un-blurred person within the blue box (pixelation not seen by annotators, only to preserve privacy in figure). tioning. This spurs the important question of whether race should be included in generated image captions at all. Prior works [63, 51] find that, in certain contexts, people who are blind or low vision want racial descriptors to be included. Further, this motivates the need to understand how people prefer their identities labeled by an automated captioning system, a question studied extensively by Bennett et al. [10]. 3. Crowdsourcing Demographic Annotations 3.1. Annotation process Dataset. To study bias in image captioning systems, we collect annotations on COCO [47, 19], a large-scale dataset containing images, labels, segmentations, and 5 human-annotated captions per image. COCO is a widely used image captioning benchmark. We focus on the 40,504 images of the COCO 2014 validation set, and look for person instances with sufficiently large bounding boxes (at least 5,500 pixels in area) such that there is a reasonable expectation of being able to infer gender and skin color. This results in 15,762 images and 28,315 person instances. Annotation setup. Using Amazon’s Mechanical Turk (AMT), we crowdsource race and gender labels. In our interface (Fig. 1), we present workers with a person instance in a COCO image and ask them to provide the skin color using the Fitzpatrick Skin Type scale [25], ranging from 1 (lightest) to 6 (darkest), and the binary gender expression. We also give workers the option of marking “unsure” for either. Each instance is annotated three times. We compensate the workers at a rate of $10 / hr."
+  },
+  {
+   "label": "S3",
+   "id": "2106.08503v2:p1:c0",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 1,
+   "score": 0.711,
+   "text": "Understanding and Evaluating Racial Biases in Image Captioning Dora Zhao Angelina Wang Olga Russakovsky Princeton University {dorothyz,angelina.wang,olgarus}@cs.princeton.edu Abstract Image captioning is an important task for benchmarking visual reasoning and for enabling accessibility for people with vision impairments. However, as in many machine learning settings, social biases can influence image captioning in undesirable ways. In this work, we study bias propagation pathways within image captioning, focusing specifically on the COCO dataset. Prior work has analyzed gender bias in captions using automatically-derived gender labels; here we examine racial and intersectional biases using manual annotations. Our first contribution is in annotating the perceived gender and skin color of 28,315 of the depicted people after obtaining IRB approval. Using these annotations, we compare racial biases present in both manual and automatically-generated image captions. We demonstrate differences in caption performance, sentiment, and word choice between images of lighter versus darker-skinned people. Further, we find the magnitude of these differences to be greater in modern captioning systems compared to older ones, thus leading to concerns that without proper consideration and mitigation these differences will only become increasingly prevalent. Code and data is available at https://princetonvisualai. github.io/imagecaptioning-bias/. 1. Introduction Computer vision applications have become ingrained in numerous aspects of everyday life, and problematically, so have the societal biases they contain. For example, gender and racial biases are prevalent in image tagging [62, 7] and image search [39, 52]; visual recognition models have disparate error rates across demographics and geographic regions [16, 24]. The perpetuation and amplification of social biases precipitate the need for a deeper exploration of these systems and of the bias propagation pathways. We focus on the task of image captioning: the process of generating a textual description of an image [69, 50, 76, 48, 3, 33]. This task serves as an important testbed for visual reasoning and can improve accessibility of digital images for people who are blind or low vision. In this work, we assess the pathways for bias propagation: from the images, to the manual captions, and finally to the automatically generated captions. We focus our attention on studying the Common Objects in Context (COCO) [47, 19] dataset; it is a widely used image captioning benchmark [32], thus making any biases especially problematic [22]. We collect both skin color and perceived gender annotations on 28,315 of the people in the COCO 2014 validation dataset after obtaining IRB approval. This data allows us"
+  },
+  {
+   "label": "S4",
+   "id": "2106.08503v2:p5:c0",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 5,
+   "score": 0.673,
+   "text": "to encourage discriminability; (4-6) Transformer [67], AoANet [33], and Oscar [45] are transformer-based models representing the current state-of-the-art. In our analysis we particularly focus on contrasting Att2in vs DiscCap, since they differ only in the added discriminability loss, and the older (1-3) vs the newer (4-6) models. We train the models on the COCO 2014 training set using proposed hyperparameters from the respective papers (e.g., the discriminability loss weight is λ = 10 for DiscCap). Oscar is further pre-trained on a public corpus of text-image pairs Data. Our racial analysis is performed on 10,969 images of the COCO 2014 validation set which were definitively labeled as either lighter or darker (not both or unsure). 4.1. Captions contain racial descriptors We begin by analyzing the presence of racial descriptors and offensive language in the manual as well as automatically generated captions. Manual captions. Prior works [54, 65] show that people are more likely to use racial descriptors when describing non-white individuals. We observe this pattern in human-annotated captions by conducting a keyword search of the captions in the COCO 2014 training set using a precompiled list of racial descriptors (details in Appendix B). For ambiguous terms (e.g. “white”, “black”) that can be used in a non-racial context, we manually inspect the captions. Assuming the training distribution mirrors that of the validation, for the manual captions, annotators used racial descriptors to describe individuals who appear to be white 0.03% of the time versus 0.54% of the time for individuals who appear to be Black. Furthermore, in 26.9% of the instances when a racial descriptor for a white individual is used, the annotator is also mentioning an individual of a different race in the caption as well (e.g. “the white woman and Black woman”). We see this as a manifestation of the belief that “white” is the norm, and race is only salient when there is a deviation or explicit difference between multiple people. In addition to looking for racial descriptors, we check for the presence of slurs and offensive language using a precompiled list of profane words [77]. There are 1,691 instances of profane language, occurring in 0.40% of the sentences in the COCO 2014 training set. We find alarming occurrences not only of racial slurs but also of homophobic and sexist language as well, similar to the NSFW discoveries by Prabhu and Birhane [13]. Automated captions. Racial descriptors are not found"
+  },
+  {
+   "label": "S5",
+   "id": "2106.08503v2:p2:c0",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 2,
+   "score": 0.652,
+   "text": "Our work lays the foundation for studying bias propagation in image captioning on the popular COCO dataset. Data and code is freely available for research purposes at https://princetonvisualai.github. io/imagecaptioning-bias/. 2. Related Work Presence of dataset bias. Our work follows a long line of literature identifying, analyzing, and mitigating bias in machine learning systems. One key facet of this discussion is the bias in datasets used to train models. Under the framework of representational harms [14, 6], there is commonly a lack of representation [16, 74] and stereotyped portrayal [17, 62, 54, 65] of certain marginalized demographic groups. Along with many ethical concerns [56, 66], these dataset biases are problematic because they can propagate into models [15, 17]. In this work we analyze the biases present in a commonly-used image captioning benchmark, COCO [47, 19], using our new crowdsourced annotations. Mitigating dataset bias. The root causes of dataset bias are complex: they stem from bias in image search engines [52], data collection practices [74, 24], and real-world disparities. Proposed solutions to dataset bias include new data collection approaches [38, 35], manual data cleanup [74, 75], synthetic data generation [58, 20, 60] – or, in extreme cases, even withdrawing the dataset after insurmountable biases have been identified [13]. Researchers have advocated for increased transparency of datasets [27, 35], including developing tools to steer researcher intervention [8, 70]. Our work does not aim to mitigate dataset bias but instead to articulate its impact on downstream image captioning models. Algorithmic bias mitigation. In tandem with efforts to reform data collection, a variety of algorithmic bias mitigation techniques have been proposed; see e.g., Hutchinson and Mitchell. [34] for an overview. This work goes along with others that unveil biases present in existing algorithms [53, 49, 4]. One important theme is bias amplification [78, 71, 72], or social biases in the data getting amplified in the trained models. In this vein, we study how bias in manual image captions propagates into automated captioning systems. Image captioning models. Image captioning models are increasingly being developed as a more complex way of labeling images [69, 50, 76, 48, 3, 33]. Recent work has discovered biases in these systems, but often with respect to gender [31, 12, 64]; the study of racial biases in captioning has been limited to analyzing bias in the manual captions [54, 65]. Racial bias has been identified in other automated systems [9] (e.g., speech"
+  }
+ ],
+ "prompt_tokens": 2505,
+ "answer_tokens": 56,
+ "seconds": 3.0,
+ "id": "S07",
+ "reference_answer": "28,315 people, annotated with perceived gender and skin color (after IRB approval).",
+ "expected_evidence": [
+  {
+   "paper": "2106.08503v2",
+   "page": 1,
+   "phrase": "28,315"
+  }
+ ]
+}

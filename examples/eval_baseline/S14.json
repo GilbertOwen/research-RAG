@@ -1,0 +1,79 @@
+{
+ "question": "How is F-CLIPScore computed?",
+ "time": "2026-10-18T21:19:18",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "F-CLIPScore is computed by first using the spaCy parser to extract nouns from a given sentence [S4]. It then evaluates the caption quality by averaging the CLIPScore of the entire sentence and each individual noun [S4]. Mathematically, this is defined as the sum of the full sentence score and all noun scores divided by N plus one [S4].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2502.20034v4:p11:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 11,
+   "score": 0.774,
+   "text": "We first observed the degree of overlap between the F-CLIPScore and CLIPScore metrics when filtering the data. At filtering rates of 20, 30, 40, 50, and 60, the proportions of overlapping image–caption pairs filtered by both metrics were 57%, 62%, 67%, 71%, and 76%, respectively. We then randomly sampled 10 image–caption pairs that did not overlap between the two metrics’ filtered sets at the 30% filtering rate, which was the setting that yielded the best performance when using the F-CLIPScore metric. The results are presented in Figure 4. As shown in Figure 4, the images filtered by CLIPScore (upper row) appear to include some that should not have been filtered out, despite having normal and semantically correct captions. Although cases such as (g) and (h) involve repetitive lexical usage—where a word is repeated even if it correctly refers to an object present in the image—it is still reasonable for such captions to receive lower scores. However, it is unfortunate that these samples were filtered only by CLIPScore and not by F-CLIPScore. On the other hand, the images filtered by F-CLIPScore (lower row in Figure 4) include cases such as (l), where even though there is repetitive lexical usage, the corresponding object in the image is actually a model rather than a designer, making the filtering reasonable. There were also examples like (n), where the captioned object is missing from the image, and (r), where the image shows a personal debt chart for “Brainy” rather than a “brain”. These qualitative samples provide insights into how filtering with F-CLIPScore influenced the performance of the LVLMs. Furthermore, we measured the CLIPScore and F-CLIPScore for each image–caption pair across the entire LLaVA-Pretrain dataset and sorted them in ascending order, such that a higher score corresponds to a higher rank. We then sorted the samples by the difference between the two ranks (F-CLIPScore rank − CLIPScore rank) and selected the top 10 samples with the largest positive values (i.e., those that CLIPScore rated higher than F-CLIPScore, shown in the upper row of Figure 5) and the bottom 10 samples with the largest negative values (i.e., those that F-CLIPScore rated higher than CLIPScore, shown in the lower row of Figure 5). As shown in Figure 5, the samples on side (I), which CLIPScore rated higher than F-CLIPScore, contain many text-rendered images. Conversely, the samples on side (II), which F-CLIPScore rated higher than CLIPScore, tend to exhibit"
+  },
+  {
+   "label": "S2",
+   "id": "2502.20034v4:p5:c1",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 5,
+   "score": 0.758,
+   "text": "Table 2, we observed the expected decline in accuracy as nouns were replaced. This indicates that the strong performance of F-CLIPScore, even without additional training, is not due to random noise, but rather stems from its ability to more effectively leverage fine-grained textual embeddings. We experimented with alternative configurations of F-CLIPScore using verbs and noun phrases instead of nouns. As shown in Table 3, using verbs yielded little to no improvement, while noun phrases performed better than verbs but still fell short of the performance achieved with nouns."
+  },
+  {
+   "label": "S3",
+   "id": "2502.20034v4:p6:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 6,
+   "score": 0.757,
+   "text": "Published in Transactions on Machine Learning Research (01/2026) Replacement Rate 0.2 0.4 0.6 0.8 1.0 COCO Acc mean ± std (%, ↑) 38.9±2.5 35.9±1.4 31.0±1.7 23.5±2.0 19.9±1.3 Flickr30k Acc mean ± std (%, ↑) 37.5±1.5 33.0±1.2 26.2±2.1 22.0±1.6 18.9±3.0 NoCaps Acc mean ± std (%, ↑) 29.4±1.9 24.2±2.3 21.2±2.0 16.2±1.7 16.5±0.4 Table 2: F-CLIPScore results on the OHD-Caps test set with different random noun replacement rates (0.2 to 1.0). Each value shows the mean accuracy ± standard deviation over five random seeds. OHD-Caps ACC (%, ↑) Metric coco flickr30k nocaps CLIPScore 22.6 22.6 12.4 F-CLIPScoreV 23.6 24.8 15.8 F-CLIPScoreNP 54.2 57.8 39.6 F-CLIPScoreN 62.2 62.2 46.6 Table 3: Accuracy on the OHD-Caps test set evaluated with OpenAI CLIP-L. F-CLIPScoreN refers to the noun-based F-CLIPScore defined in Eq. 1. F-CLIPScoreNP uses noun phrases instead of individual nouns, and F-CLIPScoreV replaces the nouns with verbs. Our F-CLIPScore even outperforms the training-based methods (Zhang et al., 2024; Yuksekgonul et al., 2023), as shown in Table 4. Furthermore, Table 5 demonstrates that F-CLIPScore consistently achieves gains across different scales and architectures of vision-language models. 5.2 LVLM Pretrain Data Curation with F-CLIPScore As shown in Section 5.1, F-CLIPScore was able to exhibit competent performance in detecting object hallucination without any training, and could further serve as an complementary method for training VLMs. We aimed to investigate whether F-CLIPScore can influence the pretraining process of LVLM by acting as a data filter between the vision encoder and the LLM. To this end, we applied F-CLIPScore to filter the pretraining data for LLaVA (Liu et al., 2023), which consists of 558k samples, by removing the bottom x% of the alignment training set based on F-CLIPScore. As shown in Table 6, training the alignment model on the top 70% of data curated by F-CLIPScore resulted in a +4.9% improvement in POPE accuracy compared to training on the entire dataset (row 5 vs. 7). In contrast, using the OHD-Caps-trained CLIP for filtering yielded only marginal gains, and random filtering showed no improvement. These results may suggest that F-CLIPScore effectively captures object hallucination-related OHD-Caps Accuracy COCO Flickr30k NoCaps CLIP-B/32 (CLIPScore) 15.2 17.6 10.2 CECLIP (Zhang et al., 2024) 32.8 28.0 25.0 NegCLIP (Yuksekgonul et al., 2023) 52.8 40.8 23.4 CLIP-B/32 (F-CLIPScore) 56.0 53.2 43.0 Table 4: OHD-Caps accuracy across different methods."
+  },
+  {
+   "label": "S4",
+   "id": "2502.20034v4:p4:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 4,
+   "score": 0.752,
+   "text": "Published in Transactions on Machine Learning Research (01/2026) Figure 3: The graphical representation of F-CLIPScore. two distributions. As shown in Figure 2a, we observe that there is no substantial difference between the two distributions. We conducted the same analysis using ground-truth text embeddings of the pre-trained and fine-tuned models, and similarly found no significant difference in the cosine similarity distributions between the samples that were correctly and incorrectly predicted by CLIP-L (Figure 2b). Two-sample t-tests yield p-values of 0.11 for a and 0.67 for b. In contrast, Figure 2c reveals significant changes in text embeddings for captions with hallucination (green), and without hallucination (purple) highlighting the distinct adaptation of text representation. Two-sample t-tests yield near zero p-value for c. These observations suggest that OHD-Caps training induces more noticeable changes in the text representation space, particularly in discriminating hallucinated from non-hallucinated captions, whereas the vision representation space exhibits relatively minor changes. 3.2 Fine-grained CLIPScore Motivated by these observations, we propose a simple metric called Fine-grained CLIPScore (F-CLIPScore), which enhances the discriminative power of the VLM in order to utilize textual information with more granularity without additional training. F-CLIPScore first utilizes the spaCy parser Honnibal et al. (2020) to extract nouns from a given sentence. Then, it evaluates the quality of an image caption by averaging the CLIPScore of the entire sentence and each individual noun (Figure 3). Mathematically, given an image I and a caption C containing a total of N nouns, each denoted as ni, F-CLIPScore is defined as Eq. 1. F-CLIPScore(I, C) = CLIPScore(I, C) + PN i=1 CLIPScore(I, ni) N + 1 (1) 4 Experiments For evaluating OHD-Caps test set, F-CLIPScore only requires an additional parsing step (we used en_core_web_sm of spaCy (Honnibal et al., 2020)), which takes on average 170 ms per sentence and can be parallelized across samples. We note that this parser runs in linear time with respect to the length of the sentence (Honnibal & Johnson, 2015). For training CLIP with Eq. 2 on the OHD-Caps train set, we used a batch size of 64 and a learning rate of 1e-5, which required 3 hours on an H100 GPU. For LLaVA"
+  },
+  {
+   "label": "S5",
+   "id": "2502.20034v4:p5:c0",
+   "title": "Do Vision Encoders Truly Explain Object Hallucination?: Mitigating Object Hallucination via Simple Fine-Grained CLIPScore",
+   "page": 5,
+   "score": 0.741,
+   "text": "Published in Transactions on Machine Learning Research (01/2026) OHD-Caps ACC (%, ↑) Metric COCO Flickr30k NoCaps w/o training CLIPScore 22.6 22.6 12.4 F-CLIPScore 62.2 62.2 46.6 trained w/ OHD-loss† CLIPScore 79.8 ±1.7 84.8 ±1.6 84.0 ±0.7 trained w/ F-CLIPScore loss CLIPScore 80.5 ±1.8 84.8 ±1.3 84.1 ±1.3 †: We trained openai/clip-vit-large-patch14 with the train code from Liu et al. (2024c) Table 1: Accuracy on the OHD-Caps test set evaluated with OpenAI CLIP-L. For trained models, we report the average evaluation results over 10 runs with different random seeds. pretraining, we employed an effective batch size of 256 and a learning rate of 1e-3, which took 7 hours on two H100 GPUs. 5 Results By utilizing the F-CLIPScore, which directly leverages the image embeddings from the CLIP vision encoder without any training or gradients, while only adding a parsing step during forward propagation, we can efficiently gain insights into whether the issue of object hallucination arises from the limited capability of the vision encoder. 5.1 F-CLIPScore on OHD-Caps We evaluated the OHD-Caps test set, an object hallucination assessment dataset, using the proposed F-CLIPScore. As shown in Table 1, evaluation results with OpenAI CLIP ViT-L Radford et al. (2021) indicate that F-CLIPScore outperformed the baseline model by up to 39.6% without additional training (row 4 vs. 5). However, it still performed 17.6% to 37.4% worse than trained models (row 5 vs. 7). This may indicate that although CLIP vision encoders may not be the main cause of object hallucination, further training may enhance their capability. To test whether F-CLIPScore is orthogonal to the previously proposed method Liu et al. (2024c), we modify the loss as LCLIP + LOHD + α B B X i=1 (1 −F-CLIPScore(Ii, Ci)) (2) where LCLIP is the contrastive loss proposed in Radford et al. (2021), and LOHD is the marginal loss proposed in Liu et al. (2024c). B denotes the batch size, while Ii and Ci are image and caption of the i-th positive pair. α is a hyperparameter that we set to 0.3. Applying F-CLIPScore as a loss improved performance by 0.7 percentage points on COCO and 0.1 percentage points on NoCaps (row 7 vs. 9). These results suggest that F-CLIPScore could be a complementary component in VLM training. We randomly replaced the caption embeddings into noun embeddings extracted from a Wikipedia corpus (Davies, 2015) to examine how F-CLIPScore responds to such perturbations. As shown in"
+  }
+ ],
+ "prompt_tokens": 3171,
+ "answer_tokens": 78,
+ "seconds": 4.0,
+ "id": "S14",
+ "reference_answer": "It extracts the nouns of a caption and averages the CLIPScore of the whole sentence with the CLIPScore of each noun.",
+ "expected_evidence": [
+  {
+   "paper": "2502.20034v4",
+   "page": 4,
+   "phrase": "each individual noun"
+  }
+ ]
+}

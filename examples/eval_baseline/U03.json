@@ -1,0 +1,71 @@
+{
+ "question": "What CIDEr score does the original CLIP paper report on MS-COCO?",
+ "time": "2026-10-18T21:20:04",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "NOT ENOUGH EVIDENCE",
+ "citation_check": {
+  "abstained": true,
+  "cited": [],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2305.14711v3:p8:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 8,
+   "score": 0.721,
+   "text": "viate gender biases. Motivated by this, we investigate if adding CLIPScore and CIDEr together without normalization for model evaluation (denoted as CLIPScore+CIDEr) can harness the benefits of both model-based and n-gram matching-based evaluation metrics, which has demonstrated effective in other tasks (Wan and Bansal, 2022; Huang et al., 2023). Formally, we obtain the new evaluation score with H(ci, ri, Ii) = CLIPScore(ci, Ii) + CIDEr(ci, ri), (4) where ci denotes the candidate caption, ri denotes the reference sentences set, and Ii denotes the corresponding image. We mainly focus on CIDEr because it is a commonly used n-gram matching-based metric in image captioning tasks although our method is compatible with other n-gram matching-based metrics as well. We assign equal weights to both of the metrics for simplicity, while a more sophiscated weighting strategy can potentially improve the model performance but add complexity, which we leave as a future direction. 4.1 Bias Evaluation In this part, we experiment with the hybrid metric following the setting in Section 2.2. Table 2 shows that CLIPScore+CIDEr does not encode gender biases on the PAO-EVALBIAS dataset, suggesting this method can successfully reduce the metric bias. We include several examples in Appendix B with CLIPScore and CIDEr score breakdowns to demonstrate the idea of combining these two metrics. Moreover, we evaluate the human correlations of each evaluation metric on Flickr8K-Expert (Hodosh et al., 2015) and as present in Table 7, CLIPScore+CIDEr achieves an improved correlation with human judgments compared to CLIPScore and CIDEr, indicating that it can maintain its capability of model evaluation. Our success with CLIPScore+CIDEr shows our method is compatible with any other statistical metrics. That say, we also test CLIPScore+BLEU4 and CLIPScore+SPICE, resulting in 51.260 and 55.051 τc, respectively, which further strengthens our argument. To conclude, our proposed metric emphasizes the synergistic fusion of two metrics with complementary strengths. While CLIPScore excels at capturing vision-language alignment, it tends to biased models due to inherent gender biases in its encoding. Conversely, CIDEr adheres to unbiased reference captions, albeit limited to surface-level comparisons. Combining these two metrics, our τc BLEU-4 30.776 METEOR 41.822 ROUGE 32.314 CIDEr 43.891 SPICE 44.888 CLIPScore 51.482 CLIPScore+BLEU-4 51.260 CLIPScore+CIDEr 53.768 CLIPScore+SPICE 55.051 Table 7: Correlations (measured with τc) with human judgment on Flickr8K-Expert. Combining CLIPScore with CIDEr or SPICE can improve the correlation over both n-gram matching-based evaluation metrics and CLIPScore. method presents a comprehensive evaluation framework containing visual relevance and"
+  },
+  {
+   "label": "S2",
+   "id": "1810.04020v2:p23:c1",
+   "title": "A Comprehensive Survey of Deep Learning for Image Captioning",
+   "page": 23,
+   "score": 0.654,
+   "text": "[39] FlickrStyle10K BLEU, METEOR, ROUGE, CIDEr Dai et al. 2017 [26] Flickr 30K, MS COCO E-NGAN, E-GAN, SPICE, CIDEr Shetty et al. 2017 [126] MS COCO Human Evaluation, SPICE, METEOR Liu et al. 2017 [85] MS COCO SPIDEr, Human Evaluation Gu et al. 2017 [51] Flickr 30K, MS COCO BLEU, METEOR, CIDEr, SPICE Yao et al. 2017 [154] MS COCO, ImageNet METEOR Rennie et al. 2017 [120] MS COCO BLEU, METEOR, CIDEr, ROUGE Vsub et al. 2017 [140] MS COCO, ImageNet METEOR Zhang et al. 2017 [161] MS COCO BLEU, METEOR, ROUGE, CIDEr Wu et al. 2018 [150] Flickr 8K/30K, MS COCO BLEU, METEOR, CIDEr Aneja et al. 2018 [5] MS COCO BLEU, METEOR, ROUGE, CIDEr Wang et al. 2018 [147] MS COCO BLEU, METEOR, ROUGE, CIDEr Table 2. An overview of methods, datasets, and evaluation metrics ACM Computing Surveys, Vol. 0, No. 0, Article 0. Acceptance Date: October 2018."
+  },
+  {
+   "label": "S3",
+   "id": "2509.03897v2:p8:c0",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 8,
+   "score": 0.647,
+   "text": "Model Urban-1k COCO Classification Text-Image Image-Text Text-Image Image-Text ImageNet CIFAR-10 CIFAR-100 CLIP 47.10 61.10 30.45 50.40 68.40 89.75 64.20 LongCLIP 79.30 79.20 40.40 57.63 66.80 90.69 69.30 SigLip 62.40 63.10 47.18 65.34 76.08 92.44 72.59 NegCLIP 52.80 55.60 41.56 56.86 55.84 85.90 60.90 DCI 43.00 29.70 21.44 20.55 53.34 87.38 57.96 DAC 23.60 11.40 37.53 33.49 52.36 89.86 64.04 LongCLIP* 77.00 75.80 35.50 52.44 59.91 90.38 66.36 SPEC 69.80 0.30 22.72 4.48 11.01 71.26 33.10 Table 3: Performance of different VL representation models on standard retrieval and classification benchmarks. Results cover long- and short-caption text–image retrieval (Urban-1k, COCO) and image classification (ImageNet, CIFAR-10, CIFAR-100). This table illustrates how specificity-oriented training, while improving fine-grained alignment, can impact general-purpose performance. Model Rel. Attr. C/O F/O SCPP CLIP 59.84 63.96 47.28 58.54 53.33 LongCLIP 59.70 63.42 56.91 69.03 54.45 SigLip 46.52 56.24 32.95 40.86 20.88 NegCLIP 70.52 81.08 87.04 90.38 63.79 DCI 81.31 73.85 94.53 95.68 51.29 DAC 76.18 67.63 88.58 91.25 43.54 La-CLIP 45.48 58.72 34.97 40.54 54.99 TripletCLIP 54.94 63.07 23.53 27.58 55.71 LongCLIP* 52.96 65.81 63.97 70.20 56.74 SPEC 73.38 69.31 75.23 84.96 35.61 Table 4: Performance of various models on the ARO and SCPP benchmarks. C/O and F/O correspond to compositionality evaluation on COCO-Order and Flickr30kOrder, respectively. measures understanding of attribute-relation-object structure and word order sensitivity, and SugarCREPE++ (SCPP) (Dumpala et al., 2024), which assesses sensitivity to semantic equivalence under lexical variation. Results are shown in Table 4, with full SCPP details in Appendix B. On ARO, SPEC exhibits considerably higher performance than LongCLIP*, which suggests a direct relationship between specificity and compositionality. This finding does not hold on the SCPP benchmark, however. In fact among all compositionalityenhanced models, only NegCLIP shows a marked improvement on SCPP over the base CLIP model, all others either matching the base performance or showing a considerable degradation (e.g., DAC.) 5.3 Caption Length Sensitivity We further examined how evaluation performance varies across different caption lengths. To this Figure 3: Comparison of Pearson Correlation (PCC) across token ranges for different models on the Flickr30k and ImageInWords datasets. end, we divided captions into buckets based on token counts and measured human correlation within each range. As shown in Figure 3, CLIPScore performs reasonably well on short captions (fewer than 60 tokens), while SPECS yields consistently stronger correlation for longer captions. This trend suggests that short and long captioning represent two distinct regimes that require different"
+  },
+  {
+   "label": "S4",
+   "id": "2111.08940v2:p6:c1",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 6,
+   "score": 0.647,
+   "text": "that machine captioning models would still fall short of crowdworkers in a wide range of downstream scenarios. 5The official leaderboard ranks submissions using CIDEr (Vedantam et al., 2015) with 40 references on the hidden test data. We use the public Karpathy test split instead, but we suspect the same pattern would hold on the hidden data as well, given the large gap between machines and Human. Model Human Vin-large Vin-base U-VLP Up-Down # Best ↑ 327 180 161 112 74 # Worst ↓ 65 128 150 190 269 Table 3: # times when each captioning model is strictly best/worst in the caption set (i.e., best/worst both in precision and recall). 3.2 Comparing Automatic Metrics While carefully-designed human judgments like ours should be considered more reliable, automatic metrics allow for faster development cycles. Our transparent evaluations can also be used to analyze how these automatic metrics correlate with different aspects of image captioning. Table 2 (right section) shows automatic scores of the captioning models over 7 popular metrics for image captioning. CLIP-S (Hessel et al., 2021) is a referenceless metric that uses image features from CLIP (Radford et al., 2021), a crossmodal retrieval model trained on 400M image-caption pairs from the web. RefCLIP-S augments CLIP-S with similarities between the generated and reference captions. All other metrics, such as SPICE (Anderson et al., 2016) and CIDEr (Vedantam et al., 2015), only use reference captions without image features. These automatic metrics generally agree with our evaluations in ranking the four machines, but completely disagree in the assessment of Human. Most metrics rank Human near the bottom, showing that they are not reliable in evaluating high-quality, human-generated captions. The two metrics with powerful image and text features (CLIP-S and RefCLIP-S) give high scores to Human compared to the other metrics, but they still fail to score Human substantially higher than VinVL-large. This suggests that automatic metrics"
+  },
+  {
+   "label": "S5",
+   "id": "2305.14711v3:p8:c1",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 8,
+   "score": 0.644,
+   "text": "magnified sensitivity to gender-inclusive terminology. 4.2 Impact on Generation Models Following the setting in Section 3.2, we perform the same experiments with the hybrid metric. Table 5 shows that CLIPScore+CIDEr can alleviate the biases. Specifically, we find that (1) biases in the evaluation metric can make biased and debiased models indistinguishable based on evaluation scores; (2) n-gram matching metrics can hardly encode biases and CLIPScore+CIDEr can alleviate the bias issue (biased: 208.5 vs debiased: 223.2 on linear combination scores). In addition, as shown in Table 6, we observe that the linear combination of CIDEr and CLIPScore as rewards can enhance the model performance compared with MLE, as evidenced by the increase in CLIPScore from 75.4 to 76.6. Besides, RL with CLIPScore+CIDER can achieve the best scores on all n-gram matching-based evaluation metrics compared to RL with CLIPScore or CIDEr only. Moreover, this combination approach can mitigate the bias problem of CLIPScore, as indicated by the reduction in gender prediction errors from 1.6% to 1.3%. The advantage of using CIDEr scores as rewards is that they motivate the model to make accurate predictions word-by-word, leading to improvements in gender-inclusive predictions. Conversely, since CLIPScore emphasizes the overall similarity between images and text, biases in the evaluation metrics can be carried over to generation models through the optimization process. Therefore, linearly combined CLIPScore with CIDEr can decrease gender prediction errors, while achieving"
+  }
+ ],
+ "prompt_tokens": 3233,
+ "answer_tokens": 7,
+ "seconds": 2.8,
+ "id": "U03",
+ "reference_answer": "Not in the collection: the CLIP paper is not one of the 20 papers.",
+ "expected_evidence": []
+}

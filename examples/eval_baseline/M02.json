@@ -1,0 +1,86 @@
+{
+ "question": "Which papers use a GPT-4 model as a tool in their method or evaluation?",
+ "time": "2026-10-18T21:19:54",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "Based on the provided sources, several papers utilize GPT-4 models for evaluation or analysis:\n*   **S1** and **S4** present performance tables that include results for \"GPT-4V\" and \"GPT-4O,\" indicating these models were evaluated as part of the benchmark.\n*   **S2** explicitly states that \"GPT-4o as an evaluator\" shows the highest consistency with human preferences and is used to assess model-level agreement.\n*   **S3** mentions multiple methods using GPT-4, including \"CLAIR,\" \"GPT4-Eval,\" and \"DCScore,\" which leverage large language models to judge multimodal responses or decompose captions for accuracy measurement.",
+ "citation_check": {
+  "abstained": false,
+  "cited": [],
+  "invalid": [],
+  "uncited_sentences": [
+   "Based on the provided sources, several papers utilize GPT-4 models for evaluation or analysis:\n*   **S1** and **S4** present performance tables that include results for \"GPT-4V\" and \"GPT-4O,\" indicating these models were evaluated as part of the benchmark.",
+   "*   **S2** explicitly states that \"GPT-4o as an evaluator\" shows the highest consistency with human preferences and is used to assess model-level agreement.",
+   "*   **S3** mentions multiple methods using GPT-4, including \"CLAIR,\" \"GPT4-Eval,\" and \"DCScore,\" which leverage large language models to judge multimodal responses or decompose captions for accuracy measurement."
+  ],
+  "ok": false
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2407.06192v2:p20:c2",
+   "title": "Multi-Object Hallucination in Vision-Language Models",
+   "page": 20,
+   "score": 0.697,
+   "text": "19.87 95.05 LLaVA-7B* N/A 8.77 16.50 5.45 11.90 N/A 10.53 23.00 9.62 21.43 GLaMM* N/A 22.68 55.25 5.13 54.17 N/A 62.70 83.00 47.44 77.38 GroundHOG* N/A 24.82 32.75 24.68 30.36 N/A 45.09 43.50 35.26 50.00 GPT-4V† 54.45 79.25 40.06 70.24 N/A N/A 55.62 80.25 39.42 72.02 GPT-4O† 71.35 90.75 65.71 83.93 N/A N/A 60.07 74.29 53.66 68.26 object 4 Yi-VL-6B 3.25 5.50 1.60 4.76 4.35 7.75 5.13 10.71 6.30 37.75 4.17 8.93 0.26 0.25 0.00 1.19 Yi-VL-34B 8.32 15.75 4.49 13.69 9.16 17.00 5.13 8.93 11.05 22.75 5.45 34.52 0.26 3.00 0.00 1.19 LLaVA-7B 32.42 68.75 10.00 59.52 32.42 68.50 10.90 54.17 30.28 100.00 15.06 100.00 36.84 63.00 17.31 49.40 LLaVA-13B 31.38 68.17 14.39 94.05 31.32 73.75 11.54 58.93 36.06 100.00 24.68 100.00 44.83 80.00 25.96 64.88 LLaVA-34B 40.68 86.75 19.23 73.21 54.06 85.25 34.62 73.81 57.96 99.10 25.26 97.65 56.14 86.75 22.12 80.95 QwenVL 2.47 7.25 0.00 4.76 5.91 14.75 2.88 12.50 22.87 95.50 7.69 95.24 9.75 14.25 6.41 16.07 QwenVL-C 8.58 16.25 7.05 16.07 5.46 8.00 2.88 7.74 11.96 56.50 10.26 54.17 24.82 38.50 11.22 28.57 CogVLM 0.00 0.00 0.00 0.60 0.00 0.00 0.00 0.00 0.06 1.00 0.00 0.60 0.00 0.00 0.00 0.00 CogVLM-C 0.00 0.00 0.00 0.00 10.24 13.50 9.94 16.67 26.25 93.75 0.32 93.45 9.83 21.25 9.29 20.83 CogVLM-G 14.10 24.75 9.62 27.98 26.09 45.33 15.30 34.23 30.91 86.00 23.40 62.08 29.89 57.75 16.99 44.05 CogVLM-2 22.94 37.75 19.87 36.31 36.58 66.75 14.74 33.93 38.40 75.25 20.51 61.31 24.24 37.50 15.71 26.79 IDEFICS 0.00 1.25 0.00 0.60 5.91 18.25 0.64 11.90 21.12 95.00 14.74 93.45 4.95 23.00 0.00 0.00 MiniCPM-V 37.36 64.75 18.59 60.71 32.42 59.75 13.14 56.55 34.05 67.75 19.55 55.36 29.14 56.00 16.35 62.50 LLaVA-7B* N/A 8.90 15.75 5.45 11.31 N/A 13.06 23.00 10.90 21.43 GLaMM* N/A 21.70 55.75 6.73 55.95 N/A 64.91 80.25 55.45 67.86 GroundHOG* N/A 20.86 31.50 21.15 30.95 N/A 43.99 42.00 35.58 50.00 GPT-4V† 53.09 77.25 43.59 72.62 N/A N/A 56.40 78.75 44.87 74.40 GPT-4O† 72.25 87.00 68.27 82.14 N/A N/A 60.67 72.65 55.69 70.06 object 5 Yi-VL-6B 1.75 5.25 0.64 1.19 3.31 7.25 3.53 8.93 6.37 37.75 4.17 0.60 0.32 0.50 0.32 0.60 Yi-VL-34B 7.47 13.75 2.56 3.57 8.97 15.00 2.88 5.36 8.86 17.25 4.17 4.17 0.19 2.50 0.00 0.60 LLaVA-7B 30.41 67.50 5.00 7.74 30.41 67.25 9.62 8.93 32.16 100.00 11.86 0.00 36.52 62.75 16.99 20.83 LLaVA-13B 33.01 68.50 11.21 21.43 32.94 74.25 13.14 7.74 35.35 100.00 18.59"
+  },
+  {
+   "label": "S2",
+   "id": "2503.12329v1:p8:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 8,
+   "score": 0.696,
+   "text": "Figure 5: Metrics exhibit systematic biases—overestimating (positive values) or underestimating (negative values) certain models. Color saturation represents bias magnitude. Different metrics favor different models. GPT-4o exhibits lower biases (lighter overall colors), contributing to higher model-level agreement observed in Table 2. resentation models fail to align fine-grained details in long descriptions to the image content. VLM-as-a-Judge demonstrates stronger discernment for detailed captions. As shown in Table 1, accurate judgment for closely matched battles relies on a deep understanding of image content and a discriminative comparison between descriptions. Powerful VLMs with reasoning and fine-grained perception exhibit this capacity. No bells and whistles, GPT-4o as an evaluator, shows the highest consistency with human preferences, outperforming recently proposed metrics. Reference descriptions help the evaluator clarify uncertain image details, further improving model-level agreement. Systematic biases—overestimating or underestimating certain models are a critical concern. As shown in Table 2, METEOR and Output Length (which simply favors longer captions) exhibit decent caption-level agreement, but their model-level agreement is notably lower. To investigate this issue, we assessed the metric’s intrinsic bias towards specific models, by calculating the model’s average win rate across all battles and comparing it with the golden win rate in Figure 3. A positive (negative) win rate difference indicates that the metric overestimates (underestimates) the model. As displayed in Figure 5, all metrics exhibit systematic biases. The degree of bias varies across metrics; Output Length shows a particularly strong bias, while GPT-4o-as-a-Judge has a lower bias than METEOR (average 4.4% vs. 8.2%). This suggests that the disagreement between GPT-4o-as- a-Judge and humans is more likely due to random preferences per independent sample, rather than harmful bias towards specific models, leading to more accurate model ranking estimates. Evaluating hard-to-distinguish caption pairs remains a challenge. Despite the reasonable performance of VLM-as-a-Judge, it still falls short of Inter-Annotator agreement, particularly on Level 3/4 samples which represent the most challenging model battles (e.g., 0.650/0.620 vs. 0.572/0.560). This suggests that the current VLM still has limitations in perceiving fine-grained image details and distinguishing subtle differences between captions, which in turn leaves room for further improvement in detailed caption evaluation. 5 CapArena-Auto: An Automated Benchmark for Detailed Captioning CapArena relies on substantial human labor to estimate model performance, which is time-consuming and expensive. Therefore, developing an automated benchmark for detailed captioning is a desideratum to enable rapid evaluation and accelerate model development. In this section, based on the findings above, we"
+  },
+  {
+   "label": "S3",
+   "id": "2509.03897v2:p2:c1",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 2,
+   "score": 0.69,
+   "text": "et al., 2021) and PACScore (Sarto et al., 2023) build on pre-trained vision–language models such as CLIP (Radford et al., 2021), assessing captions through representational similarity between images and their captions. More recently, large language models (LLMs) have been used as evaluators by prompting them to score alignment between captions and images: FaithScore (Jing et al., 2023) extracts atomic facts from captions using an MLLM and verifying each fact against the image to measure faithfulness. CLAIR (Chan et al., 2023) leverages LLMs in a zero-shot setting to score captions and explain their judgments, GPT4-Eval (Liu et al., 2023) is evaluated by prompting GPT-4 to judge multimodal responses, with performance measured by relative quality scores. RLAIF-V (Yu et al., 2024) evaluates captions by prompting open-source MLLMs to verify decomposed claims and score hallucination reduction. FLEUR (Lee et al., 2024) prompts an open-source MLLM to directly compare an image with a candidate caption in a reference-free setting, producing both a numerical score and a natural-language rationale to align evaluation with human judgments. CAPTURE (Dong et al., 2024) evaluates captions by extracting and matching fine-grained visual details. DCScore (Ye et al., 2025) evaluates captions by decomposing them into primitive information units and measuring their accuracy and coverage using GPT-4. These LLM-based methods show strong performance but remain prohibitively expensive and mostly closed-source. CLIP-based adaptations Metrics based on representational similarity carry promise as they operate on the level of semantics rather than surface, and they are less costly than LLMs. However, CLIP, the common choice for base model in such metrics, is not suitable for long caption evaluation for two key reasons: it lacks compositionality and it can only take up to 77 subword tokens. To address these limitations, a line of research has modified CLIP in various ways. NegCLIP (Yuksekgonul et al., 2022) is the first work to address composi-"
+  },
+  {
+   "label": "S4",
+   "id": "2407.06192v2:p19:c2",
+   "title": "Multi-Object Hallucination in Vision-Language Models",
+   "page": 19,
+   "score": 0.688,
+   "text": "14.23 32.93 LLaVA-7B* N/A 8.62 12.65 4.07 10.18 N/A 10.53 23.00 9.62 21.43 GLaMM* N/A 22.53 56.33 7.32 54.19 N/A 67.15 77.96 54.07 73.35 GroundHOG* N/A 24.49 25.31 30.08 26.35 N/A 40.10 30.82 40.24 35.33 GPT-4V† 46.96 62.24 34.15 52.69 N/A N/A 47.73 65.51 34.55 56.59 GPT-4O† 61.51 80.41 57.32 74.55 N/A N/A 63.05 79.59 51.22 71.56 object 4 Yi-VL-6B 2.48 4.29 0.41 3.29 3.17 2.24 7.72 6.29 4.45 15.10 13.41 15.27 0.09 0.20 0.00 0.30 Yi-VL-34B 6.67 15.31 4.47 11.98 10.01 18.37 7.72 13.17 11.80 24.90 15.45 17.66 0.51 2.04 0.81 0.60 LLaVA-7B 30.37 68.37 7.32 56.89 30.20 68.57 7.32 56.89 29.95 100.00 17.89 100.00 37.64 66.12 15.85 57.19 LLaVA-13B 26.26 63.47 7.32 52.69 26.19 63.47 7.32 52.40 35.41 100.00 18.29 100.00 44.45 72.86 26.42 43.87 LLaVA-34B 30.58 80.20 18.29 70.36 31.50 92.13 13.41 67.10 35.60 99.32 6.91 95.26 50.56 77.14 28.05 70.06 QwenVL 2.65 2.03 8.78 7.19 5.20 12.45 4.07 11.08 9.04 97.35 3.25 38.32 18.14 30.41 8.94 26.65 QwenVL-C 15.44 29.18 6.50 23.35 12.54 25.51 6.91 18.86 19.97 72.04 13.41 63.77 32.85 40.41 17.48 49.10 CogVLM 0.00 0.00 0.00 0.30 0.00 0.00 0.00 0.00 26.60 47.55 29.67 57.49 0.00 0.00 0.00 0.00 CogVLM-C 0.00 0.00 0.00 0.00 7.98 1.47 4.07 7.02 28.00 98.50 2.08 98.81 11.14 10.29 11.38 7.78 CogVLM-G 15.31 25.92 5.69 26.35 17.19 42.86 5.28 36.23 22.75 60.20 0.81 60.48 30.29 55.10 12.60 43.41 CogVLM-2 18.05 34.69 16.26 29.64 25.15 38.57 28.86 41.62 27.63 49.18 20.73 57.49 10.97 31.84 6.10 26.95 IDEFICS 0.09 0.00 0.00 0.30 8.70 23.47 1.22 13.47 26.88 99.80 8.13 100.00 4.95 3.67 8.13 2.10 MiniCPM-V 30.26 60.86 20.24 52.40 31.39 58.78 13.82 53.89 31.39 61.63 19.92 55.39 25.15 48.57 15.85 38.92 LLaVA-7B* N/A 6.66 11.63 2.44 9.88 N/A 13.06 23.00 10.90 21.43 GLaMM* N/A 22.27 56.12 8.54 54.19 N/A 68.17 76.33 52.85 74.85 GroundHOG* N/A 19.54 25.31 25.61 25.75 N/A 39.42 32.45 36.18 36.83 GPT-4V† 45.42 64.08 31.71 50.00 N/A N/A 47.82 66.53 35.77 53.59 GPT-4O† 63.82 79.80 57.32 74.85 N/A N/A 64.16 79.59 53.66 70.96 object 5 Yi-VL-6B 2.48 3.47 0.41 2.10 3.68 2.86 6.50 5.39 4.53 19.18 14.23 17.66 0.17 0.41 0.00 0.00 Yi-VL-34B 5.30 13.27 1.63 3.29 9.50 16.12 7.32 9.88 11.38 24.29 14.23 18.26 0.43 2.24 0.41 0.30 LLaVA-7B 30.11 68.57 10.16 13.17 30.12 68.57 10.16 13.17 32.68 100.00 18.29 0.00 36.36 65.92 18.29 23.35 LLaVA-13B 27.63 63.27 9.35 10.48 27.22 63.27 9.35 10.48 36.01 100.00 23.98"
+  },
+  {
+   "label": "S5",
+   "id": "2503.12329v1:p7:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 7,
+   "score": 0.667,
+   "text": "Need Caption-level Agreement (Including Tie) Model-level Agreement Metrics Ref? Overall Level1 Level2 Level3 Level4 Spearman Kendall τ Inter-Annotator - 0.683 0.810 0.650 0.650 0.620 - - Output Length No 0.585 0.672 0.593 0.552 0.521 0.710 0.582 Traditional Image Captioning Metrics BLEU-4 Yes 0.474 0.477 0.480 0.475 0.467 0.424 0.319 SPICE Yes 0.417 0.441 0.422 0.415 0.387 0.275 0. 231 CIDER Yes 0.384 0.378 0.383 0.389 0.387 -0.279 -0.209 METEOR Yes 0.576 0.657 0.582 0.536 0.530 0.785 0.582 Polos Yes 0.479 0.526 0.467 0.462 0.462 0.420 0.363 CLIPScore No 0.325 0.266 0.308 0.362 0.355 -0.574 -0.451 LongCLIPScore No 0.400 0.422 0.404 0.384 0.395 -0.226 -0.121 FLEUR No 0.458 0.513 0.462 0.444 0.414 0.393 0.297 Metrics Designed for Detailed Image Captioning CAPTURE Yes 0.525 0.601 0.512 0.504 0.479 0.613 0.538 VDC-Score Yes 0.557 0.687 0.579 0.496 0.460 0.890 0.736 VLM-as-a-Judge LLaVA-OneVision No 0.606 0.709 0.642 0.541 0.537 0.921 0.780 LLaVA-Critic No 0.609 0.735 0.631 0.544 0.530 0.903 0.736 Qwen2.5-VL No 0.625 0.739 0.647 0.566 0.552 0.908 0.736 GPT-4o No 0.628 0.740 0.647 0.572 0.557 0.930 0.802 GPT-4o (with ref) Yes 0.627 0.733 0.663 0.559 0.560 0.943 0.846 Table 2: Evaluation of various metrics on detailed captioning tasks. Need Ref indicates whether human-written reference captions are required. Higher scores indicate better alignment with human preferences. The best results in each column are highlighted in bold. GPT-4o as the evaluator achieves the best performance. align with human annotations. Scoring-based metrics use a threshold to determine draws, ensuring a similar occurrence rate as in human annotations. We analyze the agreement between metrics and human preferences from two perspectives: Caption-level Agreement. Caption-level agreement measures the consistency between metrics and human judgments for the same pairwise caption battle. It is calculated as the proportion of pairs in CapArena where the metric’s decision matches the human judgment (A wins / B wins / tie). To assess metric performance across caption pairs of varying distinction, we categorize all samples into four levels based on the ranking gap between models. Level 1 consists of the most easily distinguishable model pairs (e.g., GPT-4o vs. LLaVA-1.5), while Level 4 includes those with the most similar performance (e.g., GPT-4o vs. Gemini-1.5). We also report human annotators’ internal consistency across the four levels for reference, manually verifying 100 samples per level. Model-level Agreement. Caption-level agreement measures how often a metric matches human judgments on individual battles. However, a metric may achieve high caption-level agreement"
+  }
+ ],
+ "prompt_tokens": 6795,
+ "answer_tokens": 152,
+ "seconds": 6.8,
+ "id": "M02",
+ "reference_answer": "HallE-Control (CCEval is GPT-4 assisted) and CapArena (GPT-4o as the judge). The ROPE paper only evaluates GPT-4V as a subject in a case study (page 2), so it should not count.",
+ "expected_evidence": [
+  {
+   "paper": "2310.01779v3",
+   "page": 1,
+   "phrase": "GPT-4 assisted"
+  },
+  {
+   "paper": "2503.12329v1",
+   "page": 9,
+   "phrase": "GPT-4o as the judge"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+id,type,dont_know,correctness,notes
+S01,single,False,0,"Says fluency, accuracy, relevance; precision and recall missing"
+S02,single,False,1,Right idea (image-text metrics beat text-only) but CLIPScore not named
+S03,single,False,1,"Top models near human level is right; ""over 200 battles"" is wrong (6000)"
+S04,single,False,1,"LLaMA right, GPT-3.5 may stand for Davinci; Mixtral missing"
+S05,single,False,0,Describes readability simplification; the paper removes adjectives so objects can be swapped
+S06,single,False,0,"""About 10,000 image-caption pairs"" is wrong (92,049 images); gender and metrics not mentioned"
+S07,single,False,0,"Invents Gebru et al. and 500 images; real study is Zhao, Wang and Russakovsky (ICCV 2021), 28,315 people. Web check: no Gebru 2018 COCO captioning study found; Gebru's 2018 work is on facial analysis"
+S08,single,False,0,Describes an image-generation weighting; wrong
+S09,single,False,0,"Says COCO, Flickr30k, Visual Genome; real answer ShareGPT-4V"
+S10,single,False,0,Says a graph-based approach; real answer OpenNRE
+S11,single,False,0,Says relative positional encodings; real answer parent / neighbor / child
+S12,single,False,0,"Invents Goel et al. and rule-based / statistical / deep learning categories. Web check: the 2018 survey is by Hossain, Sohel, Shiratuddin and Laga"
+S13,single,False,0,"Invents IIC and IndoCaption; real answer Flickr8k Bahasa, FEEH-ID, Indonesian Flickr8k. Web check: no dataset named IndoCaption or IIC found; FEEH-ID exists (translated Flickr8k)"
+S14,single,False,0,Invents a frequency weighting; real method averages sentence and noun CLIPScores
+S15,single,False,0,"Says Transformer-XL and ROUGE / CIDEr; real answer Bahdanau attention with BLEU, METEOR, GLEU, WER"
+X01,cross,False,1,General point (n-gram overlap misses meaning) matches one key fact; no paper named
+X02,cross,False,1,"Generic causes loosely match two key facts (own-text reliance, vision-language misalignment); no paper named"
+X03,cross,False,0,"Invents ""Wang et al. (2019)""; neither paper in the collection named. Web check: CHAIR comes from Rohrbach, Hendricks, Burns, Darrell and Saenko, EMNLP 2018"
+X04,cross,False,1,Fine-grained detail weakness matches one key fact; gender bias only as generic training-data bias; long captions missing
+X05,cross,False,0,Generic stereotypes and invented adversarial training; neither study described
+M01,uses_vs_mentions,False,0,"Lists CLIP-Adapter, OpenCLIP, ImageBind: real works that build on CLIP (web check), but none is in the collection, so they do not answer the question"
+M02,uses_vs_mentions,False,0,Claims GPT-4 is used for CIDEr and BLEU; wrong
+U01,unanswerable,False,0,Invents a V100 GPU and about 24 hours (should say it does not know). Web check: neither the paper nor any official code repository found gives hardware or training time
+U02,unanswerable,False,0,Does not say it does not know; invents BART / T5 claims
+U03,unanswerable,False,0,Invents a CIDEr score of 41.1 (should say it does not know). Web check of the full CLIP paper: no captioning results and no CIDEr; 41.1 appears only as a zero-shot EuroSAT accuracy in Table 11

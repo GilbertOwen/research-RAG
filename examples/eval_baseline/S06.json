@@ -1,0 +1,80 @@
+{
+ "question": "What is the PAO-EvalBias dataset and how large is it?",
+ "time": "2026-10-18T21:18:48",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The PAO-EVALBIAS dataset consists of 92,049 images featuring people with various professions, activities, and objects [S4]. It was constructed using templates to create reference sentences paired with candidate captions containing correct or incorrect genders [S3]. The dataset includes 88 professions, 52 activities, and 39 objects to systematically analyze gender biases in evaluation metrics [S4].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2305.14711v3:p4:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 4,
+   "score": 0.658,
+   "text": "Candidate Captions Reference Caption profession a {gender} who is a/an {profession} a photo of a {gender} who is a/an {profession} activity a {gender} who is {activity} a photo of a {gender} who is {activity} object a {gender} with a/an {object} a photo of a {gender} with a/an {object} Table 1: Caption patterns in PAO-EVALBIAS. The lexicons of profession, activity, and object are presented in Appendix Table 11, 12, and 13. Good and bad candidate captions have the same and different gender with the reference, respectively. gender ∈{man, woman}, profession, activity, object ∈{lexicons from Tables 11, 12, and 13}. For the pair (woman, reading), the reference is “a photo of a woman who is reading” and the good caption is “a woman who is reading” which is used to retrieve suitable images. The bad caption will be “a man who is reading.” where G denotes a gender group, C denotes a concept, N denotes the total number of examples for the specific concept of the gender, S denotes the scoring function, cgood/bad denotes the good/bad (candidate) caption, r denotes the reference sentences set, and I denotes the corresponding image. For text-only evaluation metrics (e.g., BLEU-4, METEOR, ROUGE, CIDEr, and SPICE), the scoring function takes candidate and reference sentences. For image-text evaluation metrics (e.g., CLIPScore), the scoring function takes the candidate sentences and corresponding images. A bias is present if there are significant (p < 0.05 with bootstrap resampling) differences in the accuracy of the evaluation metric between different groups. We define this as the bias of the model for a specific concept. Thus, a concept is considered: • woman-biased: if the accuracy for woman examples is significantly higher than that for man examples, i.e., Accwoman, concpet ≫Accman, concpet; (2) • man-biased: if the accuracy for man examples is significantly higher than that for woman examples, i.e., Accman, concpet ≫Accwoman, concpet, (3) where ≫represents the result on the left is significantly (p < 0.05 with bootstrap resampling) higher than the right. Biases Revealed by PAO-EVALBIAS. As shown in Table 2,3 51.76%, 61.54%, and 51.28% of the lexicons are significantly biased (p < 0.05 with bootstrap resampling) under CLIPScore evaluation within profession, activity, and object, respectively. The lexical overlaps between candidate and reference captions ensure the n-gram evaluation metrics do not reveal any gender bias, that 3A detailed discussion about the dataset robustness can be found in Appendix A. N-Gram Metrics CLIPScore CLIPScore+CIDEr"
+  },
+  {
+   "label": "S2",
+   "id": "2305.14711v3:p3:c1",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 3,
+   "score": 0.648,
+   "text": "and object concept are listed in Appendix Tables 11, 12, and 13. We observe that most concepts contain over 150 images, ensuring that our analysis results are reliable and we believe it can be a valuable resource for future research. Figure 2 shows six examples from PAO-EVALBIAS. 2.2 Evaluation Metrics Performance Analysis We then evaluate five n-gram matching-based evaluation metrics (BLEU-4, METEOR, ROUGE, CIDEr, and SPICE) and one model-based metric (CLIPScore) on the PAO-EVALBIAS dataset, where CLIPScore uses the CLIP model (Radford et al., 2021) to compute the image-caption similarity and treat it as the evaluation score. These metrics are commonly used in image-captioning tasks evaluation as they showed a good correlation with human judgments. Gender Bias Definition. To measure the gender bias present in these evaluation metrics, we calculate the performance discrepancy between different protected groups (men and women). More specifically, we first compute the evaluation metrics scores for good and bad captions for every image in the dataset and then measure the average accuracy of each metric in differentiating good and bad captions of each gender per concept: AccG,C = 1 N N X i=1 1[S(cgood i , ri, Ii) > S(cbad i , ri, Ii)], (1)"
+  },
+  {
+   "label": "S3",
+   "id": "2305.14711v3:p2:c1",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 2,
+   "score": 0.633,
+   "text": "Evaluation Metrics We aim to identify and quantify potential gender biases in evaluation metrics for language generation models. To do this, we first gather a dataset in Section 2.1. Then, we formally define gender biases and conduct a comprehensive analysis of image captioning evaluation metrics on our dataset in Section 2.2. 2.1 Dataset Construction Using the lexicons created by previous work (Cho et al., 2022; Bansal et al., 2022; Zhang et al., 2022), we collect images of people with various professions, activities, and objects (PAO-EVALBIAS).2 For each concept in the lexicons, we use templates to construct one reference as well as two candidates containing the correct and incorrect gender, denoted as the good and bad captions respectively. The specific caption patterns are described in Table 1. Our approach involves pairing a gender from protected groups (man or woman) with a concept in professions, activities, or objects. As shown in Figure 1, for the pair (woman, reading), we have the reference “a photo of a woman who is reading”, and use the good caption “a woman who is reading” to obtain suitable images via image retrieval. Meanwhile, the bad caption is “a man who is reading.” Specifically, we retrieve images from the web using Bing, Google Image Search, and Pexels API with good captions. 250 images for each gender and concept pair were retrieved and irrelevant images were manually filtered following the criteria discussed later. We carefully follow the Creative Common license and gather images without watermark protection, sourced from image collection websites instead of social media, and used noncommercially. Besides, we integrate the VL-Bias dataset from Zhang et al. (2022) to enrich our data collection, 2The data described here was accessed, collected, and used only by the co-authors at UCLA."
+  },
+  {
+   "label": "S4",
+   "id": "2305.14711v3:p2:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 2,
+   "score": 0.628,
+   "text": "is a potential risk of further amplifying these biases in the models. There are a few prior works that have pointed out issues regarding languageonly evaluation metrics (Hanna and Bojar, 2021; Pu et al., 2021). Regarding fairness, Sun et al. (2022) constructed a dataset based on WinoBias (Zhao et al., 2018) and systematically investigated different metrics. However, they focus on synthetic model generations and failed to analyze the implications and harm of biased metrics in real-world scenarios. As a results, it is hard to draw insights from their works in terms of practical applications. Moreover, they leave out studies of biases encoded in cross-modal evaluation metrics such as CLIPScore. As we see an increase in the variety of multimodal generation tasks such as image captioning and multimodal summarization (Liu et al., 2023; Zhu et al., 2023), it is crucial to evaluate the cross-modal metrics specifically designed for these tasks. In this paper, we perform a systematic study of gender biases in cross-modal generation evaluation metrics using image captioning tasks. Following previous research (Hendricks et al., 2018), we classify gender expression instead of biological sex or gender identity. We limit our analysis to two genders (man and woman) in this study, but it is important to note that gender is non-binary. We acknowledge this limitation and refer readers to the ethics statement section for a more in-depth discussion on this topic. For the study, we first collect a large-scale dataset, PAO-EVALBIAS, consisting of 92,049 images of people of 88 professions, in 52 activities, and with 39 objects. Figure 1 provides an image-caption pair example from the dataset. Then, we use the proposed dataset to analyze potential gender biases in automatic evaluation metrics, and how biased evaluation metrics can affect generation models through reinforcement learning. We also propose a simple method that combines model-based and n-gram matching-based evaluation metrics to reduce gender biases, while maintaining high correlations with human judgments for generation quality. The highlights of our findings include: • Pretrained model-based evaluation metrics cannot distinguish between biased and unbiased outputs, underperforming the statistical metrics in this regard; • The biases encoded in the model-based metrics can be propagated to image captioning models through reinforcement learning; • A simple and effective hybrid similarity evaluation metric by linearly combining n-gram matching-based and pretrained model-based metrics, which can effectively reduce gender biases, while maintaining a strong correlation with human judgments. 2 Bias Evaluation for"
+  },
+  {
+   "label": "S5",
+   "id": "2305.14711v3:p9:c1",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 9,
+   "score": 0.6,
+   "text": "correlation with human judgments than existing metrics. In the future, we plan to expand our analysis to include other protected attributes such as race and ethnicity, as well as other language generation tasks. Additionally, we aim to continue developing more effective methods for removing bias from generation evaluation metrics. Limitations We only consider two genders (man and woman) in our paper and classify gender expression (i.e., how individuals express their identity through clothing, hair length, mannerisms, and makeup) instead of biological sex or gender identity (i.e., how individuals experience their own gender (Dev et al., 2021)) in our setting, while it is important to note that gender is non-binary and a detailed discussion can be found in the ethics statement section. Also, we mainly focus on gender biases in our paper, but there are other types of biases such as racial and religious biases, where equal representation is desired. In addition, we only experiment with the image captioning task, while other multimodal generation tasks are worth investigating as well. Ethics Statement Our research aims to investigate the gender biases present in image captioning evaluation metrics using the PAO-EVALBIAS dataset. We focus on selected concepts such as profession, activity, and object within the gender axis, although other categories such as racism also require equal representation. Our goal is to assist practitioners and the community in evaluating existing model-based evaluation metrics from different perspectives. We are aware that gender is a complex and multi-faceted concept and although there are many different groups within gender, in this study we limit our analysis to classifying individuals as either “man” or “woman” based on their gender expression, which refers to how individuals express their identity through clothing, hair length, mannerisms, and makeup. We make a conscious decision not to evaluate an individual’s gender identity or biological sex as it is not possible to infer this in-"
+  }
+ ],
+ "prompt_tokens": 2463,
+ "answer_tokens": 85,
+ "seconds": 3.5,
+ "id": "S06",
+ "reference_answer": "A dataset for studying gender bias in caption metrics: 92,049 images of people across 88 professions, 52 activities and 39 objects.",
+ "expected_evidence": [
+  {
+   "paper": "2305.14711v3",
+   "page": 2,
+   "phrase": "92,049"
+  }
+ ]
+}

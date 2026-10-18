@@ -1,0 +1,80 @@
+{
+ "question": "Into which three categories does the 2018 deep learning captioning survey divide captioning methods, and which one does it focus on?",
+ "time": "2026-10-18T21:19:10",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The 2018 survey divides captioning methods into template-based, retrieval-based, and novel image caption generation [S3]. It focuses specifically on novel caption generation using deep learning [S3]. The other two categories are considered less flexible because they rely on existing captions or hard-coded structures [S5].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   3,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "1810.04020v2:p29:c0",
+   "title": "A Comprehensive Survey of Deep Learning for Image Captioning",
+   "page": 29,
+   "score": 0.761,
+   "text": "A Comprehensive Survey of Deep Learning for Image Captioning 0:29 good for small sentence evaluation. ROUGE has different types and they can be used for evaluating different types of texts. METEOR can perform an evaluation on various segments of a caption. SPICE is better in understanding semantic details of captions compared to other evaluation metrics. Although success has been achieved in recent years, there is still a large scope for improvement. Generation based methods can generate novel captions for every image. However, these methods fail to detect prominent objects and attributes and their relationships to some extent in generating accurate and multiple captions. In addition to this, the accuracy of the generated captions largely depends on syntactically correct and diverse captions which in turn rely on powerful and sophisticated language generation model. Existing methods show their performances on the datasets where images are collected from the same domain. Therefore, working on open domain dataset will be an interesting avenue for research in this area. Image-based factual descriptions are not enough to generate high-quality captions. External knowledge can be added in order to generate attractive image captions. Supervised learning needs a large amount of labelled data for training. Therefore, unsupervised learning and reinforcement learning will be more popular in future in image captioning. 7 CONCLUSIONS In this paper, we have reviewed deep learning-based image captioning methods. We have given a taxonomy of image captioning techniques, shown generic block diagram of the major groups and highlighted their pros and cons. We discussed different evaluation metrics and datasets with their strengths and weaknesses. A brief summary of experimental results is also given. We briefly outlined potential research directions in this area. Although deep learning-based image captioning methods have achieved a remarkable progress in recent years, a robust image captioning method that is able to generate high quality captions for nearly all images is yet to be achieved. With the advent of novel deep learning network architectures, automatic image captioning will remain an active research area for some time. ACKNOWLEDGEMENTS This work was partially supported by an Australian Research Council grant DE120102960."
+  },
+  {
+   "label": "S2",
+   "id": "2506.05399v1:p3:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 3,
+   "score": 0.758,
+   "text": "self-driving cars [19], CCTV footage analysis [20], improving image search accuracy [21], and enhanced facial recognition systems [22]. 1.2. Contribution and scope Several survey articles have been published on the subject of image captioning. Although these surveys provided a good overview of the literature on image captioning, they did not cover publications discussing image captioning techniques for various languages. In addition, new deep-learning studies have been published since the survey papers were written. The key contributions of this survey are: (a) providing a comprehensive review of the current state of image captioning for various languages, specifically attention-based models, (b) discussing the detailed design of transformer models with different attention mechanisms, and (c) addressing ongoing challenges and highlighting potential future directions for the field. To highlight the unique contributions of this survey, Table 1 compares our study with previous ones on attention-based image captioning. Unlike prior reviews, this survey extensively covers multilingual models, a broader dataset range, and an in-depth evaluation of current challenges and future directions. 1.3. Search criteria The survey included papers published between 2018 and 2024. A keyword search was conducted on Google Scholar using the following terms: image captioning, image description, image text generation, transformer-based image captioning, and attention-based image captioning. Google Scholar was chosen to avoid bias towards any specific publisher [30]. The survey covers articles on image captioning in multiple languages, including, but not limited to, English, Arabic, Vietnamese, Myanmar, and Indonesian. 1.4. Survey structure This paper is organized as follows: Section 2 provides an overview of related surveys in image captioning, summarizes them, and discusses their foundations. Section 3 discusses the methods employed in image captioning models. Section 4 describes relevant research in image captioning, classifying them into five categories: handcrafted approaches, deep learning for image captioning, transformer-based approaches, attention-based approaches, and graph-based representation. Section 5 discusses the datasets. Section 6 introduces the evaluation metrics used to assess the quality and performance of generated captions. Limitations and challenges are summarized in Section 7, and finally, conclusions and future directions are presented in Section 8. Fig. 15 illustrates the structure of this survey. 2. Overview of Recent Surveys Several recent papers have used deep learning techniques to create captions for images. This section presents a summary and analysis of relevant surveys in image captioning. 2.1. Attentive deep learning models A literature survey by [31] demonstrated that bottom-up attention models, which combine multi-head attention, yield the"
+  },
+  {
+   "label": "S3",
+   "id": "1810.04020v2:p2:c1",
+   "title": "A Comprehensive Survey of Deep Learning for Image Captioning",
+   "page": 2,
+   "score": 0.756,
+   "text": "area. To provide an abridged version of the literature, we present a survey mainly focusing on the deep learning-based papers on image captioning. The main aim of this paper is to provide a comprehensive survey of deep learning for image captioning. First, we group the existing image captioning articles into three main categories: (1) Template-based Image captioning, (2) Retrieval-based image captioning, and (3) Novel image caption generation. The categories are discussed briefly in Section 2. Most deep learning based image captioning methods fall into the category of novel caption generation. Therefore, we focus only on novel caption generation with deep learning. Second, we group the deep learning-based image captioning methods into different categories namely (1) Visual space-based, (2) Multimodal space-based, (3) Supervised learning, (4) Other deep learning, (5) Dense captioning, (6) Whole scenebased, (7) Encoder-Decoder Architecture-based, (8) Compositional Architecture-based, (9) LSTM (Long Short-Term Memory) [54] language model-based, (10) Others language model-based, (11) Attention-Based, (12) Semantic concept-based, (13) Stylized captions, and (12) Novel object-based image captioning. We discuss all the categories in Section 3. We provide an overview of the datasets and commonly used evaluation metrics for measuring the quality of image captions in Section 4. We also discuss and compare the results of different methods in Section 5. Finally, we give a brief discussion and future research directions in Section 6 and then a conclusion in Section 7. ACM Computing Surveys, Vol. 0, No. 0, Article 0. Acceptance Date: October 2018."
+  },
+  {
+   "label": "S4",
+   "id": "2506.05399v1:p4:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 4,
+   "score": 0.754,
+   "text": "Table 1: Comparison of this survey with existing reviews on attention-based image captioning Survey Year Focus Attention- Based Models Multilingual Coverage Datasets Reviewed Evaluation Metrics [23] 2019 Comparative study of deep learning models ! % Limited (MS, COCO, Flicker8k) BLEU, METEOR [24] 2021 Transformer-based models ! % Largescale datasets CIDEr, SPICE [25] 2022 Vision-language models ! % MS COCO, Flickr30k Multiple metrics [26] 2022 Review of datasets and metrics ! % Extensive dataset coverage Detailed metric analysis [27] 2021 Attentive deep learning models for IC ! % MSCOCO B4, METEOR, CIDER and SPICE [28] 2024 Graph types used in 2D image understanding approaches ! % A summary of common datasets A summary of performance metrics [29] 2023 Medical image captioning ! % Common data set of medical IC Multiple metrics This Survey 2025 Comprehensive review of attention-based models, multilingual coverage ! !(English, Arabic. Vietnamese, etc.) Extensive dataset coverage Detailed metric analysis and outlining potential future possibilities. In addition, a systematic review of the literature (SLR) summarized advances in image captioning [36]. The primary objective of this research was to summarize the findings from recent papers and to describe the most popular methods and challenging problems in image captioning. The survey [37] explores the challenges and advancements in image captioning. The frameworks traditionally relied on a two-step pipeline, where visual features were extracted before being processed into natural language descriptions. However, with the emergence of sequential deep learning models, such as Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM) networks, and Gated Recurrent Units (GRUs), the efficiency and accuracy of caption generation have improved significantly. The paper provides a review of the modeling architectures used, and highlights key research challenges. 2.4. Taxonomy of visual encoding and language modeling techniques The purpose of the [26] study is to present a thorough review of image captioning techniques. The researcher created a taxonomy of visual encoding and language modeling techniques, emphasizing their essential features and restrictions. A comprehensive survey was presented in [2]. This survey report provided an analysis of current deep learning-based image captioning methods, and a taxonomy of image captioning methods was provided. This study concluded that although deep learning-based image captioning techniques have made significant strides in recent years, a reliable technique still needs to be developed. The survey by [28] examines the role of graph neural networks (GNNs) in 2D image understanding, a challenging problem in computer vision that aims to achieve human-level scene comprehension. Graphs are widely used in 2D image under-"
+  },
+  {
+   "label": "S5",
+   "id": "2506.05399v1:p2:c0",
+   "title": "Attention-based transformer models for image captioning across languages: An in-depth survey and evaluation",
+   "page": 2,
+   "score": 0.734,
+   "text": "Figure 1: A general architecture for image captioning models. are limited. In retrieval-based systems, captions are retrieved from a set of existing captions. This approach has the advantage of generating generic and syntactically correct captions. However, it may not produce semantically accurate captions specific to the image. Both template-based and retrieval-based approaches are not flexible enough, as they rely on existing captions in the training set or hard-coded language structures [2]. Given the challenges of using template-based and retrieval-based approaches, a third approach based on deep learning has been introduced. This approach follows recent developments in deep neural networks, widely used in computer vision and natural language processing. Deep neural networks can provide effective solutions for visual and language modeling [6]. As a result, they have been used to improve existing systems and create many innovative approaches [1]. Before significant advances in deep learning methods, image captioning was done mainly using traditional machine learning-based techniques, which included feature extraction methods like Scale-Invariant Feature Transform (SIFT), Local Binary Patterns (LBP), and Histogram of Oriented Gradients (HOG) [8, 9]. A classifier was then used to classify the items after feature extraction. However, traditional approaches are less preferred than deep learning-based methods, which automatically learn features due to the complexity of feature extraction from massive amounts of data [7]. Numerous recent publications have focused on applying deep machine learning to caption images [2]. Deep learning algorithms are effective at handling the complexities of image captioning. This survey offers a comprehensive analysis of transformer models and attention mechanisms in image captioning, providing a current overview of the relevant literature. The discussion is structured around the following research questions. a) RQ1: What are the recent advancements and current sta- tus of image captioning models, particularly attention-based and transformer-based models? b) RQ2: How have transformer-based models advanced image captioning across different languages, and what challenges and limitations do these models face? c) RQ3: How is image captioning applied across various do- mains, and what key evaluation metrics are used to assess the quality of generated captions? d) RQ4: What are the key conclusions from recent surveys on image captioning, and how do they guide future research directions? 1.1. Application of image captioning Research in image captioning has gained significant importance across various fields. With its broad applicability and growing technological advancements, image captioning drives innovation across numerous domains in multiple real-world applications, offering significant benefits to"
+  }
+ ],
+ "prompt_tokens": 2699,
+ "answer_tokens": 64,
+ "seconds": 3.5,
+ "id": "S12",
+ "reference_answer": "Template-based, retrieval-based and novel caption generation; it focuses on novel caption generation with deep learning.",
+ "expected_evidence": [
+  {
+   "paper": "1810.04020v2",
+   "page": 2,
+   "phrase": "Template-based"
+  }
+ ]
+}

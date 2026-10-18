@@ -1,0 +1,82 @@
+{
+ "question": "Which open relation extraction method does the Focus! news captioning paper use?",
+ "time": "2026-10-18T21:19:03",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "The Focus! news captioning paper uses the OpenNRE method for open relation extraction [S1]. This method is employed to detect relations between named entities after visually grounded entities are retrieved via CLIP. The extracted relations help capture non-visually grounded entities like time and miscellaneous information [S1].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1
+  ],
+  "invalid": [],
+  "uncited_sentences": [
+   "The Focus!",
+   "This method is employed to detect relations between named entities after visually grounded entities are retrieved via CLIP."
+  ],
+  "ok": false
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2212.00843v1:p5:c0",
+   "title": "Focus! Relevant and Sufficient Context Selection for News Image Captioning",
+   "page": 5,
+   "score": 0.667,
+   "text": "sentences from the entire news article that are semantically close to the image. Our approach is to leverage a large pre-trained cross-modal retrieval model CLIP (Radford et al., 2021) trained on over 400 million image-text pairs from the Internet. The sentence relevance is measured by the cosine similarity with the image in the learned embedding space of CLIP. As there is a large domain discrepancy between news sentences and the training data of CLIP, we first need to fine-tune CLIP on the news image captioning dataset. The CLIP model is fine-tuned with a contrastive loss to distinguish the positive image-sentence pairs from the negative pairs. For the positive sentences we use the news image captions since there are no labels for which news article sentences are relevant to each image, and the writing style of the captions is close to that of the article sentences. Besides using captions describing other images as negative samples, we also define hard negatives as news article sentences that do not cover any non-stop words in the news caption. During image captioning, we use the trained CLIP model to rank news sentences against the image and pick the top 2 as the most relevant sentences. The visually grounded named entities are then retrieved as the WHO and WHERE entities contained in the retrieved relevant sentences. If the top 2 retrieved sentences do not contain any visually grounded entity, we keep searching the rest of the retrieved sentences descending by similarity score to the news image until at least a visually grounded entity is captured. Non-visually Grounded Named Entities Retrieval We define the named entities belonging to the rest of the categories: WHEN and MISC as non-visually grounded name entities. Such entities are not semantically related to the image and are more challenging to localize via cross-modal retrieval. However, they are often related to the visually grounded named entities in the news text. For example, in the sentence Ali Kashani-Rafye, started selling bastani (Persian for ice cream) in 1980 at his grocery., the TIME entity 1980 is associated with the person’s name Ali Kashani-Rafye with the action selling bastani. The task of extracting such relations between named entities is known as open relation extraction. We leverage an open relation extraction method OpenNRE (Han et al., 2019) to detect all the relations between each pair of named entities in every sentence of the news. We filter out"
+  },
+  {
+   "label": "S2",
+   "id": "2212.00843v1:p3:c1",
+   "title": "Focus! Relevant and Sufficient Context Selection for News Image Captioning",
+   "page": 3,
+   "score": 0.653,
+   "text": "(Vedantam et al., 2015) to measure the similarity between the generated caption and the referenced ground-truth captions. Among the three metrics, CIDEr is the most suitable one for news image captioning evaluation as it focuses more on unusual words generation. In addition, we evaluate the precision and recall on named entities to verify whether the key information is covered in the generated caption. Specifically, we check the exact string matches between the named entities detected in both the ground truth captions and the generated captions using SpaCy 1. 3.4 Oracle Optimal Context Selection We construct the key local context for a given im- age, assuming access to its ground truth caption. Given a set of named entities present in the caption, we define the key local context as the set of sentences (or paragraphs) that contain these named entities The selected sentences (paragraphs) are concatenated following the original order in the news article. We specifically compare the key information at both the sentence-level and paragraphlevel to measure the impact of the different degrees 1https://spacy.io/"
+  },
+  {
+   "label": "S3",
+   "id": "2212.00843v1:p1:c0",
+   "title": "Focus! Relevant and Sufficient Context Selection for News Image Captioning",
+   "page": 1,
+   "score": 0.646,
+   "text": "Focus! Relevant and Sufficient Context Selection for News Image Captioning Mingyang Zhou1 Grace Luo3 Anna Rohrbach3 Zhou Yu2 1University of California, Davis 2 Columbia University 3University of California, Berkeley minzhou@ucdavis.edu, zy2461@columbia.edu, {graceluo, anna.rohrbach}@berkeley.edu Abstract News Image Captioning requires describing an image by leveraging additional context from a news article. Previous works only coarsely leverage the article to extract the necessary context, which makes it challenging for models to identify relevant events and named entities. In our paper, we first demonstrate that by combining more fine-grained context that captures the key named entities (obtained via an oracle) and the global context that summarizes the news, we can dramatically improve the model’s ability to generate accurate news captions. This begs the question, how to automatically extract such key entities from an image? We propose to use the pre-trained vision and language retrieval model CLIP to localize the visually grounded entities in the news article and then capture the non-visual entities via an open relation extraction model. Our experiments demonstrate that by simply selecting a better context from the article, we can significantly improve the performance of existing models and achieve new state-of-the-art performance on multiple benchmarks. 1 Introduction News Image Captioning is an extension of the standard image captioning task, where, besides the image, one needs to leverage longer context in the form of the news article. This is important in order to capture the global news story context to properly discuss the image. At the same time, the specific entities (e.g. people) in the image are also often referenced in the article. Coincidentally, generating the named entities (names, locations, dates, etc), is one of the most critical challenges in news image captioning. We analyze the captions and the corresponding articles on three popular benchmarks, GoodNews (Biten et al., 2019), NY800KTimes (Tran et al., 2020), VisualNews (Liu et al., 2020), and find that 58.7% – 74.5% of the named entities present in captions also appear in the articles. This shows that the key information of a news caption, namely the named entities, can often be directly derived from the associated news article. However, due to the length and abundance of other information in the full articles, it is challenging to uncover the key entities. Inspired by this, we explore how to select relevant yet sufficient context from the news article to assist with the news image caption generation. To analyze what the"
+  },
+  {
+   "label": "S4",
+   "id": "2212.00843v1:p1:c1",
+   "title": "Focus! Relevant and Sufficient Context Selection for News Image Captioning",
+   "page": 1,
+   "score": 0.636,
+   "text": "right type of context is, we start with an oracle-based study where we demonstrate that combining key local context and global context leads to the best result. Next, we move to designing a multimodal retrieval method to handle automatic extraction of key local context (key named entities). Our method consists of two stages, first we retrieve the visually grounded entities, then we discover the non-visual ones via open relation extraction. Figure 1 illustrates our approach. Our full method outperforms the vanilla baseline on three benchmarks, and achieves the new state-ofthe-art results on two of them. 2 Related Work Automatic image captioning has achieved tremendous success over the past few years, where many methods(Xu et al., 2015; Johnson et al., 2016; Karpathy and Fei-Fei, 2017) are developed to accurately describe the visual objects and their relationships in the image. Recently, news image captioning has started to get increased attention with the focus on producing narration of news images with richer human-like information derived from the news article. The research on news image captioning is inspired by several recently collected benchmark datasets including BreakingNews (Ramisa et al., 2018), GoodNews (Biten et al., 2019), NY800KTimes (Tran et al., 2020), and VisualNews (Liu et al., 2020). Earlier works such as Ramisa et al. (2018) and Biten et al. (2019) propose a two-stage pipeline, where they first generate tem-"
+  },
+  {
+   "label": "S5",
+   "id": "2107.14178v2:p1:c2",
+   "title": "ReFormer: The Relational Transformer for Image Captioning",
+   "page": 1,
+   "score": 0.634,
+   "text": "cannot extract the relations between objects but relying on other pre-trained models to do it, which makes the captioning less explainable. As another observation, recent studies [1, 5, 9, 11, 34] have pointed out that good metric scores can be achieved with a strong decoder, without the need of underlying encoder to truly understand the visual content. Thus, it becomes less likely to determine if the models are really learning some important relationships through the encoder or they just follow some language rules by the decoder. To be more concrete, for a generated sentence like ‘a man is riding a bike’, can the model really tell the difference among ‘riding’, ‘rolling’ or ‘on’ or it just follows some language expression rules (i.e., ‘riding’ is more commonly used than ‘rolling’ and ‘on’)?"
+  }
+ ],
+ "prompt_tokens": 2001,
+ "answer_tokens": 61,
+ "seconds": 3.0,
+ "id": "S10",
+ "reference_answer": "OpenNRE (Han et al., 2019), to find relations between pairs of named entities in the article.",
+ "expected_evidence": [
+  {
+   "paper": "2212.00843v1",
+   "page": 5,
+   "phrase": "OpenNRE"
+  }
+ ]
+}

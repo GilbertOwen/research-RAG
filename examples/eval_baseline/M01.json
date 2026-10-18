@@ -1,0 +1,92 @@
+{
+ "question": "Which papers use CLIP as part of their own proposed method, rather than only citing or evaluating it?",
+ "time": "2026-10-18T21:19:47",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "Based on the provided sources, **SPECS** [S1, S4] modifies CLIP with a new objective to create its proposed specificity-enhanced metric. Additionally, **Gender Biases in Automatic Evaluation Metrics for Image Captioning** [S2] proposes a hybrid method that combines CLIPScore (derived from CLIP) with CIDEr. Other papers like NegCLIP [S1] and TripletCLIP [S3] are mentioned as examples of CLIP modifications, but the source text does not provide details on their specific methods beyond naming them.",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2509.03897v2:p2:c1",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 2,
+   "score": 0.751,
+   "text": "et al., 2021) and PACScore (Sarto et al., 2023) build on pre-trained vision–language models such as CLIP (Radford et al., 2021), assessing captions through representational similarity between images and their captions. More recently, large language models (LLMs) have been used as evaluators by prompting them to score alignment between captions and images: FaithScore (Jing et al., 2023) extracts atomic facts from captions using an MLLM and verifying each fact against the image to measure faithfulness. CLAIR (Chan et al., 2023) leverages LLMs in a zero-shot setting to score captions and explain their judgments, GPT4-Eval (Liu et al., 2023) is evaluated by prompting GPT-4 to judge multimodal responses, with performance measured by relative quality scores. RLAIF-V (Yu et al., 2024) evaluates captions by prompting open-source MLLMs to verify decomposed claims and score hallucination reduction. FLEUR (Lee et al., 2024) prompts an open-source MLLM to directly compare an image with a candidate caption in a reference-free setting, producing both a numerical score and a natural-language rationale to align evaluation with human judgments. CAPTURE (Dong et al., 2024) evaluates captions by extracting and matching fine-grained visual details. DCScore (Ye et al., 2025) evaluates captions by decomposing them into primitive information units and measuring their accuracy and coverage using GPT-4. These LLM-based methods show strong performance but remain prohibitively expensive and mostly closed-source. CLIP-based adaptations Metrics based on representational similarity carry promise as they operate on the level of semantics rather than surface, and they are less costly than LLMs. However, CLIP, the common choice for base model in such metrics, is not suitable for long caption evaluation for two key reasons: it lacks compositionality and it can only take up to 77 subword tokens. To address these limitations, a line of research has modified CLIP in various ways. NegCLIP (Yuksekgonul et al., 2022) is the first work to address composi-"
+  },
+  {
+   "label": "S2",
+   "id": "2305.14711v3:p8:c0",
+   "title": "Gender Biases in Automatic Evaluation Metrics for Image Captioning",
+   "page": 8,
+   "score": 0.714,
+   "text": "viate gender biases. Motivated by this, we investigate if adding CLIPScore and CIDEr together without normalization for model evaluation (denoted as CLIPScore+CIDEr) can harness the benefits of both model-based and n-gram matching-based evaluation metrics, which has demonstrated effective in other tasks (Wan and Bansal, 2022; Huang et al., 2023). Formally, we obtain the new evaluation score with H(ci, ri, Ii) = CLIPScore(ci, Ii) + CIDEr(ci, ri), (4) where ci denotes the candidate caption, ri denotes the reference sentences set, and Ii denotes the corresponding image. We mainly focus on CIDEr because it is a commonly used n-gram matching-based metric in image captioning tasks although our method is compatible with other n-gram matching-based metrics as well. We assign equal weights to both of the metrics for simplicity, while a more sophiscated weighting strategy can potentially improve the model performance but add complexity, which we leave as a future direction. 4.1 Bias Evaluation In this part, we experiment with the hybrid metric following the setting in Section 2.2. Table 2 shows that CLIPScore+CIDEr does not encode gender biases on the PAO-EVALBIAS dataset, suggesting this method can successfully reduce the metric bias. We include several examples in Appendix B with CLIPScore and CIDEr score breakdowns to demonstrate the idea of combining these two metrics. Moreover, we evaluate the human correlations of each evaluation metric on Flickr8K-Expert (Hodosh et al., 2015) and as present in Table 7, CLIPScore+CIDEr achieves an improved correlation with human judgments compared to CLIPScore and CIDEr, indicating that it can maintain its capability of model evaluation. Our success with CLIPScore+CIDEr shows our method is compatible with any other statistical metrics. That say, we also test CLIPScore+BLEU4 and CLIPScore+SPICE, resulting in 51.260 and 55.051 τc, respectively, which further strengthens our argument. To conclude, our proposed metric emphasizes the synergistic fusion of two metrics with complementary strengths. While CLIPScore excels at capturing vision-language alignment, it tends to biased models due to inherent gender biases in its encoding. Conversely, CIDEr adheres to unbiased reference captions, albeit limited to surface-level comparisons. Combining these two metrics, our τc BLEU-4 30.776 METEOR 41.822 ROUGE 32.314 CIDEr 43.891 SPICE 44.888 CLIPScore 51.482 CLIPScore+BLEU-4 51.260 CLIPScore+CIDEr 53.768 CLIPScore+SPICE 55.051 Table 7: Correlations (measured with τc) with human judgment on Flickr8K-Expert. Combining CLIPScore with CIDEr or SPICE can improve the correlation over both n-gram matching-based evaluation metrics and CLIPScore. method presents a comprehensive evaluation framework containing visual relevance and"
+  },
+  {
+   "label": "S3",
+   "id": "2509.03897v2:p12:c0",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 12,
+   "score": 0.713,
+   "text": "Overall, we observe that models like NegCLIP and TripletCLIP maintain relatively strong performance across both ITT and TOT settings, while our SPEC model, although competitive in overall specificity evaluation, exhibits lower compositional generalization performance. This is consistent with earlier analysis in Section 5, and supports the claim that specificity-oriented fine-tuning does not necessarily improve compositional reasoning. C Short Caption Human Correlation To explore whether a unified evaluation model could perform well across both short and long captions, we evaluated SPECS and CLIP on datasets dominated by shorter captions on short caption datasets. As shown in Table 6, CLIP consistently achieves higher correlation with human judgments across all datasets and metrics. This suggests that while SPECS is optimized for longer, detail-rich captions, it underperforms in short-caption settings. Our results indicate a clear trade-off, and confirm that a single model cannot simultaneously achieve optimal performance across all caption lengths. Metric PCC ρ ↑ 1 - R2 ↓ Kd τ ↑ Sp τ ↑ COCO Correctness CLIP 0.6384 2.45 0.4987 0.6226 SPECS 0.3838 6.78 0.2952 0.4092 COCO Throughness CLIP 0.5785 2.98 0.4458 0.5790 SPECS 0.3645 7.53 0.2784 0.3989 Flickr8k Correctness CLIP 0.5328 3.52 0.4102 0.5422 SPECS 0.1228 66.7 0.1139 0.1451 Flickr8k Throughness CLIP 0.5012 4.00 0.3790 0.5421 SPECS 0.1995 25.12 0.1550 0.2193 Flickr30k Correctness CLIP 0.6071 2.71 0.4553 0.6219 SPECS 0.2299 18.9 0.1709 0.3058 Flickr30k Throughness CLIP 0.5352 3.49 0.4026 0.5805 SPECS 0.2230 20.12 0.1641 0.2769 Table 6: Human correlation in various short capiton datasets(COCO, Flickr8k, Flickr30k). D Model Code Names We provide the exact model code names used in our experiments to ensure reproducibility: • CLIP: openai/clip-vit-base-patch32 • LongCLIP: BeichenZhang/LongCLIP-B • SPECS: Xiaohud/SPECS • FaithScore: llama2/llama-2-7b-hf • CLAIR: Claude Instant • GPT-4 Eval: gpt-4-0613 • RLAIF-V: llava-hf/llava-v1.6-7b-hf • CAPTURE: OpenGVLab/InternVL2_5-8B • FLEUR: llava-hf/llava-v1.6-13b-hf • DCSCORE: gpt-4o-2024-08-06"
+  },
+  {
+   "label": "S4",
+   "id": "2509.03897v2:p1:c0",
+   "title": "SPECS: Specificity-Enhanced CLIP-Score for Long Image Caption Evaluation",
+   "page": 1,
+   "score": 0.711,
+   "text": "SPECS: Specificity-Enhanced CLIPScore for Long Image Caption Evaluation Xiaofu Chen1 Israfel Salazar2 Yova Kementchedjhieva1 1MBZUAI 2University of Copenhagen {xiaofu.chen, yova.kementchedjhieva}@mbzuai.ac.ae israfel.salazar@di.ku.dk Abstract As interest grows in generating long, detailed image captions, standard evaluation metrics become increasingly unreliable. N-gram-based metrics though efficient, fail to capture semantic correctness. Representational Similarity (RS) metrics, designed to address this, initially saw limited use due to high computational costs, while today, despite advances in hardware, they remain unpopular due to low correlation to human judgments. Meanwhile, metrics based on large language models (LLMs) show strong correlation with human judgments, but remain too expensive for iterative use during model development. We introduce SPECS (Specificity-Enhanced CLIP-Score), a reference-free RS metric tailored to long image captioning. SPECS modifies CLIP with a new objective that emphasizes specificity: rewarding correct details and penalizing incorrect ones. We show that SPECS matches the performance of open-source LLM-based metrics in correlation to human judgments, while being far more efficient. This makes it a practical alternative for iterative checkpoint evaluation during image captioning model development. Our code can be found at https://github.com/mbzuai-nlp/SPECS. 1 Introduction Image captioning has been a key topic in vision-language research, offering a controlled setting to study grounded language generation (Karpathy and Fei-Fei, 2015). While early efforts focused on short, general captions (Vinyals et al., 2015), recent work has shifted toward generating long, detailed descriptions that capture fine-grained visual information(Johnson et al., 2016; Cho et al., 2022; Doveh et al., 2023; Li et al., 2023). This complex task requires strong visual grounding and improved cross-modal alignment (Liu et al., 2024; Li et al., 2021; Xie et al., 2025). It expands the scope of generative vision-language modeling but also mag- 65.44 92.87 Metric Success Rate CLIPScore SPECS < < < (·) (·) (·) (·) (·) (·) Figure 1: Example of specificity in caption evaluation. Given an image, captions with increasing correct details (“jumper” →“blanket” →“blanket with fringed edges”) should receive progressively higher cosine similarity, (·), to the image. SPECS ranks these minimal pairs correctly at a high rate, reflecting its strong specificity. nifies a long-standing challenge: how to evaluate captions reliably and efficiently. Automatic evaluation in captioning, as in other natural language generation tasks, has long been a challenge (Otani et al., 2023; Wang et al., 2023). Early metrics rely on n-gram overlap between generated captions and references. While computationally efficient, these methods fail to capture semantic similarity, often penalizing valid paraphrases and"
+  },
+  {
+   "label": "S5",
+   "id": "2111.08940v2:p7:c0",
+   "title": "Transparent Human Evaluation for Image Captioning",
+   "page": 7,
+   "score": 0.705,
+   "text": "should be regularly updated as our models become stronger (and perhaps more similar to humans), and raises a significant concern about the current practice that fixes evaluation metrics over time (Kasai et al., 2022). w/o Human w/ Human Metric P R Total P R Total RefCLIP-S 0.34 0.27 0.44 0.31 0.26 0.41+0.05 −0.05 RefOnlyC 0.42 0.14 0.41 0.37 0.11 0.34+0.04 −0.05 CLIP-S 0.18 0.27 0.32 0.17 0.28 0.32+0.05 −0.05 CIDEr 0.27 0.18 0.33 0.21 0.11 0.23+0.04 −0.04 BERT-S 0.27 0.18 0.33 0.20 0.10 0.21+0.04 −0.04 SPICE 0.26 0.15 0.30 0.20 0.09 0.21+0.04 −0.04 ROUGE-L 0.26 0.17 0.31 0.18 0.07 0.18+0.04 −0.04 BLEU 0.21 0.13 0.25 0.15 0.04 0.13+0.04 −0.04 Table 4: Instance-level correlations of automatic evaluation scores. RefCLIP-S and CLIP-S use image features unlike the others, and all but CLIP-S require references. All of these reference-based metrics use the same subset of four captions as in Table 2 that exclude Human. All metrics had correlations lower than 0.1 for fluency. Seen in Table 4 are instance-level Pearson correlation scores between automatic scores and our evaluations.6 We also add an ablation study: RefOnlyC removes image features from RefCLIP-S to quantify the effect of image features. We consider two types of scenarios: one with Human and one without. Correlations drop from the latter to the former for all metrics and aspects except CLIP-S, again showing that the metrics are not reliable in assessing human-generated captions. Interestingly, CLIP-S correlates best in recall (0.28 w/ Human) but suffers in precision (0.17 w/ Human). RefOnlyC, in contrast, achieves the best correlations in P at the expense of R. RefCLIP-S balances the two and achieves the best correlation in total scores. This indicates that the CLIP image features particularly help assess coverage of salient information that can be ignored in some reference captions from crowdworkers.7 Prior work (Hessel et al., 6Instance-level Pearson correlations with human judgments were often computed in prior work to compare automatic metrics for image captioning (e.g., Hessel et al., 2021). An alternative is system-level correlations, but they would be uninformative with five systems only. 7The low recall correlations of reference-only metrics can be partly because the maximum (as opposed to minimum or average) is typically taken over multiple reference captions (e.g., BERTScore, Zhang et al., 2020). Nevertheless, this alone does not explain the recall gap from image-based metrics because RefCLIP-S also takes the maximum score over all references. Future work can explore"
+  }
+ ],
+ "prompt_tokens": 3673,
+ "answer_tokens": 118,
+ "seconds": 4.6,
+ "id": "M01",
+ "reference_answer": "Focus! (uses CLIP to localize visually grounded entities), SPECS (modifies CLIP with a specificity objective) and F-CLIPScore (builds on CLIPScore). THumB and the gender bias paper evaluate CLIPScore but do not build a new method on CLIP (the gender paper combines CLIPScore with n-gram metrics: Gilbert to decide).",
+ "expected_evidence": [
+  {
+   "paper": "2212.00843v1",
+   "page": 1,
+   "phrase": "CLIP to localize"
+  },
+  {
+   "paper": "2509.03897v2",
+   "page": 1,
+   "phrase": "modifies CLIP"
+  },
+  {
+   "paper": "2502.20034v4",
+   "page": 4,
+   "phrase": "each individual noun"
+  }
+ ]
+}

@@ -1,0 +1,89 @@
+{
+ "question": "Which papers use the CHAIR metric to measure object hallucination, and what do they say about it?",
+ "time": "2026-10-18T21:19:35",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "[S1] describes CHAIR as a benchmark that splits sentences, augments ground truth with synonyms, and compares caption objects against this set to compute hallucination ratios. [S2] notes that adding object labels reduces hallucination on CHAIR metrics by 1 to 4% compared to state-of-the-art models. [S3] provides the specific formula for CHAIRi (ratio of unmatched objects) and CHAIRs (ratio of sentences with unmatched objects). [S4] states that previous studies have focused on object hallucination in LMMs, while this work introduces a new evaluation method to overcome limitations of existing metrics like CHAIR.",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "invalid": [],
+  "uncited_sentences": [
+   "states that previous studies have focused on object hallucination in LMMs, while this work introduces a new evaluation method to overcome limitations of existing metrics like CHAIR."
+  ],
+  "ok": false
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2310.01779v3:p4:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 4,
+   "score": 0.809,
+   "text": "Table 2: Comparison between CHAIR and our evaluation method, CCEval. Model CHAIR CCEval (Ours) CHAIRs↓CHAIRi↓Avg. Length↑Avg. Object↑ CHAIRs↓CHAIRi↓Coverage↑Avg. Length↑Avg. Object↑ LLaVA7B 24.1 9.1 42.5 3.7 72.00 19.7 32.74 92.27 9.19 LLaVA13B 60.6 18.4 90.2 7.6 79.00 23.80 33.56 108.02 9.28 Shikra7B 59.1 16.6 91.2 7.5 83.00 24.40 33.29 109.37 9.10 InstructBLIP7B 1.4 1.7 2.3 0.8 72.00 22.30 29.76 108.42 8.04 the lowest. Additionally, Shikra’s ”Yes” ratio is closer to a balanced 50% compared to other models. However, in subsequent sections, we demonstrate that these observations from VQA-based benchmarks are not consistent with those from caption-based benchmarks. Caption-based benchmarks, like CHAIR, begin by splitting the sentence and extracting nouns. Subsequently, it augments the ground truth objects by incorporating hard-coded synonyms and phrases, forming a ground truth set. The benchmark then identifies hallucinated objects by comparing the objects in the caption with this ground truth set. CHAIR computes CHAIRi and CHAIRs as follows: CHAIRi = |{hallucinated objects}| |{all objects mentioned}| CHAIRs = |{sentences with hallucinated object}| |{all sentences}| Table 2(left) reveals that while InstructBLIP exhibits minimal object existence hallucination, it averages a mere 0.8 objects per sentence. In contrast, LLaVA13B and Shikra manifest more hallucination, but they also generate more detailed captions, with as many as 7.6 and 7.5 objects per sentence, respectively. We find comparing object hallucinations is impractical when there is a significant disparity in average sentence length and number of objects. Apart from these disparities, the use of a hard-coded ground truth set is another challenge. To counter these challenges, we introduce CCEval, a GPT-4 assisted evaluation for detailed captions. We first prompt LMMs to generate detailed captions on 100 randomly sampled images from Visual Genome (Krishna et al., 2017). Subsequently, utilizing GPT-4’s in-context learning capabilities, we extract individual objects from these captions and identify hallucinated ones by referencing the provided ground truth objects. On top of CHAIR Rohrbach et al. (2018), we introduce ”coverage” metric to ensure that the captions are detailed enough. This metric computes the ratio of objects in the caption that match the ground truth to the total number of ground truth objects. We additionally record and balance the average number of objects as well as the average length of captions across all cases. More details of CCEval can be found in Appendix. As reflected in Table 2(right), when subjected to consistent constraints—average sentence length approximately 100 words and around 9 objects per sentence—all models"
+  },
+  {
+   "label": "S2",
+   "id": "2110.01705v2:p5:c1",
+   "title": "Let there be a clock on the beach: Reducing Object Hallucination in Image Captioning",
+   "page": 5,
+   "score": 0.77,
+   "text": "110.0 20.3 7.1 4.4 24.30 35.9 28.0 119.6 21.7 7.8 4.8 24.81 1.20 AoA-L + Uni 34.1 27.2 111.4 20.5 6.2 3.9 24.58 35.1 27.8 117.7 21.4 7.3 4.5 24.58 1.21 AoA-L + Inv 34.3 27.3 112.0 20.6 6.5 4.1 24.93 35.7 28.0 119.2 21.8 7.5 4.6 24.93 1.22 AoA-L + Occ 34.3 27.1 111.3 20.5 6.2 3.9 24.57 34.5 27.5 116.0 21.1 7.0 4.3 24.20 The next point we would like to move to is regarding our methods starting from 1.13. Simply by adding the object labels as input we notice an improvement on CHAIR metrics for both of the models. This progress can also be observed on classic image captioning metrics for UpDown model. Furthermore, we note that addition of labels also reaches the reported numbers in 1.10 while significantly diminishing the object bias on both sentence and object level. Finally, we see that this simple technique of concatenating object labels and visual features already gives state-of-the-art results in object hallucination by around 1 to 4%. Remark 2 Merely concatenating the labels with visual features results in the decline of hallucination of our models while beating state-of-the-art models on CHAIR metrics. Before we focus on our augmentation techniques, we want to point out that reducing object hallucination from 10% to 6% is not an equivalent to reducing it from 6% to 2%. The reason is that there are 2 different elements affecting the hallucination, one of which is the dataset bias which what we are trying to solve and the other one is the noisy and incorrect FasterRCNN features. From the next section, we see that our methods upper bound is around 2-3%, suggesting that the rest of the hallucination is mostly coming from the visual features. That said, it can be seen that we even better the results of row 1.14 and row 1.19 in comparison to our proposed techniques by around 0.5 to 1%. Remark 3 We demonstrate that our proposed techniques can reduce the object bias on the same model architectures. Furthermore, we remark that we always obtain the best results on CHAIR metrics with the Co-Occurrence Updating technique although we usually obtain a decrease in the other common metrics. We also see that Inverse Multinomial sampling results in the best performance in the classic captioning metrics. Moreoever, Co-Occurence Updating always achieves the best CHAIR scores out of all the different sampling. Remark 3.1 Inverse"
+  },
+  {
+   "label": "S3",
+   "id": "2310.01779v3:p17:c1",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 17,
+   "score": 0.763,
+   "text": "next section. After Step 3, we get the following information: matched objects (no hallucination), unmatched objects (hallucination), total objects mentioned, total ground truth objects. Our metric calculates: CHAIRi = |{unmatched objects}| |{total objects mentioned}| CHAIRs = |{sentences with unmatched objects}| |{total sentences}| Coverage = |{matched objects}| |{total ground truth objects}| Average Length = |{total words}| |{number of examples}|"
+  },
+  {
+   "label": "S4",
+   "id": "2310.01779v3:p10:c0",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 10,
+   "score": 0.745,
+   "text": "introduces CCEval, including CHAIR metrics, object coverage, average sentence length and number of objects to overcome limitations of previous evaluations. Hallucination Hallucinations (Ji et al., 2023a; Shi et al., 2023; Lin et al., 2021) have been widely studied in traditional NLG (Ji et al., 2023b) tasks, including machine translation (Zhou et al., 2020; Lee et al., 2019), data-to-text (Rebuffel et al., 2021; Kasner & Duˇsek, 2022; Lee et al., 2022), summarization (Cao et al., 2022), dialogue (Dziri et al., 2022) and QA (Shuster et al., 2021). For LMMs, previous studies have been mainly focusing on object hallucination (Marino et al., 2019; MacLeod et al., 2017; Li et al., 2023a;e). POPE (Li et al., 2023e) reveals object existence hallucination may related with label distributions, such as object co-occurance. Earlier than POPE, Biten et al. (2022) balance object co-occurance to decrease hallucination. LRV (Liu et al., 2023a) finds the cause of hallucination in VQA benchmarks, especially unbalanced answer distribution and lack of negation information. Our work raise another important cause: misalignment between the vision and language information captured by models. More interestingly, we can explain balancing labels in Biten et al. (2022) as trying to weaken the parametric knowledge caused by the misalignment. 6 Conclusion In summary, this study delves deep into the object hallucination phenomena within the detailed captions of LMMs, advancing understanding of the accuracy and unwarranted inference in describing visual details. We introduce a novel and comprehensive evaluation method for object existence hallucination in detailed captions. We conduct an in-depth and component-wise analysis of LMMs, meticulously examining each element that might result in hallucination. We further identify an alignment issue between the vision encoder and the instruction data. To alleviate such hallucination, we introduce controlling parameters over LMMs to condition the inference of objects."
+  },
+  {
+   "label": "S5",
+   "id": "2310.01779v3:p8:c1",
+   "title": "HallE-Control: Controlling Object Hallucination in Large Multimodal Models",
+   "page": 8,
+   "score": 0.743,
+   "text": "should reflect a low level of hallucination. 3. Evaluation with indicated objects: We calculate CCEval on all objects. Due to modification of the settings, we slightly change definition of CHAIR scores in CCEval as detailed in Appendix. Evaluation only on indicated objects. The hallucination level for indicated objects, CHAIRi, is 63.90 for LLaVA7B and 62.31 for LLaVA13B. It is considerably higher than the baselines all other models. Concurrently, their coverage is 12.01 and 19.09 for LLaVA7B and LLaVA13B, respectively, which both of them significantly lower than the coverage of 33.58 for LLaVA7B baseline model. The experiment results show the object within special tokens has significantly higher hallucination rate and lower coverage rate which support our assumption that the object inside the indication tokens are objects from parametric knowledge. Evaluation without indicated objects. For objects outside of the special token scope, we find hallucination is markedly reduced. CHAIRs decreased from 82 to 57 which is 30.5% percent improvement; CHAIRi decrease 32.4%, from 25.3 to 17.10, compared to the baseline. This suggests that the model is less prone to make erroneous assumptions for objects not"
+  }
+ ],
+ "prompt_tokens": 2661,
+ "answer_tokens": 132,
+ "seconds": 4.3,
+ "id": "X03",
+ "reference_answer": "Clock on the beach reports CHAIRs and CHAIRi; HallE-Control compares CHAIR with its own GPT-4 assisted CCEval for detailed captions.",
+ "expected_evidence": [
+  {
+   "paper": "2110.01705v2",
+   "page": 2,
+   "phrase": "CHAIRs"
+  },
+  {
+   "paper": "2310.01779v3",
+   "page": 4,
+   "phrase": "CCEval"
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "question": "Why do several papers argue that standard metrics such as BLEU or CIDEr are not enough to evaluate captions?",
+ "time": "2026-10-18T21:19:26",
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "embedding": "qwen3-embedding:0.6b",
+  "chunking": {
+   "size_words": 400,
+   "overlap_words": 0
+  },
+  "add_title": false,
+  "top_k": 5,
+  "temperature": 0
+ },
+ "answer": "Standard metrics like BLEU and CIDEr often fail to correlate well with human assessments of caption quality [S2]. They struggle specifically with detailed captioning tasks due to their reliance on rigid n-gram matching, which cannot handle the flexible nature of such descriptions [S5]. Additionally, these metrics may exhibit bias toward certain models, leading to inaccurate performance estimations [S5].",
+ "citation_check": {
+  "abstained": false,
+  "cited": [
+   2,
+   5
+  ],
+  "invalid": [],
+  "uncited_sentences": [],
+  "ok": true
+ },
+ "sources": [
+  {
+   "label": "S1",
+   "id": "2106.08503v2:p13:c0",
+   "title": "Understanding and Evaluating Racial Biases in Image Captioning",
+   "page": 13,
+   "score": 0.766,
+   "text": "Table 3: The caption performance as measured by BLEU [55], CIDEr [68], and SPICE [2] multiplied by 100 on the COCO 2014 validation dataset. Error bars represents 95% confidence intervals across random seeds used to train 5 models per architecture. BLEU CIDEr SPICE FC [59] 28.2 ± 0.4 87.2 ± 0.4 16.9 ± 0.2 Att2in [59] 31.5 ± 0.2 94.2 ± 0.3 18.4 ± 0.1 DiscCap [50] 23.7 ± 0.7 71.1 ± 2.3 18.8 ± 0.2 Transformer [67] 33.9 ± 0.6 97.2 ± 2.2 20.2 ± 0.2 AoANet [33] 38.7 ± 1.6 116.2 ± 4.6 22.2 ± 0.6 Oscar [45] 40.0 ± 0.4 120.0 ± 0.5 23.0 ± 0.3 D. Vocabulary differences coefficients In Sec. 4.4 we explore the different word choices in the captions describing lighter and darker images. We provide the most predictive words for lighter and darker across the manual captions and the automatically generated captions in Tbl. 5."
+  },
+  {
+   "label": "S2",
+   "id": "1810.04020v2:p25:c1",
+   "title": "A Comprehensive Survey of Deep Learning for Image Captioning",
+   "page": 25,
+   "score": 0.765,
+   "text": "and are not enough to measure the consensus between generated captions and human judgement. However, CIDEr achieves human consensus using term frequency-inverse document frequency (TF-IDF) [121]. 4.2.5 SPICE. SPICE (Semantic Propositional Image Caption Evaluation) [3] is a new caption evaluation metric based on semantic concept. It is based on a graph-based semantic representation called scene-graph [63, 123]. This graph can extract the information of different objects, attributes and their relationships from the image descriptions. Existing image captioning methods compute log-likelihood scores to evaluate their generated captions. They use BLEU, METEOR, ROUGE, SPICE, and CIDEr as evaluation metrics. However, BLEU, METEOR, ROUGE are not well correlated with human assessments of quality. SPICE and CIDEr have better correlation but they are hard to optimize. Liu et al. [85] introduced a new captions evaluation metric that is a good choice by human raters. It is developed by a combination of SPICE and CIDEr, and termed as SPIDEr. It uses a policy gradient method to optimize the metrics. The quality of image captioning depends on the assessment of two main aspects: adequacy and fluency. An evaluation metric needs to focus on a diverse set of linguistic features to achieve these ACM Computing Surveys, Vol. 0, No. 0, Article 0. Acceptance Date: October 2018."
+  },
+  {
+   "label": "S3",
+   "id": "2503.12329v1:p6:c0",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 6,
+   "score": 0.764,
+   "text": "formance on vision-language benchmarks and CapArena ranking in Figure 4. Strong performance on general benchmarks does not always translate to superior captioning ability. For example, despite its relatively low MMMU (Yue et al., 2024) score, InternVL2-26B excels in captioning. Moreover, the hallucination benchmark POPE (Li et al., 2023) lacks discriminative capacity for detailed captioning, underscoring the need for further exploration in assessing image comprehension. Failure Cases. Besides weaker models missing image details or making errors, we identified several common mistakes: (1) failure to provide accurate descriptions for unusual scenes, (2) frequent neglect of subtle yet important details, (3) challenges in scenes requiring knowledge association, and (4) an inability of VLMs to accurately identify the time on clocks. Examples of these cases are provided in Table 7. These shortcomings highlight the need for further research in detailed captioning to advance real-world applications. 4 Analysis of Captioning Metrics Thanks to its meticulously designed annotation process, CapArena can be regarded as a reliable evaluation system for detailed image captioning that reflects the performance of different models. However, it relies on costly human preference annotations, making annotating every model of interest impractical. Therefore, automatic metrics are crucial for evaluating and iterating on the development of detailed captioning capabilities in VLMs. This section evaluates a range of traditional and recently proposed captioning metrics, and the ability of VLM-as-a-Judge to assess the quality of detailed captions using the CapArena data. The over 6000 high-quality human annotations serve as the golden standard, providing the basis to analyze how these metrics correlate with human preferences and to identify their potential deficiencies. 4.1 Captioning Metrics Traditional Metrics. We first consider rule-based metrics that are commonly used for MSCOCO evaluation: BLEU (Papineni et al., 2002) measures n-gram overlap between the generated and reference captions. METEOR (Banerjee and Lavie, 2005) incorporates synonym matching and stemming to improve recall. SPICE (Anderson et al., 2016) measures semantic consistency using scene graph. CIDEr (Vedantam et al., 2015) evaluates consensus across multiple reference captions. Next, we include a range of CLIP-based metrics, which claim higher alignment with human judgments (Hodosh et al., 2013). CLIPScore (Hessel et al., 2021) is a reference-free metric that measures the similarity using CLIP features, and LongCLIPScore (Zhang et al., 2024) is a variant adapted for longer text. Polos (Wada et al., 2024) enhances CLIPScore through supervised learning on human feedback. FLEUR (Lee et al., 2024) leverages a large multimodal model"
+  },
+  {
+   "label": "S4",
+   "id": "1810.04020v2:p25:c0",
+   "title": "A Comprehensive Survey of Deep Learning for Image Captioning",
+   "page": 25,
+   "score": 0.763,
+   "text": "A Comprehensive Survey of Deep Learning for Image Captioning 0:25 4.1.9 FlickrStyle10k Dataset. FlickrStyle10k dataset has 10,000 Flickr images with stylized captions. The training data consists of 7000 images. The validation and test data consists of 2,000 and 1,000 images respectively. Each image contains romantic, humorous, and factual captions. 4.2 Evaluation Metrics 4.2.1 BLEU. BLEU (Bilingual evaluation understudy) [110] is a metric that is used to measure the quality of machine generated text. Individual text segments are compared with a set of reference texts and scores are computed for each of them. In estimating the overall quality of the generated text, the computed scores are averaged. However, syntactical correctness is not considered here. The performance of the BLEU metric is varied depending on the number of reference translations and the size of the generated text. Subsequently, Papineni et al. introduced a modified precision metric. This metrics uses n-grams. BLEU is popular because it is a pioneer in automatic evaluation of machine translated text and has a reasonable correlation with human judgements of quality [20, 29]. However, it has a few limitations such as BLEU scores are good only if the generated text is short [20]. There are some cases where an increase in BLEU score does not mean that the quality of the generated text is good [82]. 4.2.2 ROUGE. ROUGE (Recall-Oriented Understudy for Gisting Evaluation) [81] is a set of metrics that are used for measuring the quality of text summary. It compares word sequences, word pairs, and n-grams with a set of reference summaries created by humans. Different types of ROUGE such as ROUGE-1, 2, ROUGE-W, ROUGE-SU4 are used for different tasks. For example, ROUGE-1 and ROUGE-W are appropriate for single document evaluation whereas ROUGE-2 and ROUGE-SU4 have good performance in short summaries. However, ROUGE has problems in evaluating multi-document text summary. 4.2.3 METEOR. METEOR (Metric for Evaluation of Translation with Explicit ORdering) [9] is another metric used to evaluate the machine translated language. Standard word segments are compared with the reference texts. In addition to this, stems of a sentence and synonyms of words are also considered for matching. METEOR can make better correlation at the sentence or the segment level. 4.2.4 CIDEr. CIDEr (Consensus-based Image Descripton Evaluation) [139] is an automatic consensus metric for evaluating image descriptions. Most existing datasets have only five captions per image. Previous evaluation metrics work with these small number of sentences"
+  },
+  {
+   "label": "S5",
+   "id": "2503.12329v1:p7:c1",
+   "title": "CapArena: Benchmarking and Analyzing Detailed Image Captioning in the LLM Era",
+   "page": 7,
+   "score": 0.757,
+   "text": "while exhibiting bias toward certain models, leading to inaccurate performance estimation. To address this, we introduce model-level agreement, which measures the consistency between rankings derived from human judgments and those derived from metrics. Specifically, we replace human annotations with metrics for all pairwise battles in CapArena and compute rankings using the same ELO mechanism. We compute this agreement using Spearman’s rank coefficient and Kendall’s τ. 4.3 Results Analysis Most traditional metrics fail in the detailed captioning task. Traditional metrics with high human agreement on short captions (Hodosh et al., 2013) deviate from human preferences when applied to detailed captioning task. As shown in Table 2, they exhibit low agreement both at the caption-level and model-level. Rule-based metrics, such as CIDEr, struggle due to the flexible nature of detailed captions, which complicates n-gram matching. For CLIP-based metrics like CLIPScore, our results reveal that current vision-language rep-"
+  }
+ ],
+ "prompt_tokens": 2309,
+ "answer_tokens": 78,
+ "seconds": 3.6,
+ "id": "X01",
+ "reference_answer": "SPECS: n-gram metrics fail to capture semantic correctness, especially for long captions. THumB: most automatic metrics rate machine captions above human ones, the opposite of human judgment. CapArena: metric biases make model rankings inconsistent.",
+ "expected_evidence": [
+  {
+   "paper": "2509.03897v2",
+   "page": 1,
+   "phrase": "fail to capture semantic correctness"
+  },
+  {
+   "paper": "2111.08940v2",
+   "page": 1,
+   "phrase": "say the opposite"
+  },
+  {
+   "paper": "2503.12329v1",
+   "page": 1,
+   "phrase": "systematic biases"
+  }
+ ]
+}
