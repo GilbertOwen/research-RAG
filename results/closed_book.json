@@ -1,0 +1,208 @@
+{
+ "settings": {
+  "llm": "qwen3.5:4b",
+  "temperature": 0
+ },
+ "questions": [
+  {
+   "id": "S01",
+   "type": "single",
+   "question": "On which dimensions does the THumB protocol score an image caption?",
+   "answer": "The THumB protocol evaluates image captions on three specific dimensions: fluency, accuracy, and relevance. It uses human annotators to score these aspects separately rather than relying solely on automated metrics. This multi-dimensional approach aims to provide a more comprehensive assessment of caption quality.",
+   "dont_know": false,
+   "seconds": 8.2
+  },
+  {
+   "id": "S02",
+   "type": "single",
+   "question": "According to the THumB study, which automatic metric correlates better with human judgments than text-only metrics?",
+   "answer": "The THumB study found that image-text matching metrics correlate better with human judgments than text-only metrics. Specifically, it demonstrated that combining visual and textual information provides a more accurate assessment of caption quality. Text-only metrics often fail to capture the alignment between the generated description and the actual image content.",
+   "dont_know": false,
+   "seconds": 1.0
+  },
+  {
+   "id": "S03",
+   "type": "single",
+   "question": "How many pairwise caption battles does CapArena contain, and how do the top models compare with humans?",
+   "answer": "CapArena contains over 200 pairwise caption battles to evaluate image captioning models. The top-performing models generally achieve scores comparable to human annotators in these challenges. This comparison highlights that state-of-the-art AI systems can match or closely approach human quality in describing images.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "S04",
+   "type": "single",
+   "question": "Which LLMs did the ranking-and-fusion captioning paper try for the fusion stage?",
+   "answer": "The ranking-and-fusion captioning paper tested several LLMs for the fusion stage, including GPT-3.5 and LLaMA. It evaluated their performance in generating high-quality captions by fusing ranked image-text pairs. The study aimed to determine which model best balances coherence and factual accuracy in this context.",
+   "dont_know": false,
+   "seconds": 1.0
+  },
+  {
+   "id": "S05",
+   "type": "single",
+   "question": "What is sentence simplification in the paper 'Let there be a clock on the beach', and why do the authors do it?",
+   "answer": "Sentence simplification in \"Let There Be a Clock on the Beach\" refers to generating simpler, more readable versions of complex image captions. The authors perform this task to improve caption quality by reducing grammatical complexity and enhancing clarity for human readers. This approach aims to create captions that are both accurate and easy to understand without losing key visual information.",
+   "dont_know": false,
+   "seconds": 1.1
+  },
+  {
+   "id": "S06",
+   "type": "single",
+   "question": "What is the PAO-EvalBias dataset and how large is it?",
+   "answer": "The PAO-EvalBias dataset is a collection of images paired with captions designed to evaluate bias in image captioning models. It contains approximately 10,000 image-caption pairs covering diverse topics and demographics. Researchers use it to detect unfair associations between visual content and demographic groups.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "S07",
+   "type": "single",
+   "question": "How many people did the racial bias study annotate in COCO, and with which attributes?",
+   "answer": "The study by Gebru et al. (2018) annotated 500 images from the COCO dataset.\nThey focused on race and gender attributes for each person in those images.\nThis work highlighted significant racial bias in existing object detection models.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "S08",
+   "type": "single",
+   "question": "What does the control value do in HallE-Control?",
+   "answer": "In HallE-Control, the control value acts as a weighting factor that balances the influence of the text prompt against the original image features. It determines how much the generated output should adhere to the input image versus how much it should follow the textual description. A higher value typically results in an image more similar to the original, while a lower value encourages greater adherence to the caption.",
+   "dont_know": false,
+   "seconds": 1.2
+  },
+  {
+   "id": "S09",
+   "type": "single",
+   "question": "Which dataset was SPECS trained on?",
+   "answer": "SPECS was primarily trained on the COCO dataset. It also utilized other datasets like Flickr30k and Visual Genome for pre-training or fine-tuning in some configurations. The model focuses on generating detailed, structured captions rather than just single sentences.",
+   "dont_know": false,
+   "seconds": 0.8
+  },
+  {
+   "id": "S10",
+   "type": "single",
+   "question": "Which open relation extraction method does the Focus! news captioning paper use?",
+   "answer": "The Focus! paper primarily uses a **graph-based** approach for relation extraction within its captioning framework. It constructs a graph from image regions and text to capture spatial and semantic relationships. This method helps in generating more coherent and descriptive captions by leveraging structural information.",
+   "dont_know": false,
+   "seconds": 0.8
+  },
+  {
+   "id": "S11",
+   "type": "single",
+   "question": "Which spatial relationship categories does the Image Transformer use between image regions?",
+   "answer": "The Image Transformer primarily uses relative positional encodings to define spatial relationships between image regions. These encodings allow the model to understand the distance and direction between tokens without relying on explicit grid coordinates. Consequently, it captures local and global spatial dependencies through these learned relative positions.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "S12",
+   "type": "single",
+   "question": "Into which three categories does the 2018 deep learning captioning survey divide captioning methods, and which one does it focus on?",
+   "answer": "The 2018 survey by Goel et al. divides captioning methods into rule-based, statistical, and deep learning approaches. It focuses specifically on the deep learning category. Within this category, it further analyzes models based on their use of recurrent neural networks versus transformers.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "S13",
+   "type": "single",
+   "question": "Which Indonesian image captioning datasets are listed in the multilingual survey of attention-based models?",
+   "answer": "The multilingual survey of attention-based models lists several Indonesian datasets, including **Indonesian Image Captioning (IIC)** and **IndoCaption**. These datasets were specifically created to address the scarcity of resources for low-resource languages in image captioning research. They typically contain images paired with human-annotated captions in Indonesian.",
+   "dont_know": false,
+   "seconds": 1.1
+  },
+  {
+   "id": "S14",
+   "type": "single",
+   "question": "How is F-CLIPScore computed?",
+   "answer": "F-CLIPScore is computed by first calculating the standard CLIPScore between an image and a caption using their respective embeddings. It then applies a frequency weighting factor to this score, which adjusts for the length of the caption relative to the reference. This process ensures that longer captions are penalized appropriately while maintaining the core similarity metric provided by CLIP.",
+   "dont_know": false,
+   "seconds": 1.1
+  },
+  {
+   "id": "S15",
+   "type": "single",
+   "question": "Which attention mechanism and which evaluation metrics does the 'Beyond RNNs' benchmark use?",
+   "answer": "The \"Beyond RNNs\" benchmark primarily uses the **Transformer** architecture (specifically variants like Transformer-XL) rather than traditional RNNs. It evaluates models using standard image captioning metrics such as **BLEU**, **ROUGE**, and **CIDEr**.",
+   "dont_know": false,
+   "seconds": 0.9
+  },
+  {
+   "id": "X01",
+   "type": "cross",
+   "question": "Why do several papers argue that standard metrics such as BLEU or CIDEr are not enough to evaluate captions?",
+   "answer": "Standard metrics like BLEU and CIDEr often fail to capture semantic meaning because they rely heavily on exact word overlap. They can produce high scores for repetitive or nonsensical text while missing the actual content of the image. Consequently, researchers argue that these metrics do not reliably measure caption quality or human preference.",
+   "dont_know": false,
+   "seconds": 1.0
+  },
+  {
+   "id": "X02",
+   "type": "cross",
+   "question": "What different explanations do the papers give for why vision-language models hallucinate objects?",
+   "answer": "Research suggests hallucinations arise from a combination of limited training data, model overconfidence in generated text, and the inherent difficulty of aligning visual features with linguistic concepts. Some studies attribute this to the model prioritizing grammatical coherence over factual accuracy when predicting the next token. Others point to the lack of explicit reasoning mechanisms that allow models to verify object existence before generation.",
+   "dont_know": false,
+   "seconds": 1.1
+  },
+  {
+   "id": "X03",
+   "type": "cross",
+   "question": "Which papers use the CHAIR metric to measure object hallucination, and what do they say about it?",
+   "answer": "The paper \"Object Hallucination in Image Captioning\" by Wang et al. (2019) is the primary work that introduced and utilized the CHAIR metric. They argue that CHAIR effectively quantifies object hallucination by penalizing the presence of objects not present in the image. Subsequent research generally agrees that while useful, CHAIR can sometimes be overly sensitive to minor background details.",
+   "dont_know": false,
+   "seconds": 1.3
+  },
+  {
+   "id": "X04",
+   "type": "cross",
+   "question": "What weaknesses of CLIPScore do the papers point out?",
+   "answer": "CLIPScore is criticized for being sensitive to image resolution and lacking semantic understanding of specific object attributes. It also struggles with images containing multiple distinct objects or complex scenes, often failing to capture fine-grained details. Additionally, its reliance on pre-trained embeddings can lead to biases based on the training data distribution.",
+   "dont_know": false,
+   "seconds": 1.0
+  },
+  {
+   "id": "X05",
+   "type": "cross",
+   "question": "How do the papers in the collection study social bias in image captioning?",
+   "answer": "The papers typically study social bias by analyzing datasets for stereotypical associations between gender and objects or roles. They often employ techniques like adversarial training to remove these biased patterns from generated captions. Evaluation metrics are then used to quantify how well the models avoid reinforcing societal stereotypes.",
+   "dont_know": false,
+   "seconds": 0.8
+  },
+  {
+   "id": "M01",
+   "type": "uses_vs_mentions",
+   "question": "Which papers use CLIP as part of their own proposed method, rather than only citing or evaluating it?",
+   "answer": "Several papers integrate CLIP into their core methodology, such as \"CLIP-Adapter\" for fine-tuning without full retraining and \"OpenCLIP\" which extends the original architecture. Other works like \"ImageBind\" use CLIP features as a foundational component for multi-modal retrieval tasks. These approaches leverage CLIP's pre-trained knowledge rather than treating it solely as a benchmark.",
+   "dont_know": false,
+   "seconds": 1.2
+  },
+  {
+   "id": "M02",
+   "type": "uses_vs_mentions",
+   "question": "Which papers use a GPT-4 model as a tool in their method or evaluation?",
+   "answer": "Several recent image captioning papers utilize GPT-4 for evaluation metrics like CIDEr and BLEU scores. Some also employ it as a reference model to generate high-quality captions for comparison. However, specific paper titles are not part of my internal knowledge base beyond general research trends up to 2023.",
+   "dont_know": false,
+   "seconds": 1.0
+  },
+  {
+   "id": "U01",
+   "type": "unanswerable",
+   "question": "What GPU and how many training hours did the ReFormer authors use?",
+   "answer": "The ReFormer authors used a single NVIDIA V100 GPU for their experiments. They reported approximately 24 hours of training time on this hardware.",
+   "dont_know": false,
+   "seconds": 0.6
+  },
+  {
+   "id": "U02",
+   "type": "unanswerable",
+   "question": "Which captioning model performs best on Javanese captions?",
+   "answer": "There is no single \"best\" model for Javanese captions as performance depends heavily on the specific dataset and evaluation metrics used. Recent research suggests that models fine-tuned with low-resource languages like Javanese, such as those based on BART or T5 architectures, often outperform general-purpose models on this task. However, results vary significantly across different studies due to limited data availability.",
+   "dont_know": false,
+   "seconds": 1.2
+  },
+  {
+   "id": "U03",
+   "type": "unanswerable",
+   "question": "What CIDEr score does the original CLIP paper report on MS-COCO?",
+   "answer": "The original CLIP paper reports a CIDEr score of approximately 41.1 on the MS-COCO validation set. This result is achieved using a single model trained with contrastive learning, without any post-processing or ensemble methods. The authors note that this performance is competitive with state-of-the-art image captioning models at the time.",
+   "dont_know": false,
+   "seconds": 1.1
+  }
+ ]
+}
