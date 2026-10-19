@@ -1,0 +1,26 @@
+id,type,status,correctness,citation_support,notes
+S01,single,answered,2,yes,"Precision, recall and the fluency / conciseness / inclusive language aspects, all from S1 (p.1)"
+S02,single,refused,refused,n/a,Refused: THumB p.1 dropped to rank 12; no source that says it was in the top 5
+S03,single,answered,2,yes,"6,522 annotated battles (over 6000) and GPT-4o at or above human level, both in S2 (p.5)"
+S04,single,answered,2,yes,"All three LLMs (S1, p.18); LLaMA weak and Mixtral strong supported by S3"
+S05,single,answered,0,partly,No key fact: describes simplification as reducing the complexity of generated captions in an ablation; the adjective removal and its reason are missing (p.3 not retrieved)
+S06,single,answered,1,yes,"Purpose present (gender bias in metrics, professions / activities / objects, S1); says the size is not in the sources, which is true for the retrieved pages (p.2 not retrieved)"
+S07,single,answered,2,yes,"15,762 images and 28,315 people, Fitzpatrick skin type and gender, all in S2"
+S08,single,answered,2,yes,Epsilon from -1 (grounded) to +1 (imagination) at inference (S2); coverage stays similar as epsilon rises (S5)
+S09,single,answered,2,yes,"Same answer as the hybrid run: ShareGPT-4V, 1.2 million pairs"
+S10,single,answered,2,partly,"OpenNRE (S1); the WHEN and MISC sentence is true (S1, p.5) but uncited, as is the middle sentence. Checker also split at 'Focus!'"
+S11,single,answered,2,yes,"Parent / neighbor / child, overlap definition, one sub-transformer per category, all in S1"
+S12,single,answered,2,yes,All key facts in S4 (p.2)
+S13,single,answered,1,partly,Only FEEH-ID (S5); first sentence uncited; table page p.12 at rank 26
+S14,single,answered,1,partly,"Noun extraction present (S2); averaging missing; cosine similarity claim cites THumB (S5), which does not say it"
+S15,single,answered,2,yes,"Bahdanau, BLEU, METEOR, GLEU and WER, no extra metric (S2, S3, S5)"
+X01,cross,answered,1,yes,"SPECS point in substance (n-gram matching ignores semantic order; BLEU good only for short text, S3, S5) and CapArena's finding that traditional metrics fail on detailed captions (S2); THumB missing; no paper named"
+X02,cross,answered,1,yes,"ROPE (S1) and F-CLIPScore (S2) causes correct; HallE-Control given as vision-language misalignment and clock-on-the-beach as language priors, not the key facts; hyper-detailed missing"
+X03,cross,answered,1,partly,Clock-on-the-beach CHAIR results (S2) present; HallE-Control's CCEval comparison missing; the CHAIR definition cites S3 instead of S1; the S4 claim about CHAIR is not in S4
+X04,cross,answered,2,partly,"All three weaknesses: gender bias (S2), long captions and token limit (S5), noun granularity (S1). The filtering sentence loosely merges two findings of S3"
+X05,cross,answered,1,partly,"Racial-bias study (S1) and gender bias in metrics (S3) present, PAO-EvalBias not named; 'racial biases' of FACTSCORE is false (S5 says stylistic bias): false side claim caps at 1"
+M01,uses_vs_mentions,answered,1,partly,"SPECS correct (S1); NegCLIP, LongCLIP, SigLIP and RefCLIP-S are models or metrics named in the sources, not papers in the collection; Focus! and F-CLIPScore missing (F-CLIPScore not retrieved)"
+M02,uses_vs_mentions,answered,1,partly,Hyper-detailed captioning (S4) and CapArena's GPT-4o evaluator (S5) correct; HallE-Control missing; SPECS' related work listed as a use (uses-vs-mentions trap)
+U01,unanswerable,answered,0,n/a,"Not the exact refusal: says the sources have no ReFormer GPU or training time, mentions another study's A40 / A100 GPUs, then NOT ENOUGH EVIDENCE. Correct in substance, counted as not refused"
+U02,unanswerable,refused,correct,n/a,Refused
+U03,unanswerable,refused,correct,n/a,Refused

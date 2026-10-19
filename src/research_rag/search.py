@@ -40,6 +40,8 @@ class Index:
         self.client = Client(host=config["ollama_host"])
         self.mode = config["retrieval"].get("mode", "dense")
         self.rrf_k = config["retrieval"].get("rrf_k", 60)
+        self.mmr_lambda = config["retrieval"].get("mmr_lambda", 0.7)
+        self.pool = config["retrieval"].get("pool", 20)
         if self.mode == "hybrid":
             self.bm25 = BM25([c["text"] for c in self.chunks])
 
@@ -47,6 +49,8 @@ class Index:
         query = format_query(question, instruction)
         q = np.array(self.client.embed(model=self.model, input=query).embeddings[0], dtype=np.float32)
         dense = self.vectors @ q  # vectors have length 1, so this is cosine similarity
+        if self.mode == "mmr":
+            return self.mmr(dense, top_k)
         if self.mode != "hybrid":
             best = np.argsort(-dense)[:top_k]
             return [{**self.chunks[i], "score": float(dense[i]), "rank": r + 1} for r, i in enumerate(best)]
@@ -61,6 +65,21 @@ class Index:
         best = np.argsort(-fused, kind="stable")[:top_k]
         return [{**self.chunks[i], "score": float(fused[i]), "dense_score": float(dense[i]),
                  "keyword_score": float(keyword[i]), "rank": r + 1} for r, i in enumerate(best)]
+
+    def mmr(self, dense: np.ndarray, top_k: int) -> list[dict]:
+        """Reorder the top `pool` chunks: relevant to the question, but not too similar to chunks already picked."""
+        order = np.argsort(-dense)
+        pool = list(order[:self.pool])
+        picked = []
+        while pool and len(picked) < top_k:
+            if picked:
+                redundancy = (self.vectors[pool] @ self.vectors[picked].T).max(axis=1)
+            else:
+                redundancy = np.zeros(len(pool))
+            scores = self.mmr_lambda * dense[pool] - (1 - self.mmr_lambda) * redundancy
+            picked.append(pool.pop(int(np.argmax(scores))))
+        best = picked + list(order[self.pool:])[:max(0, top_k - len(picked))]  # beyond the pool: dense order
+        return [{**self.chunks[i], "score": float(dense[i]), "rank": r + 1} for r, i in enumerate(best)]
 
 
 def main() -> None:
