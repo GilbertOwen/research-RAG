@@ -1,9 +1,10 @@
 """Find where each expected evidence chunk ranks when the whole index is searched.
 
 Uses the index in data/index and the settings in config.yaml; nothing is changed.
-Run: uv run python scripts/diagnose_ranks.py
+Run: uv run python scripts/diagnose_ranks.py [--out ranks_400_0_emb4b]
 """
 
+import argparse
 import json
 import sys
 from collections import Counter
@@ -29,6 +30,9 @@ def bucket(rank: int | None, top_k: int) -> str:
 
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--out", help="output name in results/, instead of one built from the config")
+    args = parser.parse_args()
     config = load_config()
     top_k = config["retrieval"]["top_k"]
     instruction = config["retrieval"]["query_instruction"]
@@ -80,7 +84,7 @@ def main() -> None:
     label = f"{config['chunking']['size_words']}_{config['chunking']['overlap_words']}"
     if index.mode != "dense":
         label += f"_{index.mode}"
-    out = ROOT / "results" / f"ranks_{label}.json"
+    out = ROOT / "results" / f"{args.out or 'ranks_' + label}.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump({"top_k": top_k, "pool": POOL, "chunks": len(index.chunks), "counts": dict(counts),
                    "rule_pick": pick, "items": items, "questions": per_question}, f, ensure_ascii=False, indent=1)
