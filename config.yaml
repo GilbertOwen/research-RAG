@@ -19,6 +19,9 @@ embedding:
 
 retrieval:
   top_k: 5
+  mode: dense           # dense or hybrid (step 6.2)
+  # mode: hybrid           
+  rrf_k: 60
   query_instruction: >-
     Given a question about image captioning and vision-language model evaluation,
     retrieve research-paper passages that directly answer the question or provide
@@ -32,4 +35,4 @@ generation:
 paths:
   manifest: papers/manifest.csv
   papers_dir: data/papers   
-  index_dir: data/index     
+  index_dir: data/index

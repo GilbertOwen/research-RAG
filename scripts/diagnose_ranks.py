@@ -78,6 +78,8 @@ def main() -> None:
     print(f"Reading rule (near >= deep picks C, otherwise B): {pick}")
 
     label = f"{config['chunking']['size_words']}_{config['chunking']['overlap_words']}"
+    if index.mode != "dense":
+        label += f"_{index.mode}"
     out = ROOT / "results" / f"ranks_{label}.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump({"top_k": top_k, "pool": POOL, "chunks": len(index.chunks), "counts": dict(counts),

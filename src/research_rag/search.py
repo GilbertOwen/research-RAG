@@ -11,6 +11,7 @@ import numpy as np
 from ollama import Client
 
 from research_rag.config import ROOT, load_config
+from research_rag.keyword import BM25
 
 
 def format_query(question: str, instruction: str | None) -> str:
@@ -37,13 +38,29 @@ class Index:
 
         self.model = meta["model"]
         self.client = Client(host=config["ollama_host"])
+        self.mode = config["retrieval"].get("mode", "dense")
+        self.rrf_k = config["retrieval"].get("rrf_k", 60)
+        if self.mode == "hybrid":
+            self.bm25 = BM25([c["text"] for c in self.chunks])
 
     def search(self, question: str, top_k: int, instruction: str | None = None) -> list[dict]:
         query = format_query(question, instruction)
         q = np.array(self.client.embed(model=self.model, input=query).embeddings[0], dtype=np.float32)
-        scores = self.vectors @ q  # vectors have length 1, so this is cosine similarity
-        best = np.argsort(-scores)[:top_k]
-        return [{**self.chunks[i], "score": float(scores[i]), "rank": r + 1} for r, i in enumerate(best)]
+        dense = self.vectors @ q  # vectors have length 1, so this is cosine similarity
+        if self.mode != "hybrid":
+            best = np.argsort(-dense)[:top_k]
+            return [{**self.chunks[i], "score": float(dense[i]), "rank": r + 1} for r, i in enumerate(best)]
+
+        # Reciprocal rank fusion: 1 / (k + rank) from each list, added up
+        keyword = self.bm25.scores(question)  # the plain question, without the instruction
+        fused = np.zeros(len(self.chunks), dtype=np.float32)
+        for scores in (dense, keyword):
+            ranks = np.empty(len(scores), dtype=np.int64)
+            ranks[np.argsort(-scores, kind="stable")] = np.arange(1, len(scores) + 1)
+            fused += 1 / (self.rrf_k + ranks)
+        best = np.argsort(-fused, kind="stable")[:top_k]
+        return [{**self.chunks[i], "score": float(fused[i]), "dense_score": float(dense[i]),
+                 "keyword_score": float(keyword[i]), "rank": r + 1} for r, i in enumerate(best)]
 
 
 def main() -> None:
