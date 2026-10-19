@@ -3,6 +3,7 @@
 models:
   llm: qwen3.5:4b
   embedding: qwen3-embedding:0.6b
+  # embedding: qwen3-embedding:4b   # step 6.4, not kept
   think: false          
 
 chunking:
@@ -19,6 +20,12 @@ embedding:
 
 retrieval:
   top_k: 5
+  mode: dense           # dense, hybrid (step 6.2) or mmr (step 6.3)
+  # mode: hybrid           
+  # mode : mmr
+  rrf_k: 60
+  # mmr_lambda: 0.7       # mmr mode (step 6.3)
+  pool: 20
   query_instruction: >-
     Given a question about image captioning and vision-language model evaluation,
     retrieve research-paper passages that directly answer the question or provide
@@ -32,4 +39,5 @@ generation:
 paths:
   manifest: papers/manifest.csv
   papers_dir: data/papers   
-  index_dir: data/index     
+  index_dir: data/index
+  # index_dir: data/index_4b   # step 6.4

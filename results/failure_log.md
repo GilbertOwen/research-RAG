@@ -49,7 +49,7 @@ The same failure types appear with 400 / 80 and 250 / 50 (`compare_settings.md`)
 
 ## Patterns
 
-1. Retrieval failures are all on cross-paper and uses-vs-mentions questions (X01, X02, M01, M02) plus one table page (S13): one or two papers fill the five slots.
+1. Retrieval failures are all on cross-paper and uses-vs-mentions questions (X01, X02, M01, M02) plus one table page (S13): one or two papers take four of the five slots; on X01 and M02 three of the five go to papers that are not expected.
 2. Generation failures are mostly a correct answer with one false or missing detail, not a wrong main answer.
 3. No answer was graded 0, and no failure traced back to broken PDF text.
 4. The citation checker catches missing labels, but none of the generation errors above; those needed reading the source.

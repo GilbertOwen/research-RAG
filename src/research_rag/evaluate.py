@@ -68,7 +68,7 @@ def main() -> None:
         "mrr": sum(r["reciprocal_rank"] for r in rows) / n,
         "paper_recall": sum(r["paper_recall"] for r in rows) / n,
     }
-    print(f"\n{n} questions, top-{top_k}, instruction: {'yes' if instruction else 'no'}, "
+    print(f"\n{n} questions, top-{top_k}, mode: {index.mode}, instruction: {'yes' if instruction else 'no'}, "
           f"chunks: {config['chunking']['size_words']}/{config['chunking']['overlap_words']} words")
     print(f"Hit@{top_k} {summary['hit_at_k']:.2f} ({sum(r['hit'] for r in rows)}/{n})   "
           f"evidence recall {summary['evidence_recall']:.2f}   MRR {summary['mrr']:.2f}   "
@@ -79,7 +79,7 @@ def main() -> None:
     out = out_dir / f"retrieval_{args.label}.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump({"label": args.label, "time": datetime.now().isoformat(timespec="seconds"),
-                   "top_k": top_k, "instruction": bool(instruction), "chunking": config["chunking"],
+                   "top_k": top_k, "mode": index.mode, "instruction": bool(instruction), "chunking": config["chunking"],
                    "add_title": config["embedding"]["add_title"], "summary": summary, "questions": rows},
                   f, ensure_ascii=False, indent=1)
     print(f"saved {out}")

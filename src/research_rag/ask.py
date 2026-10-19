@@ -24,7 +24,7 @@ def ask(index: Index, config: dict, question: str) -> dict:
         "time": datetime.now().isoformat(timespec="seconds"),
         "settings": {"llm": config["models"]["llm"], "embedding": config["models"]["embedding"],
                      "chunking": config["chunking"], "add_title": config["embedding"]["add_title"],
-                     "top_k": config["retrieval"]["top_k"], "temperature": config["generation"]["temperature"]},
+                     "top_k": config["retrieval"]["top_k"], "mode": index.mode, "temperature": config["generation"]["temperature"]},
         "answer": result["answer"],
         "citation_check": check,
         "sources": [{"label": f"S{i}", "id": c["id"], "title": c["title"], "page": c["page"],
