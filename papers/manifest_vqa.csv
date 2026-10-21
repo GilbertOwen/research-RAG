@@ -1,0 +1,11 @@
+arxiv_id,version,group,title,license
+2309.16511,v1,benchmark,Toloka Visual Question Answering Benchmark,CC BY 4.0
+2311.00807,v1,benchmark,VQA-GEN: A Visual Question Answering Benchmark for Domain Generalization,CC BY 4.0
+2407.03386,v5,robustness,Visual Robustness Benchmark for Visual Question Answering (VQA),CC BY 4.0
+1912.01452,v2,robustness,Assessing the Robustness of Visual Question Answering Models,CC BY 4.0
+2401.05827,v2,benchmark,Hallucination Benchmark in Medical Visual Question Answering,CC BY 4.0
+2208.00690,v3,bias,Generative Bias for Robust Visual Question Answering,CC BY 4.0
+2310.14670,v2,bias,Dataset Bias Mitigation in Multiple-Choice Visual Question Answering and Beyond,CC BY 4.0
+2305.19664,v1,bias,Unveiling Cross Modality Bias in Visual Question Answering: A Causal View with Possible Worlds VQA,CC BY 4.0
+2012.11134,v1,bias,Learning content and context with language bias for Visual Question Answering,CC BY 4.0
+2410.10184,v1,bias,Eliminating the Language Bias for Visual Question Answering with fine-grained Causal Intervention,CC BY 4.0

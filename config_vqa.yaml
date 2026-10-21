@@ -1,0 +1,38 @@
+# Held-out collection (visual question answering papers): the same settings as config.yaml,
+# frozen; only the paths and the topic name in the answer prompt differ.
+# Run any script with it: $env:RAG_CONFIG = "config_vqa.yaml" (PowerShell), then the usual command.
+
+models:
+  llm: qwen3.5:4b
+  embedding: qwen3-embedding:0.6b
+  think: false
+
+chunking:
+  size_words: 400
+  overlap_words: 0
+
+embedding:
+  add_title: false
+  batch_size: 32
+
+retrieval:
+  top_k: 5
+  mode: dense
+  rrf_k: 60
+  pool: 20
+  query_instruction: >-
+    Given a question about image captioning and vision-language model evaluation,
+    retrieve research-paper passages that directly answer the question or provide
+    evidence for comparing methods, metrics, results, or limitations.
+
+generation:
+  temperature: 0
+  num_ctx: 8192
+  no_evidence_reply: NOT ENOUGH EVIDENCE
+  topic: visual question answering
+
+paths:
+  manifest: papers/manifest_vqa.csv
+  papers_dir: data/papers_vqa
+  index_dir: data/index_vqa
+  questions: eval/questions_vqa.jsonl

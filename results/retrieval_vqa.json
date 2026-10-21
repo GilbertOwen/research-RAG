@@ -1,0 +1,215 @@
+{
+ "label": "vqa",
+ "time": "2026-10-19T20:38:08",
+ "top_k": 5,
+ "mode": "dense",
+ "instruction": true,
+ "chunking": {
+  "size_words": 400,
+  "overlap_words": 0
+ },
+ "add_title": false,
+ "summary": {
+  "hit_at_k": 0.6153846153846154,
+  "evidence_recall": 0.5897435897435898,
+  "mrr": 0.3487179487179487,
+  "paper_recall": 0.9025641025641025
+ },
+ "questions": [
+  {
+   "id": "VS01",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 1.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2309.16511v1:p1:c0",
+    "2309.16511v1:p2:c0",
+    "1912.01452v2:p5:c0",
+    "1912.01452v2:p5:c1",
+    "1912.01452v2:p14:c1"
+   ]
+  },
+  {
+   "id": "VS02",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 0.2,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2311.00807v1:p1:c0",
+    "2311.00807v1:p8:c0",
+    "2311.00807v1:p7:c1",
+    "2311.00807v1:p3:c1",
+    "2311.00807v1:p1:c1"
+   ]
+  },
+  {
+   "id": "VS03",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 1.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2407.03386v5:p1:c0",
+    "2407.03386v5:p1:c1",
+    "2407.03386v5:p2:c0",
+    "2407.03386v5:p8:c0",
+    "2407.03386v5:p3:c0"
+   ]
+  },
+  {
+   "id": "VS04",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 0.5,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "1912.01452v2:p7:c0",
+    "1912.01452v2:p1:c0",
+    "1912.01452v2:p3:c0",
+    "2407.03386v5:p1:c0",
+    "2407.03386v5:p2:c0"
+   ]
+  },
+  {
+   "id": "VS05",
+   "type": "single",
+   "hit": false,
+   "evidence_recall": 0.0,
+   "reciprocal_rank": 0.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2401.05827v2:p1:c0",
+    "2401.05827v2:p2:c0",
+    "2401.05827v2:p2:c1",
+    "2407.03386v5:p1:c0",
+    "2310.14670v2:p14:c0"
+   ]
+  },
+  {
+   "id": "VS06",
+   "type": "single",
+   "hit": false,
+   "evidence_recall": 0.0,
+   "reciprocal_rank": 0.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2208.00690v3:p8:c1",
+    "2208.00690v3:p7:c1",
+    "2208.00690v3:p6:c1",
+    "2208.00690v3:p3:c1",
+    "2208.00690v3:p2:c0"
+   ]
+  },
+  {
+   "id": "VS07",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 1.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2310.14670v2:p1:c0",
+    "2310.14670v2:p1:c1",
+    "2305.19664v1:p10:c0",
+    "2410.10184v1:p4:c1",
+    "2310.14670v2:p3:c0"
+   ]
+  },
+  {
+   "id": "VS08",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 0.25,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2410.10184v1:p5:c1",
+    "2305.19664v1:p11:c0",
+    "2410.10184v1:p1:c1",
+    "2305.19664v1:p1:c0",
+    "2305.19664v1:p11:c1"
+   ]
+  },
+  {
+   "id": "VS09",
+   "type": "single",
+   "hit": false,
+   "evidence_recall": 0.0,
+   "reciprocal_rank": 0.0,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2410.10184v1:p5:c0",
+    "2012.11134v1:p6:c0",
+    "2012.11134v1:p5:c0",
+    "2012.11134v1:p4:c1",
+    "2305.19664v1:p8:c0"
+   ]
+  },
+  {
+   "id": "VS10",
+   "type": "single",
+   "hit": true,
+   "evidence_recall": 1.0,
+   "reciprocal_rank": 0.25,
+   "paper_recall": 1.0,
+   "retrieved": [
+    "2410.10184v1:p5:c1",
+    "2410.10184v1:p5:c0",
+    "2410.10184v1:p1:c1",
+    "2410.10184v1:p1:c0",
+    "2410.10184v1:p4:c1"
+   ]
+  },
+  {
+   "id": "VX01",
+   "type": "cross",
+   "hit": false,
+   "evidence_recall": 0.0,
+   "reciprocal_rank": 0.0,
+   "paper_recall": 0.6666666666666666,
+   "retrieved": [
+    "2305.19664v1:p10:c0",
+    "2310.14670v2:p3:c0",
+    "2410.10184v1:p2:c0",
+    "2310.14670v2:p1:c1",
+    "2012.11134v1:p1:c1"
+   ]
+  },
+  {
+   "id": "VX02",
+   "type": "cross",
+   "hit": true,
+   "evidence_recall": 0.6666666666666666,
+   "reciprocal_rank": 0.3333333333333333,
+   "paper_recall": 0.6666666666666666,
+   "retrieved": [
+    "1912.01452v2:p3:c0",
+    "1912.01452v2:p14:c1",
+    "1912.01452v2:p1:c0",
+    "1912.01452v2:p7:c0",
+    "2407.03386v5:p1:c0"
+   ]
+  },
+  {
+   "id": "VX03",
+   "type": "cross",
+   "hit": false,
+   "evidence_recall": 0.0,
+   "reciprocal_rank": 0.0,
+   "paper_recall": 0.4,
+   "retrieved": [
+    "2410.10184v1:p5:c1",
+    "2208.00690v3:p6:c0",
+    "2208.00690v3:p7:c0",
+    "2410.10184v1:p5:c0",
+    "2410.10184v1:p1:c1"
+   ]
+  }
+ ]
+}
