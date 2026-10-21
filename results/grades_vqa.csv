@@ -1,0 +1,17 @@
+id,type,status,correctness,citation_support,notes
+VS01,single,answered,2,yes,"Both key facts (45,199 pairs; bounding box around the answering object), S1 (p.1)"
+VS02,single,answered,2,partly,"All key facts: style transfer and corruptions, back translation and persona-based modelling, recombined image and question shifts. The stage details cite S4 (p.3), which does not have them; they are in S5 (p.1)"
+VS03,single,answered,2,yes,"213,000 augmented images (S2) and 14 corruption functions (S5)"
+VS04,single,answered,2,yes,"Basic questions as noise, ranked by similarity (S2), and Rscore (S1, p.7); LASSO not named but the ranking is described"
+VS05,single,answered,2,partly,"FAKE, NOTA and SWAP all named; the first sentence is uncited and the cited S1 (p.1 c0) describes only FAKE; NOTA and SWAP appear in S2's results table"
+VS06,single,answered,2,yes,"Adversarial training with a discriminator (S4) plus knowledge distillation to mimic the target model, and all four datasets (S5)"
+VS07,single,answered,2,yes,"Unbalanced Matching and Distractor Similarity biases, both in S1"
+VS08,single,answered,2,partly,Both key facts; supported by S4 (p.1) and S5 (p.11); the first sentence is uncited
+VS09,single,answered,1,partly,"57.99% present (S3); 52.05% baseline and 59.12% with CSS missing; '57.62% with CF-VQA in Table I' is CIBi's number in the CIBi paper (S1), not CCB's: false side claim"
+VS10,single,answered,2,yes,"Syntactic structure, keyword and context bias with the handling of each, all in S3 (p.1). The key was corrected after reading the paper: the abstract names two kinds, the introduction three"
+VX01,cross,answered,1,yes,"Language bias (S3, S5) and Unbalanced Matching (S4) present; PW-VQA's vision-language confounder missing (the S1 example of a salient-object bias is real but is not the confounder point); Distractor Similarity not named"
+VX02,cross,answered,1,partly,"Basic questions with Rscore and visual corruptions present; VQA-GEN's joint shifts missing (VQA-GEN not retrieved); the Rscore claim cites S1 (p.3), which does not mention it"
+VX03,cross,answered,1,partly,"CIBi's fine-grained causal intervention present; GenB named without its generative bias model; CCB, PW-VQA and ADS-ICT missing (ADS-ICT added to the key in the key check); RUBi, LMH and CSS are baselines in the tables, not methods of the collection; the CIBi branch claim cites GenB's page (S2)"
+VU01,unanswerable,refused,correct,n/a,Refused
+VU02,unanswerable,refused,correct,n/a,Refused
+VU03,unanswerable,refused,correct,n/a,Refused
