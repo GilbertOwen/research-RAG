@@ -10,7 +10,7 @@ import json
 import sys
 from datetime import datetime
 
-from research_rag.config import ROOT, load_config
+from research_rag.config import ROOT, load_config, questions_path
 from research_rag.search import Index
 
 
@@ -47,7 +47,7 @@ def main() -> None:
     top_k = args.top_k or config["retrieval"]["top_k"]
     instruction = None if args.no_instruction else config["retrieval"]["query_instruction"]
 
-    with open(ROOT / "eval" / "questions.jsonl", encoding="utf-8") as f:
+    with open(questions_path(config), encoding="utf-8") as f:
         questions = [q for q in map(json.loads, f) if q["evidence"]]
 
     index = Index(config)

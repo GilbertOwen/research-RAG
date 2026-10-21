@@ -9,7 +9,7 @@ import sys
 import time
 
 from research_rag.ask import ask
-from research_rag.config import ROOT, load_config
+from research_rag.config import ROOT, load_config, questions_path
 from research_rag.evaluate import score_question
 from research_rag.search import Index
 
@@ -22,7 +22,7 @@ def main() -> None:
 
     config = load_config()
     index = Index(config)
-    with open(ROOT / "eval" / "questions.jsonl", encoding="utf-8") as f:
+    with open(questions_path(config), encoding="utf-8") as f:
         questions = [json.loads(line) for line in f]
 
     out_dir = ROOT / "examples" / f"eval_{args.label}"

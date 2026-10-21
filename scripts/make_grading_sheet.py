@@ -9,7 +9,7 @@ import csv
 import json
 import sys
 
-from research_rag.config import ROOT
+from research_rag.config import ROOT, load_config, questions_path
 
 
 def main() -> None:
@@ -18,7 +18,7 @@ def main() -> None:
     parser.add_argument("--label", default="baseline")
     args = parser.parse_args()
 
-    with open(ROOT / "eval" / "questions.jsonl", encoding="utf-8") as f:
+    with open(questions_path(load_config()), encoding="utf-8") as f:
         questions = {q["id"]: q for q in map(json.loads, f)}
     run_dir = ROOT / "examples" / f"eval_{args.label}"
 
